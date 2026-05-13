@@ -276,6 +276,14 @@ export const WORK: WorkItem[] = [
 
   // ── POSTS ─────────────────────────────────────────────────
   {
+    id: "p-geo-docs",
+    type: "Post",
+    company: "Personal",
+    title: "Your docs are invisible to AI. Here's why.",
+    desc: "Why well-written docs still get skipped by AI retrieval systems, and what to do about it. Covers citation patterns, GEO infrastructure, and making content that AI can actually read.",
+    url: "https://www.prisma.io/blog/rebuilding-the-prisma-docs",
+  },
+  {
     id: "p-docs-rebuild",
     type: "Post",
     company: "Prisma",
