@@ -2,7 +2,7 @@
 title: "The push I didn't ask for"
 slug: "the-push-i-didnt-ask-for"
 date: "2026-05-13"
-description: "I read my termination notice alone in the morning. Half my company was gone by end of day. Here's what that was actually like."
+description: "I read my termination notice alone in the morning. Half my company was gone by end of day. Here's what that was like."
 draft: false
 ---
 
@@ -11,8 +11,6 @@ Yesterday I got laid off.
 I woke up, saw a weird meeting on my calendar, opened Slack, and read that my position had been affected. Notice of termination attached. The company runs on European time, so the announcement had come through at 4:30am. That meant I wasn't a part of the announcement call.
 
 The first thing that went through my head was "I'm fucked."
-
-![Removed from the Prisma organization](/github-prisma-removed.png)
 
 ## What the rest of that morning looked like
 
@@ -34,7 +32,9 @@ That doesn't go away because the job did. The layoff says something about the si
 
 I'm not going to pretend the "I'm fucked" feeling is gone. It's still there. I'm just pushing forward anyway, because sitting still doesn't help and will just make it harder in the future.
 
-What's actually helping is the people. My *former* team, my family. The relationships I built don't expire with the contract, and I'm not treating them like they do. That support is real, and right now it matters more than I expected. We need to lean on eachother and push forward.
+What's helping is the people. My former team, my family. The relationships I built don't expire with the contract, and I'm not treating them like they do. That support is real, and right now it matters more than I expected.
+
+I met some amazing people at this job. People I learned from, worked alongside, and genuinely liked. I hope to run into them again someday.
 
 ## If this just happened to you
 
