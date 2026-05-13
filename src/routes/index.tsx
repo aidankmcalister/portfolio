@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router"
-import { Github, Linkedin, Mail, Moon, Sun } from "lucide-react"
-import { useEffect, useState } from "react"
-
+import { createFileRoute, Link } from "@tanstack/react-router"
+import { ArrowUpRight } from "lucide-react"
+import { useState } from "react"
+import { STATS, WORK } from "@/data/work"
 import {
   Dialog,
   DialogContent,
@@ -13,84 +13,60 @@ import {
 } from "@/components/ui/dialog"
 import { sendContactEmail } from "@/server/send-contact-email"
 
-export const Route = createFileRoute("/")({ component: App })
+export const Route = createFileRoute("/")({ component: Home })
 
-const actionClassName =
-  "inline-flex cursor-pointer items-center gap-2 rounded-full border border-page-line bg-page-surface px-[1.02rem] py-[0.64rem] font-inherit text-[0.9rem] leading-none font-[500] text-page-ink transition-[transform,border-color,background-color,color] duration-150 ease-out hover:-translate-y-px hover:border-page-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-ink"
+const inputClass =
+  "h-11 w-full rounded-md border border-page-border bg-transparent px-3 text-[13px] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
-const primaryActionClassName =
-  "inline-flex cursor-pointer items-center justify-center rounded-full border border-page-ink bg-page-ink px-[1.02rem] py-[0.64rem] text-[0.9rem] leading-none font-[500] text-page-surface transition-[transform,border-color,background-color,color,opacity] duration-150 ease-out hover:-translate-y-px hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-ink"
+const textareaClass =
+  "min-h-24 w-full resize-y rounded-md border border-page-border bg-transparent px-3 py-2 text-[13px] leading-[1.55] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
-const iconClassName = "h-[0.95rem] w-[0.95rem]"
-const inputClassName =
-  "h-11 w-full rounded-xl border border-page-line bg-page-bg px-3 text-sm text-page-ink placeholder:text-page-muted/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-ink"
-const textareaClassName =
-  "min-h-32 w-full rounded-xl border border-page-line bg-page-bg px-3 py-2 text-sm text-page-ink placeholder:text-page-muted/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-ink"
+function StatsBar() {
+  const counts = WORK.reduce<Record<string, number>>((acc, w) => {
+    acc.total = (acc.total ?? 0) + 1
+    acc[w.type] = (acc[w.type] ?? 0) + 1
+    return acc
+  }, {})
 
-function setThemeFavicon(isDark: boolean) {
-  const iconHref = isDark ? "/favicon-dark.svg" : "/favicon-light.svg"
-  let faviconLink = document.querySelector<HTMLLinkElement>(
-    'link[data-theme-favicon="true"]'
+  return (
+    <div className="grid grid-cols-3 border-t border-page-border-soft py-8 max-sm:grid-cols-1 max-sm:gap-6 max-sm:py-6">
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] text-page-muted">// now</span>
+        <span className="text-[13px]">
+          <strong className="font-[600] text-page-ink">{STATS.role}</strong>{" "}
+          <span className="text-page-muted">@ {STATS.company}</span>
+        </span>
+      </div>
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] text-page-muted">// shipped</span>
+        <span className="text-[13px]">
+          <strong className="font-[600] text-page-ink">{counts.total ?? 0} pieces</strong>{" "}
+          <span className="text-page-muted">
+            — {counts.Docs ?? 0} docs, {counts.Demo ?? 0} demos, {counts.Talk ?? 0} talks
+          </span>
+        </span>
+      </div>
+      <div className="flex flex-col gap-[6px]">
+        <span className="text-[11px] text-page-muted">// based</span>
+        <span className="text-[13px]">
+          <strong className="font-[600] text-page-ink">{STATS.location}</strong>{" "}
+          <span className="text-page-muted">/ {STATS.locationNote}</span>
+        </span>
+      </div>
+    </div>
   )
-
-  if (!faviconLink) {
-    faviconLink = document.createElement("link")
-    faviconLink.rel = "icon"
-    faviconLink.type = "image/svg+xml"
-    faviconLink.dataset.themeFavicon = "true"
-    document.head.appendChild(faviconLink)
-  }
-
-  faviconLink.href = iconHref
 }
 
-function App() {
-  const [isDark, setIsDark] = useState(false)
-  const [contactDialogOpen, setContactDialogOpen] = useState(false)
-  const [isSendingContact, setIsSendingContact] = useState(false)
+function Home() {
+  const [contactOpen, setContactOpen] = useState(false)
+  const [isSending, setIsSending] = useState(false)
   const [contactStatus, setContactStatus] = useState<{
     kind: "error" | "success"
     message: string
   } | null>(null)
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-    const storedTheme = localStorage.getItem("theme")
-    const initialDark = storedTheme
-      ? storedTheme === "dark"
-      : mediaQuery.matches
-
-    setIsDark(initialDark)
-    document.documentElement.classList.toggle("dark", initialDark)
-    setThemeFavicon(initialDark)
-
-    const handleThemeChange = (event: MediaQueryListEvent) => {
-      if (localStorage.getItem("theme")) {
-        return
-      }
-
-      setIsDark(event.matches)
-      document.documentElement.classList.toggle("dark", event.matches)
-      setThemeFavicon(event.matches)
-    }
-
-    mediaQuery.addEventListener("change", handleThemeChange)
-    return () => {
-      mediaQuery.removeEventListener("change", handleThemeChange)
-    }
-  }, [])
-
-  function toggleTheme() {
-    const nextDark = !isDark
-    setIsDark(nextDark)
-    document.documentElement.classList.toggle("dark", nextDark)
-    localStorage.setItem("theme", nextDark ? "dark" : "light")
-    setThemeFavicon(nextDark)
-  }
-
   async function handleContactSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
     const form = event.currentTarget
     const formData = new FormData(form)
 
@@ -102,122 +78,112 @@ function App() {
       subject: String(formData.get("subject") ?? ""),
     }
 
-    setIsSendingContact(true)
+    setIsSending(true)
     setContactStatus(null)
 
     try {
       const result = await sendContactEmail({ data: payload })
-
       if (!result.ok) {
-        setContactStatus({
-          kind: "error",
-          message: result.error,
-        })
+        setContactStatus({ kind: "error", message: result.error })
         return
       }
-
       setContactStatus({
         kind: "success",
-        message: "Message sent. I will get back to you soon.",
+        message: "Sent. I'll get back to you soon.",
       })
       form.reset()
     } catch (error) {
       setContactStatus({
         kind: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Unable to send message right now.",
+        message: error instanceof Error ? error.message : "Unable to send right now.",
       })
     } finally {
-      setIsSendingContact(false)
+      setIsSending(false)
     }
   }
 
   return (
-    <section className="grid min-h-svh p-[clamp(1rem,2vw,1.75rem)]">
-      <main className="mx-auto my-auto grid w-full max-w-3xl animate-rise justify-items-center gap-[clamp(0.9rem,2vw,1.5rem)] text-center max-[720px]:gap-4">
-        <h1 className="m-0 font-serif text-[clamp(2.05rem,6.1vw,4.35rem)] leading-[0.95] font-medium tracking-[-0.034em] text-balance">
-          Making developers
-          <br />
-          feel less alone.
+    <>
+      <div className="animate-fade pb-12 pt-24 max-sm:pb-8 max-sm:pt-14">
+        <h1 className="mb-8 max-w-[640px] text-[28px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink">
+          Making developers feel less alone{" "}
+          <span className="text-page-muted">—</span> through docs, demos, and the occasional
+          terrible pun.
         </h1>
 
-        <p className="m-0 max-w-148 font-serif text-[clamp(1.08rem,2.2vw,1.7rem)] leading-[1.2] tracking-[-0.012em] text-balance text-page-muted italic">
-          through docs, demos, and the occasional terrible pun.
-        </p>
-
-        <p className="m-0 max-w-136 text-[clamp(0.92rem,1.2vw,1.02rem)] leading-[1.6] text-pretty text-page-muted">
-          I&apos;m Aidan McAlister, Developer Advocate at{" "}
+        <p className="mb-14 max-w-[580px] text-[14px] leading-[1.75] text-page-mid max-sm:mb-10">
+          I turn complex tech into things people actually want to use, and write about the parts I
+          get wrong on the way there. Mostly at{" "}
           <a
-            className="text-page-ink underline decoration-page-muted decoration-dotted decoration-2 underline-offset-[0.2em]"
-            href="https://www.prisma.io"
+            className="border-b border-page-faint pb-px text-page-ink transition-colors duration-[220ms] hover:border-page-ink"
+            href="https://prisma.io"
             target="_blank"
             rel="noreferrer"
           >
             Prisma
-          </a>
-          . I turn complex tech into things people actually want to use.
+          </a>{" "}
+          these days, in docs, demos, and the odd conference room.
         </p>
 
-        <div className="mt-[0.2rem] flex flex-wrap justify-center gap-[0.62rem]">
-          <Dialog open={contactDialogOpen} onOpenChange={setContactDialogOpen}>
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <Dialog
+            open={contactOpen}
+            onOpenChange={(open) => {
+              setContactOpen(open)
+              if (!open) setContactStatus(null)
+            }}
+          >
             <DialogTrigger asChild>
-              <button
-                type="button"
-                className={actionClassName}
-                onClick={() => {
-                  setContactStatus(null)
-                }}
-              >
-                <Mail className={iconClassName} aria-hidden />
-                <span>Contact me</span>
+              <button className="btn-link">
+                contact <ArrowUpRight className="btn-arrow h-[11px] w-[11px]" />
               </button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="font-mono">
               <DialogHeader>
-                <DialogTitle>Contact me</DialogTitle>
-                <DialogDescription>
-                  Send a quick note and it will be delivered through Resend.
+                <DialogTitle className="text-[15px] font-[500]">Contact</DialogTitle>
+                <DialogDescription className="text-[12px] text-page-muted">
+                  Send a quick note. Delivered through Resend — usually answered within a few days.
                 </DialogDescription>
               </DialogHeader>
 
               <form className="grid gap-3" onSubmit={handleContactSubmit}>
-                <div className="grid gap-1.5">
-                  <label className="text-sm text-page-muted" htmlFor="contact-name">
-                    Name
-                  </label>
-                  <input
-                    className={inputClassName}
-                    id="contact-name"
-                    maxLength={120}
-                    name="name"
-                    placeholder="Your name"
-                    required
-                    type="text"
-                  />
+                <div className="grid grid-cols-2 gap-3 max-sm:grid-cols-1">
+                  <div className="grid gap-1.5">
+                    <label className="text-[11.5px] text-page-muted" htmlFor="contact-name">
+                      name
+                    </label>
+                    <input
+                      className={inputClass}
+                      id="contact-name"
+                      maxLength={120}
+                      name="name"
+                      placeholder="your name"
+                      required
+                      type="text"
+                    />
+                  </div>
+                  <div className="grid gap-1.5">
+                    <label className="text-[11.5px] text-page-muted" htmlFor="contact-company">
+                      company{" "}
+                      <span className="text-page-faint text-[11px]">(optional)</span>
+                    </label>
+                    <input
+                      className={inputClass}
+                      id="contact-company"
+                      maxLength={140}
+                      name="company"
+                      placeholder="company"
+                      type="text"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid gap-1.5">
-                  <label className="text-sm text-page-muted" htmlFor="contact-company">
-                    Company (optional)
+                  <label className="text-[11.5px] text-page-muted" htmlFor="contact-email">
+                    email
                   </label>
                   <input
-                    className={inputClassName}
-                    id="contact-company"
-                    maxLength={140}
-                    name="company"
-                    placeholder="Your company"
-                    type="text"
-                  />
-                </div>
-
-                <div className="grid gap-1.5">
-                  <label className="text-sm text-page-muted" htmlFor="contact-email">
-                    Email
-                  </label>
-                  <input
-                    className={inputClassName}
+                    className={inputClass}
                     id="contact-email"
                     maxLength={320}
                     name="email"
@@ -228,31 +194,32 @@ function App() {
                 </div>
 
                 <div className="grid gap-1.5">
-                  <label className="text-sm text-page-muted" htmlFor="contact-subject">
-                    Subject
+                  <label className="text-[11.5px] text-page-muted" htmlFor="contact-subject">
+                    subject{" "}
+                    <span className="text-page-faint text-[11px]">(optional)</span>
                   </label>
                   <input
-                    className={inputClassName}
+                    className={inputClass}
                     id="contact-subject"
                     maxLength={140}
                     name="subject"
-                    placeholder="What should we talk about?"
-                    required
+                    placeholder="what should we talk about?"
                     type="text"
                   />
                 </div>
 
                 <div className="grid gap-1.5">
-                  <label className="text-sm text-page-muted" htmlFor="contact-message">
-                    Message
+                  <label className="text-[11.5px] text-page-muted" htmlFor="contact-message">
+                    message
                   </label>
                   <textarea
-                    className={textareaClassName}
+                    className={textareaClass}
                     id="contact-message"
                     maxLength={5000}
                     name="message"
-                    placeholder="Write your message..."
+                    placeholder="write your message..."
                     required
+                    rows={5}
                   />
                 </div>
 
@@ -260,8 +227,8 @@ function App() {
                   <p
                     className={
                       contactStatus.kind === "error"
-                        ? "text-sm text-red-600 dark:text-red-400"
-                        : "text-sm text-emerald-700 dark:text-emerald-400"
+                        ? "text-[12px] text-red-500"
+                        : "text-[12px] italic text-page-muted"
                     }
                     role="status"
                   >
@@ -269,22 +236,27 @@ function App() {
                   </p>
                 ) : null}
 
-                <DialogFooter>
+                <DialogFooter className="mt-2 flex items-center gap-6">
                   <button
                     type="button"
-                    className={actionClassName}
-                    onClick={() => {
-                      setContactDialogOpen(false)
-                    }}
+                    className="text-[12.5px] text-page-muted transition-colors hover:text-page-ink"
+                    onClick={() => setContactOpen(false)}
                   >
-                    Cancel
+                    cancel
                   </button>
                   <button
-                    className={primaryActionClassName}
-                    disabled={isSendingContact}
                     type="submit"
+                    disabled={isSending}
+                    className="btn-link disabled:pointer-events-none disabled:opacity-50"
                   >
-                    {isSendingContact ? "Sending..." : "Send message"}
+                    {isSending ? (
+                      "sending..."
+                    ) : (
+                      <>
+                        send message{" "}
+                        <ArrowUpRight className="btn-arrow h-[11px] w-[11px]" />
+                      </>
+                    )}
                   </button>
                 </DialogFooter>
               </form>
@@ -292,39 +264,30 @@ function App() {
           </Dialog>
 
           <a
-            className={actionClassName}
+            className="btn-link"
             href="https://github.com/aidankmcalister"
             target="_blank"
             rel="noreferrer"
           >
-            <Github className={iconClassName} aria-hidden />
-            <span>GitHub</span>
+            github <ArrowUpRight className="btn-arrow h-[11px] w-[11px]" />
           </a>
 
           <a
-            className={actionClassName}
+            className="btn-link"
             href="https://www.linkedin.com/in/aidankmcalister"
             target="_blank"
             rel="noreferrer"
           >
-            <Linkedin className={iconClassName} aria-hidden />
-            <span>LinkedIn</span>
+            linkedin <ArrowUpRight className="btn-arrow h-[11px] w-[11px]" />
           </a>
-        </div>
-      </main>
 
-      <button
-        type="button"
-        className="fixed right-[clamp(1rem,2vw,1.75rem)] bottom-[clamp(1rem,2vw,1.75rem)] inline-grid size-10 place-items-center rounded-full border border-page-line bg-page-surface text-page-ink transition-[transform,border-color,background-color] duration-150 ease-out hover:-translate-y-px hover:border-page-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-ink"
-        onClick={toggleTheme}
-        aria-label="Toggle theme"
-      >
-        {isDark ? (
-          <Sun className="size-4" aria-hidden />
-        ) : (
-          <Moon className="size-4" aria-hidden />
-        )}
-      </button>
-    </section>
+          <Link className="btn-link" to="/work">
+            work <ArrowUpRight className="btn-arrow h-[11px] w-[11px]" />
+          </Link>
+        </div>
+      </div>
+
+      <StatsBar />
+    </>
   )
 }

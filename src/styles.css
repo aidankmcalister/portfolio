@@ -1,44 +1,55 @@
 @import "tailwindcss";
-@import "@fontsource-variable/fraunces/full.css";
-@import "@fontsource-variable/montserrat/index.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Montserrat Variable", sans-serif;
-  --font-serif: "Fraunces Variable", serif;
+  --font-sans: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --color-page-bg: #f3f1eb;
-  --color-page-surface: #fcfbf8;
-  --color-page-ink: #141414;
-  --color-page-muted: #595959;
-  --color-page-line: #d4d0c8;
+  --color-page-bg: #f6f4ee;
+  --color-page-surface: #fbfaf4;
+  --color-page-hover: #ebe9e1;
+  --color-page-border: #d3d1c8;
+  --color-page-border-soft: #e5e3da;
+  --color-page-ink: #16161a;
+  --color-page-mid: #44443f;
+  --color-page-muted: #76746c;
+  --color-page-faint: #b0aea4;
+  --color-page-line: #d3d1c8;
 
-  --animate-rise: rise 600ms cubic-bezier(0.17, 0.84, 0.44, 1) both;
+  --animate-fade: fade 220ms ease both;
 
-  @keyframes rise {
+  @keyframes fade {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(3px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
   }
 }
 
 .dark {
-  --color-page-bg: #121212;
-  --color-page-surface: #181818;
-  --color-page-ink: #ededed;
-  --color-page-muted: #b7b7b7;
-  --color-page-line: #393939;
+  --color-page-bg: #0b0b0d;
+  --color-page-surface: #131316;
+  --color-page-hover: #16161a;
+  --color-page-border: #1f1f24;
+  --color-page-border-soft: #16161a;
+  --color-page-ink: #ebeae6;
+  --color-page-mid: #b5b3ad;
+  --color-page-muted: #807e78;
+  --color-page-faint: #47464a;
+  --color-page-line: #1f1f24;
 }
 
 @layer base {
   * {
     box-sizing: border-box;
+    /* Baseline theme-switch transition for elements with no explicit transition.
+       Class-level transitions (Tailwind utilities, custom classes) override this. */
+    transition: color 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
   }
 
   html,
@@ -47,25 +58,148 @@
   }
 
   body {
-    @apply font-sans text-page-ink;
-    background:
-      radial-gradient(
-        circle at 20% 12%,
-        color-mix(in oklab, var(--color-page-surface) 86%, white 14%) 0%,
-        transparent 46%
-      ),
-      radial-gradient(
-        circle at 86% 88%,
-        color-mix(in oklab, var(--color-page-surface) 78%, black 22%) 0%,
-        transparent 42%
-      ),
-      var(--color-page-bg);
+    background: var(--color-page-bg);
+    color: var(--color-page-ink);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv01", "cv11";
+    min-height: 100vh;
     transition:
-      background-color 220ms ease,
-      color 220ms ease;
+      background 0.22s ease,
+      color 0.22s ease,
+      border-color 0.22s ease;
   }
 
   a {
-    @apply text-inherit no-underline;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-page-ink);
+    color: var(--color-page-bg);
+  }
+}
+
+/* Nav: color-mix can't be expressed as a Tailwind utility */
+.nav-bg {
+  background: color-mix(in srgb, var(--color-page-bg) 92%, transparent);
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+/* Btn-link: inline text link with animated pseudo-element underline + arrow nudge */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-page-ink);
+  padding: 4px 0;
+  position: relative;
+  transition: color 0.22s ease;
+  font-size: 13px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+.btn-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-page-faint);
+  transition: background 0.22s ease;
+}
+
+.btn-link:hover::after {
+  background: var(--color-page-ink);
+}
+
+.btn-arrow {
+  color: var(--color-page-muted);
+  transition:
+    color 0.22s ease,
+    transform 0.15s ease;
+}
+
+.btn-link:hover .btn-arrow {
+  color: var(--color-page-ink);
+  transform: translate(2px, -2px);
+}
+
+/* Work list row: 4-col grid that collapses to 2-col on mobile */
+.work-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 96px 14px;
+  gap: 18px;
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--color-page-border-soft);
+  align-items: baseline;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.work-row::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  right: -12px;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.15s ease;
+}
+
+.work-row:hover::before {
+  background: var(--color-page-surface);
+}
+
+.work-arrow {
+  color: var(--color-page-faint);
+  transition:
+    color 0.22s ease,
+    transform 0.15s ease;
+}
+
+.work-row:hover .work-arrow {
+  color: var(--color-page-ink);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 640px) {
+  .work-row {
+    grid-template-columns: 1fr 14px;
+    gap: 4px;
+    padding: 14px 12px 14px 0;
+  }
+
+  .work-type {
+    grid-column: 1 / -1;
+    margin-bottom: -2px;
+  }
+
+  .work-ctx {
+    grid-column: 1;
+    text-align: left !important;
+    margin-top: 4px;
   }
 }
