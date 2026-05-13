@@ -43,3 +43,4 @@ This is just a thing that happens.
 It doesn't mean you didn't do good work. It means circumstances changed and you got caught in it. Feel the bad feeling. It's honest. Then take a breath and keep going.
 
 Stay as positive as you can and push through it. That's what I'm doing.
+
