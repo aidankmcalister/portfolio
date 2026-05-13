@@ -8,7 +8,7 @@ draft: false
 
 Yesterday I got laid off.
 
-I woke up, saw a weird meeting on my calendar, opened Slack, and read that my position had been affected. Notice of termination attached. The company runs on European time, so the announcement had come through at 4:30am.
+I woke up, saw a weird meeting on my calendar, opened Slack, and read that my position had been affected. Notice of termination attached. The company runs on European time, so the announcement had come through at 4:30am. That meant I wasn't a part of the announcement call.
 
 The first thing that went through my head was "I'm fucked."
 
