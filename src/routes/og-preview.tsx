@@ -1,19 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { getWebRequest } from "@tanstack/react-start/server"
 import { getPublishedPosts } from "@/lib/posts"
 
 export const Route = createFileRoute("/og-preview")({
   loader: () => {
-    let origin: string
-    if (typeof window !== "undefined") {
-      origin = window.location.origin
-    } else {
-      try {
-        origin = new URL(getWebRequest().url).origin
-      } catch {
-        origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
-      }
-    }
+    const origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
 
     const posts = getPublishedPosts()
 
