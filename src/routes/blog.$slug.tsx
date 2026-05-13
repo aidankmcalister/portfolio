@@ -1,5 +1,4 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router"
-import { getWebRequest } from "@tanstack/react-start/server"
 import { ArrowLeft } from "lucide-react"
 import { getPostBySlug, type Post } from "@/lib/posts"
 
@@ -9,16 +8,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = getPostBySlug(params.slug)
     if (!post) throw notFound()
 
-    let origin: string
-    if (typeof window !== "undefined") {
-      origin = window.location.origin
-    } else {
-      try {
-        origin = new URL(getWebRequest().url).origin
-      } catch {
-        origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
-      }
-    }
+    const origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
 
     return { post, origin }
   },

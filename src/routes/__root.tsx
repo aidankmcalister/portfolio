@@ -6,7 +6,6 @@ import {
   createRootRoute,
   useRouterState,
 } from "@tanstack/react-router"
-import { getWebRequest } from "@tanstack/react-start/server"
 import { Analytics } from "@vercel/analytics/react"
 import { Moon, Sun } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -30,11 +29,7 @@ const themeBootstrapScript = `
 
 function getOrigin(): string {
   if (typeof window !== "undefined") return window.location.origin
-  try {
-    return new URL(getWebRequest().url).origin
-  } catch {
-    return import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
-  }
+  return import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
 }
 
 export const Route = createRootRoute({
