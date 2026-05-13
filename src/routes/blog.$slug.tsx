@@ -1,4 +1,5 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router"
+import { getWebRequest } from "@tanstack/react-start/server"
 import { ArrowLeft } from "lucide-react"
 import { getPostBySlug, type Post } from "@/lib/posts"
 
@@ -7,15 +8,40 @@ export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
     const post = getPostBySlug(params.slug)
     if (!post) throw notFound()
-    return { post }
+
+    let origin: string
+    if (typeof window !== "undefined") {
+      origin = window.location.origin
+    } else {
+      try {
+        origin = new URL(getWebRequest().url).origin
+      } catch {
+        origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
+      }
+    }
+
+    return { post, origin }
   },
   head: ({ loaderData }) => {
     const fm = loaderData?.post.frontmatter
+    const origin = loaderData?.origin ?? ""
     if (!fm) return {}
+
+    const ogImage = `${origin}/api/og?title=${encodeURIComponent(fm.title)}&author=Aidan+McAlister`
+
     return {
       meta: [
         { title: fm.title },
         ...(fm.description ? [{ name: "description", content: fm.description }] : []),
+        { property: "og:title", content: fm.title },
+        ...(fm.description
+          ? [{ property: "og:description", content: fm.description }]
+          : []),
+        { property: "og:type", content: "article" },
+        { property: "og:image", content: ogImage },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: fm.title },
+        { name: "twitter:image", content: ogImage },
       ],
     }
   },

@@ -6,6 +6,7 @@ import {
   createRootRoute,
   useRouterState,
 } from "@tanstack/react-router"
+import { getWebRequest } from "@tanstack/react-start/server"
 import { Analytics } from "@vercel/analytics/react"
 import { Moon, Sun } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -27,29 +28,59 @@ const themeBootstrapScript = `
   })();
 `
 
+function getOrigin(): string {
+  if (typeof window !== "undefined") return window.location.origin
+  try {
+    return new URL(getWebRequest().url).origin
+  } catch {
+    return import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
+  }
+}
+
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aidan McAlister" },
-      {
-        name: "description",
-        content:
-          "Developer Advocate building clear docs, practical demos, and better developer experiences.",
-      },
-    ],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap",
-      },
-      { rel: "stylesheet", href: appCss },
-      { rel: "manifest", href: "/manifest.json" },
-    ],
-  }),
+  head: () => {
+    const origin = getOrigin()
+    return {
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: "Aidan McAlister" },
+        {
+          name: "description",
+          content:
+            "Developer Advocate building clear docs, practical demos, and better developer experiences.",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: "Aidan McAlister" },
+        {
+          property: "og:description",
+          content:
+            "Developer Advocate building clear docs, practical demos, and better developer experiences.",
+        },
+        {
+          property: "og:image",
+          content: `${origin}/api/og?title=Aidan+McAlister&author=Aidan+McAlister`,
+        },
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:image",
+          content: `${origin}/api/og?title=Aidan+McAlister&author=Aidan+McAlister`,
+        },
+      ],
+      links: [
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap",
+        },
+        { rel: "stylesheet", href: appCss },
+        { rel: "manifest", href: "/manifest.json" },
+        { rel: "icon", href: "/favicon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+        { rel: "icon", href: "/favicon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
+      ],
+    }
+  },
   shellComponent: RootDocument,
   component: RootLayout,
 })
@@ -106,7 +137,10 @@ function Nav({
 
   return (
     <nav className="nav-bg sticky top-0 z-10 flex items-center justify-between border-b border-page-border-soft py-[22px] backdrop-blur-[10px]">
-      <Link to="/" className="text-[13.5px] font-[500] tracking-[-0.005em] text-page-ink">
+      <Link
+        to="/"
+        className="text-[13.5px] font-[500] tracking-[-0.005em] text-page-ink"
+      >
         Aidan McAlister
       </Link>
       <div className="flex items-center gap-[22px]">

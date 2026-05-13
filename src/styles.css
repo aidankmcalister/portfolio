@@ -322,6 +322,61 @@
   margin: 2em 0;
 }
 
+/* Experience row: role | meta (company/kind/date) | arrow */
+.exp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px 14px;
+  gap: 20px;
+  padding: 14px 12px 14px 0;
+  border-bottom: 1px solid var(--color-page-border-soft);
+  align-items: start;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.exp-row::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  right: -12px;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.15s ease;
+}
+
+.exp-row:hover::before {
+  background: var(--color-page-surface);
+}
+
+.exp-row:hover .work-arrow {
+  color: var(--color-page-ink);
+  transform: translate(2px, -2px);
+}
+
+/* exp-co is a flex column — use CSS so display:none works on mobile */
+.exp-co {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+@media (max-width: 640px) {
+  .exp-row {
+    grid-template-columns: 1fr 14px;
+    gap: 4px;
+  }
+
+  .exp-co {
+    display: none !important;
+  }
+}
+
 /* Blog row: 3-col grid (date | title/desc | arrow) */
 .blog-row {
   display: grid;

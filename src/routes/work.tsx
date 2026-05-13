@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { ArrowUpRight } from "lucide-react"
 import { useMemo, useState, type ReactNode } from "react"
-import { WORK, type WorkItem, type WorkType } from "@/data/work"
+import { EXPERIENCE, WORK, type ExperienceItem, type WorkItem, type WorkType } from "@/data/work"
 
 export const Route = createFileRoute("/work")({ component: Work })
 
@@ -20,9 +20,15 @@ function Work() {
   const [activeCo, setActiveCo] = useState<string | null>(null)
   const [activeType, setActiveType] = useState<WorkType | null>(null)
 
-  // Derived dynamically: chips only render for values present in WORK.
-  const types = useMemo(() => [...new Set(WORK.map((w) => w.type))], [])
-  const companies = useMemo(() => [...new Set(WORK.map((w) => w.company))], [])
+  // Each dimension only shows values that exist given the other active filter.
+  const availableTypes = useMemo(
+    () => [...new Set(WORK.filter((w) => !activeCo || w.company === activeCo).map((w) => w.type))],
+    [activeCo]
+  )
+  const availableCompanies = useMemo(
+    () => [...new Set(WORK.filter((w) => !activeType || w.type === activeType).map((w) => w.company))],
+    [activeType]
+  )
 
   const filtered = useMemo(
     () =>
@@ -33,6 +39,26 @@ function Work() {
       }),
     [activeCo, activeType]
   )
+
+  function handleSetCo(co: string) {
+    const next = activeCo === co ? null : co
+    setActiveCo(next)
+    // Clear type if it no longer exists for the new company selection
+    if (next && activeType) {
+      const typesForCo = [...new Set(WORK.filter((w) => w.company === next).map((w) => w.type))]
+      if (!typesForCo.includes(activeType)) setActiveType(null)
+    }
+  }
+
+  function handleSetType(type: WorkType) {
+    const next = activeType === type ? null : type
+    setActiveType(next)
+    // Clear company if it no longer exists for the new type selection
+    if (next && activeCo) {
+      const cosForType = [...new Set(WORK.filter((w) => w.type === next).map((w) => w.company))]
+      if (!cosForType.includes(activeCo)) setActiveCo(null)
+    }
+  }
 
   const hasFilter = activeCo !== null || activeType !== null
   const reset = () => {
@@ -62,27 +88,29 @@ function Work() {
       {/* Filter toolbar */}
       <div className="space-y-3 border-b border-t border-page-border-soft py-4">
         <FilterRow label="type">
-          {types.map((type) => (
+          {availableTypes.map((type) => (
             <button
               key={type}
               className={chipClass(activeType === type)}
-              onClick={() => setActiveType(activeType === type ? null : type)}
+              onClick={() => handleSetType(type)}
             >
               {type.toLowerCase()}
             </button>
           ))}
         </FilterRow>
-        <FilterRow label="from">
-          {companies.map((co) => (
-            <button
-              key={co}
-              className={chipClass(activeCo === co)}
-              onClick={() => setActiveCo(activeCo === co ? null : co)}
-            >
-              {co.toLowerCase()}
-            </button>
-          ))}
-        </FilterRow>
+        {availableCompanies.length > 1 && (
+          <FilterRow label="from">
+            {availableCompanies.map((co) => (
+              <button
+                key={co}
+                className={chipClass(activeCo === co)}
+                onClick={() => handleSetCo(co)}
+              >
+                {co.toLowerCase()}
+              </button>
+            ))}
+          </FilterRow>
+        )}
       </div>
 
       {/* Result count */}
@@ -122,7 +150,43 @@ function Work() {
           ))}
         </div>
       )}
+
+      {/* Experience */}
+      <div className="mt-16">
+        <h3 className="mb-6 text-[11px] uppercase tracking-[0.08em] text-page-faint">Experience</h3>
+        <div>
+          {EXPERIENCE.map((item) => (
+            <ExperienceRow key={item.id} item={item} />
+          ))}
+        </div>
+      </div>
     </div>
+  )
+}
+
+export function ExperienceRow({ item }: { item: ExperienceItem }) {
+  const isExternal = !!item.url
+  const Tag = isExternal ? "a" : "div"
+  return (
+    <Tag
+      className="exp-row"
+      {...(isExternal ? { href: item.url, target: "_blank", rel: "noreferrer" } : {})}
+    >
+      <div className="text-[13.5px] leading-[1.4] text-page-ink">
+        {item.role}
+        <span className="mt-[3px] block text-[12px] leading-[1.5] text-page-muted">{item.desc}</span>
+      </div>
+      <div className="exp-co text-[12px] text-page-muted">
+        <div className="whitespace-nowrap">{item.company}</div>
+        <div className="text-[10.5px] text-page-faint">{item.kind}</div>
+        <div className="mt-auto pt-2 text-[10.5px] whitespace-nowrap text-page-faint">{item.date}</div>
+      </div>
+      {isExternal ? (
+        <div className="work-arrow"><ArrowUpRight className="h-[11px] w-[11px]" /></div>
+      ) : (
+        <div />
+      )}
+    </Tag>
   )
 }
 

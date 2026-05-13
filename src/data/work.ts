@@ -15,6 +15,7 @@ export interface ExperienceItem {
   role: string
   company: string
   desc: string
+  kind: "full-time" | "contract"
   url?: string
 }
 
@@ -49,6 +50,7 @@ export const WORK: WorkItem[] = [
     desc: "Full-stack type-safe queries with TanStack Start server functions. Authored as part of the Prisma × TanStack partnership.",
     url: "https://www.prisma.io/docs/guides/frameworks/tanstack-start",
   },
+  // ── FRAMEWORKS ───────────────────────────────────────────
   {
     id: "d-astro",
     type: "Docs",
@@ -58,52 +60,12 @@ export const WORK: WorkItem[] = [
     url: "https://www.prisma.io/docs/guides/frameworks/astro",
   },
   {
-    id: "d-clerk",
+    id: "d-nuxt",
     type: "Docs",
     company: "Prisma",
-    title: "Prisma with Clerk",
-    desc: "Auth + Prisma without the boilerplate, with webhooks for keeping user state in sync.",
-    url: "https://www.prisma.io/docs/guides/authentication/clerk/nextjs",
-  },
-  {
-    id: "d-cloudflare-workers",
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma on Cloudflare Workers",
-    desc: "Edge-runtime Prisma with the right pooling and connection setup for Workers.",
-    url: "https://www.prisma.io/docs/guides/deployment/cloudflare-workers",
-  },
-  {
-    id: "d-bun",
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma with Bun",
-    desc: "Getting Prisma running cleanly on Bun, including the gotchas.",
-    url: "https://www.prisma.io/docs/guides/runtimes/bun",
-  },
-  {
-    id: "d-nestjs",
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma with NestJS",
-    desc: "Wiring Prisma into a NestJS app with the right module structure.",
-    url: "https://www.prisma.io/docs/guides/frameworks/nestjs",
-  },
-  {
-    id: "d-deno",
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma with Deno",
-    desc: "Running Prisma on Deno with Prisma Postgres, including Deno Deploy.",
-    url: "https://www.prisma.io/docs/guides/runtimes/deno",
-  },
-  {
-    id: "d-solid-start",
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma with SolidStart",
-    desc: "Using Prisma ORM in a SolidStart app end-to-end.",
-    url: "https://www.prisma.io/docs/guides/frameworks/solid-start",
+    title: "Prisma with Nuxt",
+    desc: "Using Prisma ORM and Prisma Postgres in a Nuxt application.",
+    url: "https://www.prisma.io/docs/guides/frameworks/nuxt",
   },
   {
     id: "d-sveltekit",
@@ -114,12 +76,160 @@ export const WORK: WorkItem[] = [
     url: "https://www.prisma.io/docs/guides/frameworks/sveltekit",
   },
   {
+    id: "d-solid-start",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with SolidStart",
+    desc: "Using Prisma ORM in a SolidStart app end-to-end.",
+    url: "https://www.prisma.io/docs/guides/frameworks/solid-start",
+  },
+
+  // ── RUNTIMES ─────────────────────────────────────────────
+  {
+    id: "d-bun",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Bun",
+    desc: "Getting Prisma running cleanly on Bun, including the gotchas.",
+    url: "https://www.prisma.io/docs/guides/runtimes/bun",
+  },
+  {
+    id: "d-deno",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Deno",
+    desc: "Running Prisma on Deno with Prisma Postgres, including Deno Deploy.",
+    url: "https://www.prisma.io/docs/guides/runtimes/deno",
+  },
+
+  // ── DEPLOYMENT ───────────────────────────────────────────
+  {
+    id: "d-cloudflare-workers",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma on Cloudflare Workers",
+    desc: "Edge-runtime Prisma with the right pooling and connection setup for Workers.",
+    url: "https://www.prisma.io/docs/guides/deployment/cloudflare-workers",
+  },
+  {
+    id: "d-bun-workspaces",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Bun Workspaces",
+    desc: "Monorepo deployment using Bun workspaces with Prisma Postgres.",
+    url: "https://www.prisma.io/docs/guides/deployment/bun-workspaces",
+  },
+
+  // ── AUTH ─────────────────────────────────────────────────
+  {
+    id: "d-clerk-nextjs",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Clerk (Next.js)",
+    desc: "Auth + Prisma without the boilerplate, with webhooks for keeping user state in sync.",
+    url: "https://www.prisma.io/docs/guides/authentication/clerk/nextjs",
+  },
+  {
+    id: "d-clerk-astro",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Clerk (Astro)",
+    desc: "Clerk authentication integrated with Prisma in an Astro application.",
+    url: "https://www.prisma.io/docs/guides/authentication/clerk/astro",
+  },
+  {
+    id: "d-better-auth-nextjs",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Better Auth (Next.js)",
+    desc: "Setting up Better Auth with Prisma as the database adapter in Next.js.",
+    url: "https://www.prisma.io/docs/guides/authentication/better-auth/nextjs",
+  },
+  {
+    id: "d-better-auth-astro",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Better Auth (Astro)",
+    desc: "Better Auth and Prisma together in an Astro project.",
+    url: "https://www.prisma.io/docs/guides/authentication/better-auth/astro",
+  },
+  {
+    id: "d-authjs-nextjs",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Auth.js (Next.js)",
+    desc: "Auth.js adapter wired to Prisma for session and user persistence.",
+    url: "https://www.prisma.io/docs/guides/authentication/authjs/nextjs",
+  },
+
+  // ── INTEGRATIONS ─────────────────────────────────────────
+  {
+    id: "d-ai-sdk",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Vercel AI SDK",
+    desc: "Connecting Vercel's AI SDK to Prisma for persisting chats, embeddings, and structured AI outputs.",
+    url: "https://www.prisma.io/docs/guides/integrations/ai-sdk",
+  },
+  {
+    id: "d-embed-studio",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma with Embed Studio",
+    desc: "Embedding Prisma Studio into your own app with the Embed Studio integration.",
+    url: "https://www.prisma.io/docs/guides/integrations/embed-studio",
+  },
+  {
+    id: "d-integrations-deno",
+    type: "Docs",
+    company: "Prisma",
+    title: "Prisma Postgres on Deno Deploy",
+    desc: "Deploying Prisma Postgres to Deno Deploy via the integrations guide.",
+    url: "https://www.prisma.io/docs/guides/integrations/deno",
+  },
+  {
     id: "d-shopify",
     type: "Docs",
     company: "Prisma",
     title: "Prisma with Shopify",
     desc: "Using Prisma Postgres alongside Shopify.",
     url: "https://www.prisma.io/docs/guides/integrations/shopify",
+  },
+
+  // ── POSTGRES ─────────────────────────────────────────────
+  {
+    id: "d-viewing-data",
+    type: "Docs",
+    company: "Prisma",
+    title: "Viewing data in Prisma Postgres",
+    desc: "Built-in tools for browsing and querying your Prisma Postgres data.",
+    url: "https://www.prisma.io/docs/guides/postgres/viewing-data",
+  },
+  {
+    id: "d-from-supabase",
+    type: "Docs",
+    company: "Prisma",
+    title: "Switch to Prisma Postgres from Supabase",
+    desc: "Step-by-step migration guide from Supabase to Prisma Postgres.",
+    url: "https://www.prisma.io/docs/guides/switch-to-prisma-postgres/from-supabase",
+  },
+  {
+    id: "d-from-neon",
+    type: "Docs",
+    company: "Prisma",
+    title: "Switch to Prisma Postgres from Neon",
+    desc: "Step-by-step migration guide from Neon to Prisma Postgres.",
+    url: "https://www.prisma.io/docs/guides/switch-to-prisma-postgres/from-neon",
+  },
+
+  // ── META / INFRA ──────────────────────────────────────────
+  {
+    id: "d-making-guides",
+    type: "Docs",
+    company: "Prisma",
+    title: "How to write a Prisma guide",
+    desc: "Internal style guide and structure template for authoring new Prisma guides.",
+    url: "https://www.prisma.io/docs/guides/making-guides",
   },
   {
     id: "d-management-api",
@@ -141,7 +251,7 @@ export const WORK: WorkItem[] = [
   // ── DEMOS ─────────────────────────────────────────────────
   {
     id: "x-create-db",
-    type: "Demo",
+    type: "OSS",
     company: "Prisma",
     title: "create-db",
     desc: "CLI for provisioning temporary databases. Shortens time-to-first-query for new users. Tracked down a 700-database creation spike, added Cloudflare rate limiting, moved everything into a Turborepo monorepo.",
@@ -175,7 +285,7 @@ export const WORK: WorkItem[] = [
   },
   {
     id: "p-vibe-coding",
-    type: "Post",
+    type: "blog",
     company: "Prisma",
     title: "Vibe coding with Prisma MCP and Next.js",
     desc: "Building a Next.js app with the Prisma MCP server and an AI agent that actually understands your schema.",
@@ -191,31 +301,34 @@ export const WORK: WorkItem[] = [
     desc: "Three skills (prisma-voice, blog-writing, guide-writing) packaged as a plugin and published to Anthropic's official listing. Used daily by the DevRel team.",
     url: "https://claude.com/plugins/prisma",
   },
-  {
-    id: "o-trpc-cli",
-    type: "OSS",
-    company: "trpc-cli",
-    title: "Hidden CLI flag support",
-    desc: "Contributed hidden CLI flag support via Zod meta.",
-    url: "#",
-  },
-  {
-    id: "o-better-hub",
-    type: "OSS",
-    company: "better-hub",
-    title: "Stars pages & routing",
-    desc: "Contributed stars pages and routing to Better Auth's GitHub client.",
-    url: "#",
-  },
 ]
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
     id: "e-prisma",
-    date: "Mar 2025 to now",
+    date: "Mar 2025 – May 2026",
     role: "Developer Advocate",
     company: "Prisma",
+    kind: "full-time",
     desc: "Lead docs, guides, and dev tools across the TypeScript ecosystem. Ran the 400+ page docs rebuild, shipped create-db, built Prisma's GEO and AI-citation pipeline, and grew the Discord past 10,000 members.",
     url: "https://prisma.io",
+  },
+  {
+    id: "e-inner-armor",
+    date: "Jul 2024 – Mar 2025",
+    role: "Front End",
+    company: "Inner Armor",
+    kind: "contract",
+    desc: "Built a Remix + TypeScript admin dashboard to replace a legacy tool — hit 100% company-wide adoption. Added 10+ interactive graphs in Observable Plot and ShadCN for cross-period data analysis, plus reusable components with NextUI and AG Grid.",
+    url: "https://www.forgeinnerarmor.com/",
+  },
+  {
+    id: "e-elevate",
+    date: "Jan 2024 – Aug 2024",
+    role: "Full Stack",
+    company: "Elevate Digital IO",
+    kind: "contract",
+    desc: "Led development of an advanced filter system in RedwoodJS and Tailwind for efficient information retrieval. Built 10+ specialized CRUD interactions in Prisma and GraphQL, each with 12+ fields, focused on query efficiency and data integrity.",
+    url: "https://elevatedigital.io/",
   },
 ]
