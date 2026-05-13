@@ -8,7 +8,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = getPostBySlug(params.slug)
     if (!post) throw notFound()
 
-    const origin = import.meta.env.VITE_APP_URL ?? "http://localhost:3000"
+    const origin = import.meta.env.DEV
+      ? "http://localhost:3000"
+      : "https://www.aidanmcalister.com"
 
     return { post, origin }
   },

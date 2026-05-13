@@ -12,6 +12,8 @@ I woke up, saw a weird meeting on my calendar, opened Slack, and read that my po
 
 The first thing that went through my head was "I'm fucked."
 
+![Removed from the Prisma organization](/github-prisma-removed.png)
+
 ## What the rest of that morning looked like
 
 22 people were cut, dropping the company by about 50%. The whole DevRel team, mostly gone.
