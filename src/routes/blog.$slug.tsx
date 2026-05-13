@@ -1,0 +1,61 @@
+import { Link, createFileRoute, notFound } from "@tanstack/react-router"
+import { ArrowLeft } from "lucide-react"
+import { getPostBySlug, type Post } from "@/lib/posts"
+
+export const Route = createFileRoute("/blog/$slug")({
+  component: BlogPost,
+  loader: ({ params }) => {
+    const post = getPostBySlug(params.slug)
+    if (!post) throw notFound()
+    return { post }
+  },
+  head: ({ loaderData }) => {
+    const fm = loaderData?.post.frontmatter
+    if (!fm) return {}
+    return {
+      meta: [
+        { title: fm.title },
+        ...(fm.description ? [{ name: "description", content: fm.description }] : []),
+      ],
+    }
+  },
+})
+
+function formatDate(iso: string) {
+  if (!iso) return ""
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return iso
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+}
+
+function BlogPost() {
+  const { post } = Route.useLoaderData() as { post: Post }
+  const { title, date } = post.frontmatter
+
+  return (
+    <article className="animate-fade pb-20">
+      <div className="pb-10 pt-20 max-sm:pb-8 max-sm:pt-12">
+        <Link
+          to="/blog"
+          className="mb-8 inline-flex items-center gap-1.5 text-[12px] text-page-muted transition-colors hover:text-page-ink"
+        >
+          <ArrowLeft className="h-[11px] w-[11px]" />
+          back to blog
+        </Link>
+
+        <h1 className="mb-5 max-w-[640px] text-[26px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink max-sm:text-[22px]">
+          {title}
+        </h1>
+
+        <div className="text-[12px] text-page-muted">{formatDate(date)}</div>
+      </div>
+
+      <div className="border-t border-page-border-soft" />
+
+      <div
+        className="prose-blog pt-10 max-sm:pt-8"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
+    </article>
+  )
+}

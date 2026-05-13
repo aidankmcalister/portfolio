@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { ArrowUpRight } from "lucide-react"
 import { useState } from "react"
-import { STATS, WORK } from "@/data/work"
+import { STATS } from "@/data/work"
 import {
   Dialog,
   DialogContent,
@@ -21,38 +21,30 @@ const inputClass =
 const textareaClass =
   "min-h-24 w-full resize-y rounded-md border border-page-border bg-transparent px-3 py-2 text-[13px] leading-[1.55] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
-function StatsBar() {
-  const counts = WORK.reduce<Record<string, number>>((acc, w) => {
-    acc.total = (acc.total ?? 0) + 1
-    acc[w.type] = (acc[w.type] ?? 0) + 1
-    return acc
-  }, {})
-
+function StatItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-3 border-t border-page-border-soft py-8 max-sm:grid-cols-1 max-sm:gap-6 max-sm:py-6">
-      <div className="flex flex-col gap-[6px]">
-        <span className="text-[11px] text-page-muted">// now</span>
-        <span className="text-[13px]">
-          <strong className="font-[600] text-page-ink">{STATS.role}</strong>{" "}
-          <span className="text-page-muted">@ {STATS.company}</span>
-        </span>
-      </div>
-      <div className="flex flex-col gap-[6px]">
-        <span className="text-[11px] text-page-muted">// shipped</span>
-        <span className="text-[13px]">
-          <strong className="font-[600] text-page-ink">{counts.total ?? 0} pieces</strong>{" "}
-          <span className="text-page-muted">
-            — {counts.Docs ?? 0} docs, {counts.Demo ?? 0} demos, {counts.Talk ?? 0} talks
-          </span>
-        </span>
-      </div>
-      <div className="flex flex-col gap-[6px]">
-        <span className="text-[11px] text-page-muted">// based</span>
-        <span className="text-[13px]">
-          <strong className="font-[600] text-page-ink">{STATS.location}</strong>{" "}
-          <span className="text-page-muted">/ {STATS.locationNote}</span>
-        </span>
-      </div>
+    <div className="flex flex-col gap-2 max-sm:flex-row max-sm:items-baseline max-sm:gap-4">
+      <span className="text-[10.5px] uppercase tracking-[0.08em] text-page-faint max-sm:w-[64px] max-sm:shrink-0">
+        {label}
+      </span>
+      <div className="text-[13px] leading-[1.55]">{children}</div>
+    </div>
+  )
+}
+
+function StatsBar() {
+  return (
+    <div className="grid grid-cols-3 gap-x-8 border-t border-page-border-soft py-8 max-sm:grid-cols-1 max-sm:gap-y-3 max-sm:py-6">
+      <StatItem label="company">
+        <span className="font-[600] text-page-ink">{STATS.role}</span>{" "}
+        <span className="text-page-muted">@ {STATS.company}</span>
+      </StatItem>
+      <StatItem label="based">
+        <span className="font-[600] text-page-ink">{STATS.location}</span>
+      </StatItem>
+      <StatItem label="dates">
+        <span className="font-[600] text-page-ink">{STATS.tenure}</span>
+      </StatItem>
     </div>
   )
 }
@@ -104,16 +96,13 @@ function Home() {
 
   return (
     <>
-      <div className="animate-fade pb-12 pt-24 max-sm:pb-8 max-sm:pt-14">
-        <h1 className="mb-8 max-w-[640px] text-[28px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink">
-          Making developers feel less alone{" "}
-          <span className="text-page-muted">—</span> through docs, demos, and the occasional
-          terrible pun.
+      <div className="animate-fade pb-14 pt-24 max-sm:pb-10 max-sm:pt-14">
+        <h1 className="mb-6 max-w-[560px] text-[28px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink max-sm:text-[22px] max-sm:leading-[1.25]">
+          Making developers feel less alone, one doc and bad pun at a time.
         </h1>
 
-        <p className="mb-14 max-w-[580px] text-[14px] leading-[1.75] text-page-mid max-sm:mb-10">
-          I turn complex tech into things people actually want to use, and write about the parts I
-          get wrong on the way there. Mostly at{" "}
+        <p className="mb-12 max-w-[520px] text-[14px] leading-[1.75] text-page-mid max-sm:mb-10">
+          I turn complex tech into things people actually want to use. Mostly at{" "}
           <a
             className="border-b border-page-faint pb-px text-page-ink transition-colors duration-[220ms] hover:border-page-ink"
             href="https://prisma.io"
@@ -122,10 +111,10 @@ function Home() {
           >
             Prisma
           </a>{" "}
-          these days, in docs, demos, and the odd conference room.
+          these days.
         </p>
 
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
+        <div className="flex flex-wrap gap-x-7 gap-y-3 max-sm:gap-x-5">
           <Dialog
             open={contactOpen}
             onOpenChange={(open) => {
@@ -142,7 +131,7 @@ function Home() {
               <DialogHeader>
                 <DialogTitle className="text-[15px] font-[500]">Contact</DialogTitle>
                 <DialogDescription className="text-[12px] text-page-muted">
-                  Send a quick note. Delivered through Resend — usually answered within a few days.
+                  Send a quick note. Delivered through Resend. Usually answered within a few days.
                 </DialogDescription>
               </DialogHeader>
 

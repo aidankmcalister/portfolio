@@ -56,12 +56,14 @@ export const Route = createRootRoute({
 
 function useTheme() {
   const [isDark, setIsDark] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)")
     const stored = localStorage.getItem("theme")
     const dark = stored ? stored === "dark" : mq.matches
     setIsDark(dark)
+    setMounted(true)
     document.documentElement.classList.toggle("dark", dark)
 
     const handler = (e: MediaQueryListEvent) => {
@@ -80,10 +82,18 @@ function useTheme() {
     localStorage.setItem("theme", next ? "dark" : "light")
   }
 
-  return { isDark, toggle }
+  return { isDark, mounted, toggle }
 }
 
-function Nav({ isDark, toggle }: { isDark: boolean; toggle: () => void }) {
+function Nav({
+  isDark,
+  mounted,
+  toggle,
+}: {
+  isDark: boolean
+  mounted: boolean
+  toggle: () => void
+}) {
   const { location } = useRouterState()
   const path = location.pathname
 
@@ -106,16 +116,26 @@ function Nav({ isDark, toggle }: { isDark: boolean; toggle: () => void }) {
         <Link to="/work" className={linkClass(path === "/work")}>
           work
         </Link>
+        <Link to="/blog" className={linkClass(path === "/blog")}>
+          blog
+        </Link>
         <button
           onClick={toggle}
           aria-label="Toggle theme"
+          suppressHydrationWarning
           className="flex h-6 w-6 items-center justify-center text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
         >
-          {isDark ? (
-            <Sun className="h-[15px] w-[15px]" />
-          ) : (
-            <Moon className="h-[14px] w-[14px]" />
-          )}
+          <span suppressHydrationWarning>
+            {mounted ? (
+              isDark ? (
+                <Sun className="h-[15px] w-[15px]" />
+              ) : (
+                <Moon className="h-[14px] w-[14px]" />
+              )
+            ) : (
+              <Moon className="h-[14px] w-[14px]" />
+            )}
+          </span>
         </button>
       </div>
     </nav>
@@ -123,10 +143,10 @@ function Nav({ isDark, toggle }: { isDark: boolean; toggle: () => void }) {
 }
 
 function RootLayout() {
-  const { isDark, toggle } = useTheme()
+  const { isDark, mounted, toggle } = useTheme()
   return (
     <div className="mx-auto max-w-[880px] px-9 max-sm:px-5">
-      <Nav isDark={isDark} toggle={toggle} />
+      <Nav isDark={isDark} mounted={mounted} toggle={toggle} />
       <Outlet />
     </div>
   )
@@ -134,7 +154,7 @@ function RootLayout() {
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <HeadContent />
