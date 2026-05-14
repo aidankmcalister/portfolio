@@ -22,7 +22,7 @@ It helped to have something to still think about and work on.
 
 Over the weekend and into Monday I pushed hard to get through a lot of what I had open. Tuesday morning I was laid off.
 
-That timeline is hard to sit with, I'm pissed about it. But I also understand why it happened. This wasn't a "we want more profit" situation, but knowing that doesn't make it hurt any less, but it makes it easier to process and understand that I need to keep moving forward.
+That timeline is hard to sit with. I'm upset about it, but I also understand why it happened. This wasn't a "we want more profit" situation, but knowing that doesn't make it hurt any less, but it makes it easier to process and understand that I need to keep moving forward.
 
 ## A year of actual progress
 
@@ -43,4 +43,3 @@ This is just a thing that happens.
 It doesn't mean you didn't do good work. It means circumstances changed and you got caught in it. Feel the bad feeling. It's honest. Then take a breath and keep going.
 
 Stay as positive as you can and push through it. That's what I'm doing.
-
