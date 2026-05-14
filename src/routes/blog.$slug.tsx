@@ -6,7 +6,7 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
   loader: ({ params }) => {
     const post = getPostBySlug(params.slug)
-    if (!post) throw notFound()
+    if (!post || post.frontmatter.draft) throw notFound()
 
     const origin = import.meta.env.DEV
       ? "http://localhost:3000"
