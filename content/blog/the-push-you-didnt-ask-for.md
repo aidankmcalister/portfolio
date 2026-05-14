@@ -8,13 +8,13 @@ draft: false
 
 Yesterday I got laid off.
 
-I woke up, saw a weird meeting on my calendar, opened Slack, and read that my position had been affected. Notice of termination attached. The company runs on European time, so the announcement had come through at 4:30am. That meant I wasn't a part of the announcement call.
+I woke up, saw a weird meeting on my calendar, opened Slack, and read that my position had been affected. Notice of termination attached. The company runs on European time, so the announcement had come through at 4:30am, which meant I wasn't a part of that meeting.
 
 The first thing that went through my head was "I'm fucked."
 
 ## What the rest of that morning looked like
 
-22 people were cut, dropping the company by about 50%. The whole DevRel team, mostly gone.
+22 people were cut, dropping the company by about 50%. The whole DevRel team was mostly gone.
 
 Once I knew I wasn't the only one, it made it a bit easier to swallow and helped me not feel alone in this process. There were people in it with me, and that mattered. Before we all lost Slack access, we scrambled to stay connected. Discord channels, WhatsApp group chats, whatever we could set up fast. Most of that first day I spent talking to people and pulling together what I needed for my resume.
 
