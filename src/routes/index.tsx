@@ -21,22 +21,6 @@ const inputClass =
 const textareaClass =
   "min-h-24 w-full resize-y rounded-md border border-page-border bg-transparent px-3 py-2 text-[13px] leading-[1.55] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
-function StatItem({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col gap-2 max-sm:flex-row max-sm:items-baseline max-sm:gap-4">
-      <span className="text-[10.5px] tracking-[0.08em] text-page-faint uppercase max-sm:w-[64px] max-sm:shrink-0">
-        {label}
-      </span>
-      <div className="text-[13px] leading-[1.55]">{children}</div>
-    </div>
-  )
-}
 
 function StatsBar() {
   return (

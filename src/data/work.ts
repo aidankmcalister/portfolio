@@ -293,7 +293,7 @@ export const WORK: WorkItem[] = [
   },
   {
     id: "p-vibe-coding",
-    type: "blog",
+    type: "Post",
     company: "Prisma",
     title: "Vibe coding with Prisma MCP and Next.js",
     desc: "Building a Next.js app with the Prisma MCP server and an AI agent that actually understands your schema.",
