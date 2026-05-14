@@ -22,7 +22,7 @@ It helped to have something to still think about and work on.
 
 Over the weekend and into Monday I pushed hard to get through a lot of what I had open. Tuesday morning I was laid off.
 
-That timeline is hard to sit with. I'm upset about it, but I also understand why it happened. This wasn't a "we want more profit" situation, but knowing that doesn't make it hurt any less, but it makes it easier to process and understand that I need to keep moving forward.
+That timeline is hard to sit with. But I understand why it happened. This wasn't a "we want more profit" situation. The money wasn't there, and a call had to be made. No one is a fan of it, including the people who had to make it. Knowing that doesn't make it hurt less, but it does make it easier to process and keep moving forward.
 
 ## A year of actual progress
 
