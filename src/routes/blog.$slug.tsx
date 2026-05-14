@@ -19,7 +19,8 @@ export const Route = createFileRoute("/blog/$slug")({
     const origin = loaderData?.origin ?? ""
     if (!fm) return {}
 
-    const ogImage = `${origin}/api/og?title=${encodeURIComponent(fm.title)}&author=Aidan+McAlister`
+    const encodedTitle = encodeURIComponent(fm.title).replace(/'/g, "%27")
+    const ogImage = `${origin}/api/og?title=${encodedTitle}&author=Aidan+McAlister`
 
     return {
       meta: [
