@@ -1,13 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { readFileSync } from "node:fs"
-import { fileURLToPath } from "node:url"
+import { REGULAR_TTF_B64 } from "@/lib/og-fonts/regular"
+import { MEDIUM_TTF_B64 } from "@/lib/og-fonts/medium"
 
-// Load fonts relative to this file using import.meta.url — Nitro's file tracer
-// picks this pattern up and bundles the TTFs into the Vercel function.
-function loadFont(name: "Regular" | "Medium"): Buffer {
-  return readFileSync(
-    fileURLToPath(new URL(`../../lib/og-fonts/JetBrainsMono-${name}.ttf`, import.meta.url))
-  )
+function b64ToArrayBuffer(b64: string): ArrayBuffer {
+  const buf = Buffer.from(b64, "base64")
+  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
 }
 
 export const Route = createFileRoute("/api/og")({
@@ -101,13 +98,13 @@ export const Route = createFileRoute("/api/og")({
             fonts: [
               {
                 name: "JetBrains Mono",
-                data: loadFont("Regular") as unknown as ArrayBuffer,
+                data: b64ToArrayBuffer(REGULAR_TTF_B64),
                 weight: 400,
                 style: "normal",
               },
               {
                 name: "JetBrains Mono",
-                data: loadFont("Medium") as unknown as ArrayBuffer,
+                data: b64ToArrayBuffer(MEDIUM_TTF_B64),
                 weight: 500,
                 style: "normal",
               },
