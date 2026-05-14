@@ -3,7 +3,7 @@ title: "The push I didn't ask for"
 slug: "the-push-i-didnt-ask-for"
 date: "2026-05-13"
 description: "I read my termination notice alone in the morning. Half my company was gone by end of day. Here's what that was like."
-draft: false
+draft: true
 ---
 
 Yesterday I got laid off.
@@ -14,7 +14,7 @@ The first thing that went through my head was "I'm fucked."
 
 ## What the rest of that morning looked like
 
-22 people were cut, dropping the company by about 50%. The whole DevRel team was mostly gone.
+About 50% of the company was cut. The whole DevRel team was mostly gone.
 
 Once I knew I wasn't the only one, it made it a bit easier to swallow and helped me not feel alone in this process. There were people in it with me, and that mattered. Before we all lost Slack access, we scrambled to stay connected. Discord channels, WhatsApp group chats, whatever we could set up fast. Most of that first day I spent talking to people and pulling together what I needed for my resume.
 
@@ -22,7 +22,7 @@ It helped to have something to still think about and work on.
 
 Over the weekend and into Monday I pushed hard to get through a lot of what I had open. Tuesday morning I was laid off.
 
-That timeline is hard to sit with. But I understand why it happened. This wasn't a "we want more profit" situation. The money wasn't there, and a call had to be made. No one is a fan of it, including the people who had to make it. Knowing that doesn't make it hurt less, but it does make it easier to process and keep moving forward.
+That timeline is hard to sit with. But I understand why it happened. This wasn't a "we want more profit" situation. The business needed to make a hard call. No one is a fan of it, including the people who had to make it. Knowing that doesn't make it hurt less, but it does make it easier to process and keep moving forward.
 
 ## A year of actual progress
 
