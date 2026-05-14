@@ -1,13 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { readFileSync } from "node:fs"
-import { resolve } from "node:path"
-
-function loadFont(weight: 400 | 500): ArrayBuffer {
-  const file = resolve(
-    `node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-${weight}-normal.woff2`
-  )
-  return readFileSync(file).buffer as ArrayBuffer
-}
 
 export const Route = createFileRoute("/api/og")({
   server: {
@@ -16,14 +7,17 @@ export const Route = createFileRoute("/api/og")({
         const { ImageResponse } = await import("@vercel/og")
 
         const url = new URL(request.url)
+        const origin = url.origin
         const title = url.searchParams.get("title") ?? "Aidan McAlister's Portfolio"
         const author = url.searchParams.get("author") ?? "Aidan McAlister"
 
         const titleSize =
           title.length > 50 ? "64px" : title.length > 25 ? "80px" : "100px"
 
-        const fontRegular = loadFont(400)
-        const fontMedium = loadFont(500)
+        const [fontRegular, fontMedium] = await Promise.all([
+          fetch(`${origin}/fonts/jetbrains-mono-latin-400-normal.woff2`).then(r => r.arrayBuffer()),
+          fetch(`${origin}/fonts/jetbrains-mono-latin-500-normal.woff2`).then(r => r.arrayBuffer()),
+        ])
 
         return new ImageResponse(
           <div
