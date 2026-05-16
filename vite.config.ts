@@ -15,12 +15,6 @@ function mdAliasPlugin(): Plugin {
     name: "md-alias",
     configureServer(server) {
       server.middlewares.use((req, _res, next) => {
-        const blogMatch = req.url?.match(/^\/blog\/(.+)\.md$/)
-        if (blogMatch) {
-          req.url = `/api/blog-md/${blogMatch[1]}`
-          return next()
-        }
-
         const pageMap: Record<string, string> = {
           "/index.md": "/api/page-md/index",
           "/work.md": "/api/page-md/work",

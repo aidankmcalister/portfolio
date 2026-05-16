@@ -1,9 +1,15 @@
-import { Link, createFileRoute, notFound } from "@tanstack/react-router"
+import { Link, createFileRoute, notFound, redirect } from "@tanstack/react-router"
 import { ArrowLeft } from "lucide-react"
 import { getPostBySlug, type Post } from "@/lib/posts"
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
+  beforeLoad: ({ params }) => {
+    if (params.slug.endsWith(".md")) {
+      const realSlug = params.slug.slice(0, -3)
+      throw redirect({ to: `/api/blog-md/${realSlug}` as string, statusCode: 302 })
+    }
+  },
   loader: ({ params }) => {
     const post = getPostBySlug(params.slug)
     if (!post || post.frontmatter.draft || post.frontmatter.external) throw notFound()

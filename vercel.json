@@ -19,10 +19,6 @@
     {
       "source": "/blog.md",
       "destination": "/api/page-md/blog"
-    },
-    {
-      "source": "/blog/:slug.md",
-      "destination": "/api/blog-md/:slug"
     }
   ]
 }
