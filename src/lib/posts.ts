@@ -1,4 +1,3 @@
-import DOMPurify from "isomorphic-dompurify"
 import { marked } from "marked"
 import { createHighlighter } from "shiki"
 
@@ -102,7 +101,7 @@ function buildPost(raw: string): Post {
     link: data.link ? String(data.link) : undefined,
   }
   const body = fm.external ? "" : content
-  const html = fm.external ? "" : DOMPurify.sanitize(marked.parse(content, { async: false }) as string)
+  const html = fm.external ? "" : (marked.parse(content, { async: false }) as string)
   return { frontmatter: fm, body, html }
 }
 
