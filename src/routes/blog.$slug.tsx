@@ -36,6 +36,29 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:title", content: fm.title },
         { name: "twitter:image", content: ogImage },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: fm.title,
+            description: fm.description,
+            datePublished: fm.date,
+            image: ogImage,
+            author: {
+              "@type": "Person",
+              name: "Aidan McAlister",
+              url: "https://www.aidanmcalister.com",
+            },
+            publisher: {
+              "@type": "Person",
+              name: "Aidan McAlister",
+              url: "https://www.aidanmcalister.com",
+            },
+          }),
+        },
+      ],
     }
   },
 })

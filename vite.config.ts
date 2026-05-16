@@ -71,6 +71,9 @@ const config = defineConfig({
       routeRules: {
         "/llms.txt": { proxy: "/api/llms/txt" },
         "/llms-full.txt": { proxy: "/api/llms-full/txt" },
+        "/index.md": { proxy: "/api/page-md/index" },
+        "/work.md": { proxy: "/api/page-md/work" },
+        "/blog.md": { proxy: "/api/page-md/blog" },
       },
     }),
     viteReact(),

@@ -62,6 +62,28 @@ export const Route = createRootRoute({
           content: `${origin}/api/og?title=Aidan+McAlister&author=Aidan+McAlister`,
         },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Aidan McAlister",
+            url: "https://www.aidanmcalister.com",
+            jobTitle: "Developer Advocate",
+            knowsAbout: [
+              "Developer Relations",
+              "Technical Writing",
+              "Documentation",
+              "Developer Experience",
+            ],
+            sameAs: [
+              "https://github.com/aidankmcalister",
+              "https://www.linkedin.com/in/aidankmcalister",
+            ],
+          }),
+        },
+      ],
       links: [
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com" },

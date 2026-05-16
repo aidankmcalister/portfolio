@@ -339,6 +339,11 @@ function Home() {
             </DialogContent>
           </Dialog>
         </div>
+
+        <p className="mt-12 font-mono text-[13px] leading-[1.75] text-page-muted max-sm:mt-10">
+          Based in Boston. Collecting video game OST vinyls, riding motorcycles,
+          and playing games when I'm not shipping.
+        </p>
       </div>
 
       <StatsBar />
