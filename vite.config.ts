@@ -8,7 +8,7 @@ import tailwindcss from "@tailwindcss/vite"
 import { nitro } from "nitro/vite"
 
 const AI_AGENT_PATTERN =
-  /ChatGPT|GPTBot|Claude|ClaudeBot|Anthropic|Perplexity|PerplexityBot|Google-Extended|Cohere|cohere-ai/i
+  /ChatGPT-User|GPTBot|ClaudeBot|Anthropic-AI|PerplexityBot|Google-Extended|cohere-ai/i
 
 function mdAliasPlugin(): Plugin {
   return {
@@ -32,7 +32,8 @@ function mdAliasPlugin(): Plugin {
         }
 
         const ua = req.headers["user-agent"] ?? ""
-        if (AI_AGENT_PATTERN.test(ua)) {
+        const accept = req.headers["accept"] ?? ""
+        if (AI_AGENT_PATTERN.test(ua) && !accept.includes("text/html")) {
           const blogSlugMatch = req.url?.match(/^\/blog\/([^/.]+)\/?$/)
           if (blogSlugMatch) {
             req.url = `/api/blog-md/${blogSlugMatch[1]}`

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { useState } from "react"
-import { EXPERIENCE, STATS } from "@/data/work"
+import { EXPERIENCE } from "@/data/work"
 import {
   Dialog,
   DialogContent,
@@ -22,13 +22,14 @@ const textareaClass =
   "min-h-24 w-full resize-y rounded-md border border-page-border bg-transparent px-3 py-2 text-[13px] leading-[1.55] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
 function StatsBar() {
-  const label = "text-[10.5px] tracking-[0.08em] text-page-muted uppercase mb-3"
-
   return (
     <div className="border-t border-page-border-soft py-8 font-mono transition-colors duration-[220ms] max-sm:py-6">
+      {/* Desktop: two-column layout */}
       <div className="flex justify-between gap-16 max-sm:hidden">
         <div>
-          <div className={label}>experience</div>
+          <div className="mb-3 text-[10.5px] tracking-[0.08em] text-page-muted uppercase">
+            experience
+          </div>
           {EXPERIENCE.map((item) => (
             <div
               key={item.id}
@@ -39,23 +40,14 @@ function StatsBar() {
             </div>
           ))}
         </div>
-        <div>
-          <div className={label}>based</div>
+        <div className="shrink-0 text-right">
+          <div className="mb-3 text-[10.5px] tracking-[0.08em] text-page-muted uppercase">
+            dates
+          </div>
           {EXPERIENCE.map((item) => (
             <div
               key={item.id}
-              className={`py-1 text-[13px] leading-[1.55] font-[600] text-page-ink ${item.kind === "contract" ? "opacity-50" : ""}`}
-            >
-              {STATS.location}
-            </div>
-          ))}
-        </div>
-        <div>
-          <div className={label}>dates</div>
-          {EXPERIENCE.map((item) => (
-            <div
-              key={item.id}
-              className={`py-1 text-[13px] leading-[1.55] font-[600] text-page-ink ${item.kind === "contract" ? "opacity-50" : ""}`}
+              className={`py-1 text-[13px] leading-[1.55] font-[600] whitespace-nowrap text-page-ink ${item.kind === "contract" ? "opacity-50" : ""}`}
             >
               {item.date}
             </div>
@@ -63,7 +55,8 @@ function StatsBar() {
         </div>
       </div>
 
-      <div className="hidden max-sm:flex max-sm:flex-col max-sm:gap-4">
+      {/* Mobile: stacked rows */}
+      <div className="hidden max-sm:flex max-sm:flex-col max-sm:gap-3">
         {EXPERIENCE.map((item) => (
           <div
             key={item.id}
@@ -73,10 +66,7 @@ function StatsBar() {
               <span className="font-[600] text-page-ink">{item.role}</span>
               <span className="font-[600] text-page-ink">{item.date}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-page-muted">@ {item.company}</span>
-              <span className="text-page-muted">{STATS.location}</span>
-            </div>
+            <div className="text-page-muted">@ {item.company}</div>
           </div>
         ))}
       </div>
@@ -151,7 +141,45 @@ function Home() {
           .
         </p>
 
+        <p className="mb-12 font-mono text-[13px] text-page-muted max-sm:mb-10">
+          Open to DevRel roles —{" "}
+          <button
+            type="button"
+            onClick={() => setContactOpen(true)}
+            className="border-b border-page-faint pb-px text-page-ink transition-colors duration-[220ms] hover:border-page-ink"
+          >
+            get in touch
+          </button>
+        </p>
+
         <div className="flex flex-wrap gap-x-7 gap-y-3 font-mono max-sm:gap-x-5">
+          <Link
+            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
+            to="/work"
+          >
+            my work{" "}
+            <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-[3px] group-hover:text-page-ink" />
+          </Link>
+
+          <a
+            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
+            href="https://github.com/aidankmcalister"
+            target="_blank"
+            rel="noreferrer"
+          >
+            github{" "}
+            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
+          </a>
+
+          <a
+            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
+            href="https://www.linkedin.com/in/aidankmcalister"
+            target="_blank"
+            rel="noreferrer"
+          >
+            linkedin{" "}
+            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
+          </a>
           <Dialog
             open={contactOpen}
             onOpenChange={(open) => {
@@ -310,34 +338,6 @@ function Home() {
               </form>
             </DialogContent>
           </Dialog>
-
-          <a
-            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
-            href="https://github.com/aidankmcalister"
-            target="_blank"
-            rel="noreferrer"
-          >
-            github{" "}
-            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
-          </a>
-
-          <a
-            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
-            href="https://www.linkedin.com/in/aidankmcalister"
-            target="_blank"
-            rel="noreferrer"
-          >
-            linkedin{" "}
-            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
-          </a>
-
-          <Link
-            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
-            to="/work"
-          >
-            work{" "}
-            <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-[3px] group-hover:text-page-ink" />
-          </Link>
         </div>
       </div>
 
