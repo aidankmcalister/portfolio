@@ -1,3 +1,4 @@
+import type { Plugin } from "vite"
 import { defineConfig } from "vite"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
@@ -6,10 +7,59 @@ import viteTsConfigPaths from "vite-tsconfig-paths"
 import tailwindcss from "@tailwindcss/vite"
 import { nitro } from "nitro/vite"
 
+const AI_AGENT_PATTERN =
+  /ChatGPT|GPTBot|Claude|ClaudeBot|Anthropic|Perplexity|PerplexityBot|Google-Extended|Cohere|cohere-ai/i
+
+function mdAliasPlugin(): Plugin {
+  return {
+    name: "md-alias",
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const blogMatch = req.url?.match(/^\/blog\/(.+)\.md$/)
+        if (blogMatch) {
+          req.url = `/api/blog-md/${blogMatch[1]}`
+          return next()
+        }
+
+        const pageMap: Record<string, string> = {
+          "/index.md": "/api/page-md/index",
+          "/work.md": "/api/page-md/work",
+          "/blog.md": "/api/page-md/blog",
+        }
+        if (req.url && pageMap[req.url]) {
+          req.url = pageMap[req.url]
+          return next()
+        }
+
+        const ua = req.headers["user-agent"] ?? ""
+        if (AI_AGENT_PATTERN.test(ua)) {
+          const blogSlugMatch = req.url?.match(/^\/blog\/([^/.]+)\/?$/)
+          if (blogSlugMatch) {
+            req.url = `/api/blog-md/${blogSlugMatch[1]}`
+            return next()
+          }
+
+          const contentNegMap: Record<string, string> = {
+            "/": "/api/page-md/index",
+            "/work": "/api/page-md/work",
+            "/blog": "/api/page-md/blog",
+          }
+          if (req.url && contentNegMap[req.url]) {
+            req.url = contentNegMap[req.url]
+            return next()
+          }
+        }
+
+        next()
+      })
+    },
+  }
+}
+
 const config = defineConfig({
   plugins: [
+    mdAliasPlugin(),
     devtools(),
-    // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ["./tsconfig.json"],
     }),
@@ -18,6 +68,7 @@ const config = defineConfig({
     nitro({
       preset: "vercel",
       routeRules: {
+        "/llms.txt": { proxy: "/api/llms/txt" },
         "/llms-full.txt": { proxy: "/api/llms-full/txt" },
       },
     }),

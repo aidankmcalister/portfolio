@@ -16,7 +16,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiOgRouteImport } from './routes/api/og'
+import { Route as ApiPageMdPageRouteImport } from './routes/api/page-md/$page'
+import { Route as ApiLlmsTxtRouteImport } from './routes/api/llms.txt'
 import { Route as ApiLlmsFullTxtRouteImport } from './routes/api/llms-full.txt'
+import { Route as ApiBlogMdSlugRouteImport } from './routes/api/blog-md/$slug'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -53,9 +56,24 @@ const ApiOgRoute = ApiOgRouteImport.update({
   path: '/api/og',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPageMdPageRoute = ApiPageMdPageRouteImport.update({
+  id: '/api/page-md/$page',
+  path: '/api/page-md/$page',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiLlmsTxtRoute = ApiLlmsTxtRouteImport.update({
+  id: '/api/llms/txt',
+  path: '/api/llms/txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiLlmsFullTxtRoute = ApiLlmsFullTxtRouteImport.update({
   id: '/api/llms-full/txt',
   path: '/api/llms-full/txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiBlogMdSlugRoute = ApiBlogMdSlugRouteImport.update({
+  id: '/api/blog-md/$slug',
+  path: '/api/blog-md/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -67,7 +85,10 @@ export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
+  '/api/llms/txt': typeof ApiLlmsTxtRoute
+  '/api/page-md/$page': typeof ApiPageMdPageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,7 +97,10 @@ export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
+  '/api/llms/txt': typeof ApiLlmsTxtRoute
+  '/api/page-md/$page': typeof ApiPageMdPageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,7 +111,10 @@ export interface FileRoutesById {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
+  '/api/llms/txt': typeof ApiLlmsTxtRoute
+  '/api/page-md/$page': typeof ApiPageMdPageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,7 +126,10 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/blog/$slug'
     | '/blog/'
+    | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
+    | '/api/llms/txt'
+    | '/api/page-md/$page'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,7 +138,10 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/blog/$slug'
     | '/blog'
+    | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
+    | '/api/llms/txt'
+    | '/api/page-md/$page'
   id:
     | '__root__'
     | '/'
@@ -118,7 +151,10 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/blog/$slug'
     | '/blog/'
+    | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
+    | '/api/llms/txt'
+    | '/api/page-md/$page'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -127,7 +163,10 @@ export interface RootRouteChildren {
   OgPreviewRoute: typeof OgPreviewRoute
   WorkRoute: typeof WorkRoute
   ApiOgRoute: typeof ApiOgRoute
+  ApiBlogMdSlugRoute: typeof ApiBlogMdSlugRoute
   ApiLlmsFullTxtRoute: typeof ApiLlmsFullTxtRoute
+  ApiLlmsTxtRoute: typeof ApiLlmsTxtRoute
+  ApiPageMdPageRoute: typeof ApiPageMdPageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -181,11 +220,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiOgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/page-md/$page': {
+      id: '/api/page-md/$page'
+      path: '/api/page-md/$page'
+      fullPath: '/api/page-md/$page'
+      preLoaderRoute: typeof ApiPageMdPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/llms/txt': {
+      id: '/api/llms/txt'
+      path: '/api/llms/txt'
+      fullPath: '/api/llms/txt'
+      preLoaderRoute: typeof ApiLlmsTxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/llms-full/txt': {
       id: '/api/llms-full/txt'
       path: '/api/llms-full/txt'
       fullPath: '/api/llms-full/txt'
       preLoaderRoute: typeof ApiLlmsFullTxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/blog-md/$slug': {
+      id: '/api/blog-md/$slug'
+      path: '/api/blog-md/$slug'
+      fullPath: '/api/blog-md/$slug'
+      preLoaderRoute: typeof ApiBlogMdSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -209,7 +269,10 @@ const rootRouteChildren: RootRouteChildren = {
   OgPreviewRoute: OgPreviewRoute,
   WorkRoute: WorkRoute,
   ApiOgRoute: ApiOgRoute,
+  ApiBlogMdSlugRoute: ApiBlogMdSlugRoute,
   ApiLlmsFullTxtRoute: ApiLlmsFullTxtRoute,
+  ApiLlmsTxtRoute: ApiLlmsTxtRoute,
+  ApiPageMdPageRoute: ApiPageMdPageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
