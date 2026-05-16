@@ -1,4 +1,23 @@
+import DOMPurify from "isomorphic-dompurify"
 import { marked } from "marked"
+import { createHighlighter } from "shiki"
+
+const highlighter = await createHighlighter({
+  themes: ["vitesse-light", "vitesse-dark"],
+  langs: ["typescript", "javascript", "markdown", "mdx", "json", "bash", "tsx", "jsx", "css", "html"],
+})
+
+marked.use({
+  renderer: {
+    code({ text, lang }: { text: string; lang?: string }) {
+      const language = lang && highlighter.getLoadedLanguages().includes(lang) ? lang : "text"
+      return highlighter.codeToHtml(text, {
+        lang: language,
+        themes: { light: "vitesse-light", dark: "vitesse-dark" },
+      })
+    },
+  },
+})
 
 export interface PostFrontmatter {
   title: string
@@ -6,6 +25,8 @@ export interface PostFrontmatter {
   date: string
   description: string
   draft?: boolean
+  external?: boolean
+  link?: string
 }
 
 export interface Post {
@@ -77,9 +98,12 @@ function buildPost(raw: string): Post {
     date: String(data.date ?? ""),
     description: String(data.description ?? ""),
     draft: data.draft === true,
+    external: data.external === true,
+    link: data.link ? String(data.link) : undefined,
   }
-  const html = marked.parse(content, { async: false }) as string
-  return { frontmatter: fm, body: content, html }
+  const body = fm.external ? "" : content
+  const html = fm.external ? "" : DOMPurify.sanitize(marked.parse(content, { async: false }) as string)
+  return { frontmatter: fm, body, html }
 }
 
 const ALL_POSTS: Post[] = Object.values(rawMarkdown)

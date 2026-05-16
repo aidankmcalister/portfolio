@@ -12,7 +12,7 @@ I woke up, saw a weird meeting on my calendar, opened Slack, and read that my po
 
 The first thing that went through my head was "I'm fucked."
 
-## What the rest of that morning looked like
+# What the rest of that morning looked like
 
 About 50% of the company was cut. The whole DevRel team was mostly gone.
 
@@ -24,7 +24,7 @@ Over the weekend and into Monday I pushed hard to get through a lot of what I ha
 
 That timeline is hard to sit with. But I understand why it happened. This wasn't a "we want more profit" situation. The business needed to make a hard call. No one is a fan of it, including the people who had to make it. Knowing that doesn't make it hurt less, but it does make it easier to process and keep moving forward.
 
-## A year of actual progress
+# A year of actual progress
 
 In one year I went from a no-experience intern, to a junior, to an intermediate. I was told I did good work. I was promoted because of it.
 
@@ -36,7 +36,7 @@ What's helping is the people. My former team, my family. The relationships I bui
 
 I met some amazing people at this job. People I learned from, worked alongside, and genuinely liked. I hope to run into them again someday.
 
-## If this just happened to you
+# If this just happened to you
 
 This is just a thing that happens.
 

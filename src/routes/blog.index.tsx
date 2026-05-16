@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router"
-import { ArrowUpRight } from "lucide-react"
+import { Fragment } from "react"
 import { getPublishedPosts, type Post } from "@/lib/posts"
+import { Divider, ListRow, RowArrow } from "@/components/list-row"
 
 export const Route = createFileRoute("/blog/")({ component: Blog })
 
@@ -18,15 +19,15 @@ function Blog() {
   return (
     <div className="animate-fade pb-16">
       <div className="pb-8 pt-20 max-sm:pb-6 max-sm:pt-12">
-        <h2 className="mb-3 text-[22px] font-[500] tracking-[-0.015em] text-page-ink">
+        <h1 className="mb-3 text-[22px] font-[500] tracking-[-0.015em] text-page-ink">
           Blog
-        </h2>
-        <p className="max-w-[560px] text-[13.5px] leading-[1.65] text-page-muted">
+        </h1>
+        <p className="max-w-[560px] font-mono text-[13.5px] leading-[1.65] text-page-muted">
           Things I'm thinking about. Mostly docs, dev tools, and the lessons that show up when you ship them.
         </p>
       </div>
 
-      <div className="border-t border-page-border-soft" />
+      <div className="border-t border-page-border-soft transition-colors duration-[220ms]" />
 
       {posts.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-2 py-28 text-center max-sm:py-20">
@@ -37,8 +38,11 @@ function Blog() {
         </div>
       ) : (
         <div>
-          {posts.map((post) => (
-            <BlogRow key={post.frontmatter.slug} post={post} />
+          {posts.map((post, i) => (
+            <Fragment key={post.frontmatter.slug}>
+              {i > 0 && <Divider />}
+              <BlogRow post={post} />
+            </Fragment>
           ))}
         </div>
       )}
@@ -47,25 +51,24 @@ function Blog() {
 }
 
 function BlogRow({ post }: { post: Post }) {
-  const { slug, title, date, description } = post.frontmatter
+  const { slug, title, date, description, external, link } = post.frontmatter
+
   return (
-    <Link
-      className="blog-row"
-      to="/blog/$slug"
-      params={{ slug }}
+    <ListRow
+      href={external && link ? link : `/blog/${slug}`}
+      internal={!external}
+      className="grid-cols-[96px_minmax(0,1fr)_14px] max-sm:grid-cols-[1fr_14px] max-sm:gap-1"
     >
-      <div className="blog-date text-[11px] text-page-muted">{formatDate(date)}</div>
+      <div className="text-[11px] text-page-muted max-sm:col-span-full max-sm:-mb-0.5">{formatDate(date)}</div>
       <div className="text-[13.5px] leading-[1.4] text-page-ink">
         {title}
         {description ? (
-          <span className="mt-[3px] block text-[12px] leading-[1.5] text-page-muted">
+          <span className="mt-[3px] block text-[12px] leading-[1.5] text-page-muted max-sm:line-clamp-2">
             {description}
           </span>
         ) : null}
       </div>
-      <div className="work-arrow">
-        <ArrowUpRight className="h-[11px] w-[11px]" />
-      </div>
-    </Link>
+      <RowArrow direction={external ? "up-right" : "right"} />
+    </ListRow>
   )
 }

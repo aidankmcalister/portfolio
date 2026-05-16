@@ -6,7 +6,7 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
   loader: ({ params }) => {
     const post = getPostBySlug(params.slug)
-    if (!post || post.frontmatter.draft) throw notFound()
+    if (!post || post.frontmatter.draft || post.frontmatter.external) throw notFound()
 
     const origin = import.meta.env.DEV
       ? "http://localhost:3000"
@@ -56,20 +56,20 @@ function BlogPost() {
       <div className="pb-10 pt-20 max-sm:pb-8 max-sm:pt-12">
         <Link
           to="/blog"
-          className="mb-8 inline-flex items-center gap-1.5 text-[12px] text-page-muted transition-colors hover:text-page-ink"
+          className="mb-8 inline-flex items-center gap-1.5 font-mono text-[12px] text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
         >
           <ArrowLeft className="h-[11px] w-[11px]" />
           back to blog
         </Link>
 
-        <h1 className="mb-5 max-w-[640px] text-[26px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink max-sm:text-[22px]">
+        <h1 className="mb-5 text-[26px] font-[500] leading-[1.3] tracking-[-0.018em] text-page-ink max-sm:text-[22px]">
           {title}
         </h1>
 
-        <div className="text-[12px] text-page-muted">{formatDate(date)}</div>
+        <div className="font-mono text-[12px] text-page-muted">{formatDate(date)}</div>
       </div>
 
-      <div className="border-t border-page-border-soft" />
+      <div className="border-t border-page-border-soft transition-colors duration-[220ms]" />
 
       <div
         className="prose-blog pt-10 max-sm:pt-8"

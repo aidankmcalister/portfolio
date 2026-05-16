@@ -7,7 +7,7 @@ import {
   useRouterState,
 } from "@tanstack/react-router"
 import { Analytics } from "@vercel/analytics/react"
-import { Moon, Sun } from "lucide-react"
+import { Menu, Moon, Sun, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import appCss from "../styles.css?url"
 import type { ReactNode } from "react"
@@ -67,7 +67,7 @@ export const Route = createRootRoute({
         { rel: "preconnect", href: "https://fonts.gstatic.com" },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap",
         },
         { rel: "stylesheet", href: appCss },
         { rel: "manifest", href: "/manifest.json" },
@@ -122,51 +122,107 @@ function Nav({
 }) {
   const { location } = useRouterState()
   const path = location.pathname
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [path])
 
   const linkClass = (active: boolean) =>
-    `py-1 text-[12.5px] transition-colors duration-[220ms] ${
+    `py-2.5 text-[12.5px] transition-colors duration-[220ms] ${
       active
-        ? "border-b border-page-ink pb-[3px] text-page-ink"
+        ? "border-b border-page-ink pb-[9px] text-page-ink"
         : "text-page-muted hover:text-page-ink"
     }`
 
+  const mobileLinkClass = (active: boolean) =>
+    `block py-3 text-[14px] transition-colors duration-[220ms] ${
+      active ? "text-page-ink" : "text-page-muted"
+    }`
+
   return (
-    <nav className="nav-bg sticky top-0 z-10 flex items-center justify-between border-b border-page-border-soft py-[22px] backdrop-blur-[10px]">
-      <Link
-        to="/"
-        className="text-[13.5px] font-[500] tracking-[-0.005em] text-page-ink"
-      >
-        Aidan McAlister
-      </Link>
-      <div className="flex items-center gap-[22px]">
-        <Link to="/" className={linkClass(path === "/")}>
-          home
-        </Link>
-        <Link to="/work" className={linkClass(path === "/work")}>
-          work
-        </Link>
-        <Link to="/blog" className={linkClass(path === "/blog")}>
-          blog
-        </Link>
-        <button
-          onClick={toggle}
-          aria-label="Toggle theme"
-          suppressHydrationWarning
-          className="flex h-6 w-6 items-center justify-center text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
+    <nav className="nav-bg sticky top-0 z-10 border-b border-page-border-soft font-mono backdrop-blur-[10px] transition-[border-color] duration-[220ms]">
+      <div className="flex items-center justify-between py-[22px]">
+        <Link
+          to="/"
+          className="text-[13.5px] font-[500] tracking-[-0.005em] text-page-ink"
         >
-          <span suppressHydrationWarning>
-            {mounted ? (
-              isDark ? (
-                <Sun className="h-[15px] w-[15px]" />
+          Aidan McAlister
+        </Link>
+        <div className="flex items-center gap-[22px] max-sm:hidden">
+          <Link to="/" className={linkClass(path === "/")}>
+            home
+          </Link>
+          <Link to="/work" className={linkClass(path === "/work")}>
+            work
+          </Link>
+          <Link to="/blog" className={linkClass(path === "/blog")}>
+            blog
+          </Link>
+          <button
+            onClick={toggle}
+            aria-label="Toggle theme"
+            suppressHydrationWarning
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
+          >
+            <span suppressHydrationWarning>
+              {mounted ? (
+                isDark ? (
+                  <Sun className="h-[15px] w-[15px]" />
+                ) : (
+                  <Moon className="h-[15px] w-[15px]" />
+                )
               ) : (
-                <Moon className="h-[14px] w-[14px]" />
-              )
+                <Moon className="h-[15px] w-[15px]" />
+              )}
+            </span>
+          </button>
+        </div>
+        <div className="flex items-center gap-2 sm:hidden">
+          <button
+            onClick={toggle}
+            aria-label="Toggle theme"
+            suppressHydrationWarning
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
+          >
+            <span suppressHydrationWarning>
+              {mounted ? (
+                isDark ? (
+                  <Sun className="h-[15px] w-[15px]" />
+                ) : (
+                  <Moon className="h-[15px] w-[15px]" />
+                )
+              ) : (
+                <Moon className="h-[15px] w-[15px]" />
+              )}
+            </span>
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-page-muted transition-colors duration-[220ms] hover:text-page-ink"
+          >
+            {menuOpen ? (
+              <X className="h-[17px] w-[17px]" />
             ) : (
-              <Moon className="h-[14px] w-[14px]" />
+              <Menu className="h-[17px] w-[17px]" />
             )}
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
+      {menuOpen && (
+        <div className="border-t border-page-border-soft pb-4 pt-2 transition-colors duration-[220ms] sm:hidden">
+          <Link to="/" className={mobileLinkClass(path === "/")}>
+            home
+          </Link>
+          <Link to="/work" className={mobileLinkClass(path === "/work")}>
+            work
+          </Link>
+          <Link to="/blog" className={mobileLinkClass(path === "/blog")}>
+            blog
+          </Link>
+        </div>
+      )}
     </nav>
   )
 }
@@ -174,9 +230,12 @@ function Nav({
 function RootLayout() {
   const { isDark, mounted, toggle } = useTheme()
   return (
-    <div className="mx-auto max-w-[880px] px-9 max-sm:px-5">
+    <div className="mx-auto max-w-[880px] px-12 max-sm:px-5">
+      <a href="#main" className="skip-link">Skip to content</a>
       <Nav isDark={isDark} mounted={mounted} toggle={toggle} />
-      <Outlet />
+      <main id="main">
+        <Outlet />
+      </main>
     </div>
   )
 }

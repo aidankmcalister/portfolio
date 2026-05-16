@@ -71,10 +71,6 @@ function validateInput(input: unknown): ContactEmailInput {
     throw new Error("Please enter a valid email address")
   }
 
-  if (!subject) {
-    throw new Error("Subject is required")
-  }
-
   if (!message) {
     throw new Error("Message is required")
   }
@@ -96,7 +92,7 @@ function buildHtmlEmail(input: ContactEmailInput) {
   const safeMessage = escapeHtml(input.message).replaceAll("\n", "<br />")
 
   return `
-    <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #111;">
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif; line-height: 1.5; color: #111;">
       <h2 style="margin-bottom: 12px;">New portfolio contact form message</h2>
       <p><strong>Name:</strong> ${safeName}</p>
       ${safeCompany ? `<p><strong>Company:</strong> ${safeCompany}</p>` : ""}
@@ -126,7 +122,7 @@ export const sendContactEmail = createServerFn({ method: "POST" })
     const { data: emailResponse, error } = await resend.emails.send({
       from,
       to,
-      subject: `[Portfolio] ${data.subject}`,
+      subject: `[Portfolio] ${data.subject || "No subject"}`,
       replyTo: data.email,
       html: buildHtmlEmail(data),
     })
