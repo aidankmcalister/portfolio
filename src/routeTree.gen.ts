@@ -15,6 +15,7 @@ import { Route as OgPreviewRouteImport } from './routes/og-preview'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugDotmdRouteImport } from './routes/blog.$slug[.]md'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as ApiPageMdPageRouteImport } from './routes/api/page-md/$page'
@@ -50,6 +51,11 @@ const IndexRoute = IndexRouteImport.update({
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugDotmdRoute = BlogSlugDotmdRouteImport.update({
+  id: '/$slug.md',
+  path: '/$slug.md',
   getParentRoute: () => BlogRoute,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/$slug.md': typeof BlogSlugDotmdRoute
   '/blog/': typeof BlogIndexRoute
   '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/$slug.md': typeof BlogSlugDotmdRoute
   '/blog': typeof BlogIndexRoute
   '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/$slug.md': typeof BlogSlugDotmdRoute
   '/blog/': typeof BlogIndexRoute
   '/api/blog-md/$slug': typeof ApiBlogMdSlugRoute
   '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/og'
     | '/blog/$slug'
+    | '/blog/$slug.md'
     | '/blog/'
     | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/og'
     | '/blog/$slug'
+    | '/blog/$slug.md'
     | '/blog'
     | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/og'
     | '/blog/$slug'
+    | '/blog/$slug.md'
     | '/blog/'
     | '/api/blog-md/$slug'
     | '/api/llms-full/txt'
@@ -226,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/blog/$slug.md': {
+      id: '/blog/$slug.md'
+      path: '/$slug.md'
+      fullPath: '/blog/$slug.md'
+      preLoaderRoute: typeof BlogSlugDotmdRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -273,11 +292,13 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogSlugDotmdRoute: typeof BlogSlugDotmdRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogSlugDotmdRoute: BlogSlugDotmdRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 

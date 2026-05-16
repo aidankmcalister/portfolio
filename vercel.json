@@ -8,11 +8,7 @@
       "source": "/llms-full.txt",
       "destination": "/api/llms-full/txt"
     },
-    {
-      "source": "/blog/:slug([^.]+)\\.md",
-      "destination": "/api/blog-md/:slug"
-    },
-    {
+{
       "source": "/index.md",
       "destination": "/api/page-md/index"
     },
