@@ -68,6 +68,7 @@ const config = defineConfig({
     tanstackStart(),
     nitro({
       preset: "vercel",
+      plugins: ["./server/plugins/md-rewrite.ts"],
       routeRules: {
         "/llms.txt": { proxy: "/api/llms/txt" },
         "/llms-full.txt": { proxy: "/api/llms-full/txt" },
