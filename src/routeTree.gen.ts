@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiOgRouteImport } from './routes/api/og'
+import { Route as ApiLlmsFullTxtRouteImport } from './routes/api/llms-full.txt'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -52,6 +53,11 @@ const ApiOgRoute = ApiOgRouteImport.update({
   path: '/api/og',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiLlmsFullTxtRoute = ApiLlmsFullTxtRouteImport.update({
+  id: '/api/llms-full/txt',
+  path: '/api/llms-full/txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/api/og': typeof ApiOgRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/llms-full/txt': typeof ApiLlmsFullTxtRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,8 +99,16 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/blog/$slug'
     | '/blog/'
+    | '/api/llms-full/txt'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/og-preview' | '/work' | '/api/og' | '/blog/$slug' | '/blog'
+  to:
+    | '/'
+    | '/og-preview'
+    | '/work'
+    | '/api/og'
+    | '/blog/$slug'
+    | '/blog'
+    | '/api/llms-full/txt'
   id:
     | '__root__'
     | '/'
@@ -101,6 +118,7 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/blog/$slug'
     | '/blog/'
+    | '/api/llms-full/txt'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -109,6 +127,7 @@ export interface RootRouteChildren {
   OgPreviewRoute: typeof OgPreviewRoute
   WorkRoute: typeof WorkRoute
   ApiOgRoute: typeof ApiOgRoute
+  ApiLlmsFullTxtRoute: typeof ApiLlmsFullTxtRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -162,6 +181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiOgRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/llms-full/txt': {
+      id: '/api/llms-full/txt'
+      path: '/api/llms-full/txt'
+      fullPath: '/api/llms-full/txt'
+      preLoaderRoute: typeof ApiLlmsFullTxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +209,7 @@ const rootRouteChildren: RootRouteChildren = {
   OgPreviewRoute: OgPreviewRoute,
   WorkRoute: WorkRoute,
   ApiOgRoute: ApiOgRoute,
+  ApiLlmsFullTxtRoute: ApiLlmsFullTxtRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

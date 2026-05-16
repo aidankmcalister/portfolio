@@ -41,7 +41,7 @@ These are great for humans. They're often invisible to crawlers.
 
 Most AI retrieval systems read pages the same way search crawlers do: they see what the page delivers before JavaScript runs. If your answer only appears after a user clicks a tab or picks a runtime, the crawler may never see it. Neither will the AI.
 
-I hit this directly during a 400+ page docs rebuild at Prisma. A surprising amount of useful content was buried inside tabs or interactive panels. Once I made sure those components flattened cleanly into the underlying markdown, citation patterns shifted.
+I hit this directly during a [400+ page docs rebuild](https://www.prisma.io/blog/rebuilding-the-prisma-docs) at Prisma. A surprising amount of useful content was buried inside tabs or interactive panels. Once I made sure those components flattened cleanly into the underlying markdown, citation patterns shifted.
 
 Here's the kind of thing that's invisible to a crawler:
 
@@ -94,7 +94,7 @@ This one is easy to miss. Your docs might answer every question about how your p
 
 I saw this play out at Prisma. A comparison page from a small company was pulling hundreds of AI citations a month at a higher source rank than our own pages, because we hadn't published a direct answer to the comparison question. Same goes for integration questions ("how do I use X with Vercel?"), troubleshooting patterns ("why does X fail on edge runtimes?"), and configuration edge cases.
 
-Once I started auditing what developers were actually asking AI about, the gaps were obvious. There was no "Prisma Postgres vs Neon" comparison page. No "best Postgres for AI apps" guide. No framework-specific setup pages for Next.js on Vercel, SvelteKit, Nuxt, or Hono on Cloudflare Workers. Every one of those questions had an answer somewhere else, and that answer was the one getting cited.
+Once I started auditing what developers were actually asking AI about, the gaps were obvious. There was no "Prisma Postgres vs Neon" comparison page. No "best Postgres for AI apps" guide. No framework-specific setup pages for [Next.js on Vercel](https://www.prisma.io/docs/guides/nextjs), [SvelteKit](https://www.prisma.io/docs/guides/sveltekit), [Nuxt](https://www.prisma.io/docs/guides/nuxt), or Hono on Cloudflare Workers. Every one of those questions had an answer somewhere else, and that answer was the one getting cited.
 
 ## The page is crawlable but structurally weak
 
@@ -136,7 +136,7 @@ There's a subtler version of this problem worth pulling out.
 
 When an AI answer lists eight sources, the first ones tend to carry more weight in the actual response. If your content consistently lands at position 6 or 7, it's technically referenced but not shaping the answer.
 
-I tracked this across the Prisma docs with an AI citation monitor like [Promptwatch](https://www.promptwatch.io/) and found that even pages with high citation frequency were averaging a citation rank around 6. The problem wasn't discoverability. It was that other sources were more quotable: more direct, cleaner structure, answer closer to the top.
+I tracked this across the [Prisma docs](https://www.prisma.io/docs) with an AI citation monitor like [Promptwatch](https://www.promptwatch.io/) and found that even pages with high citation frequency were averaging a citation rank around 6. The problem wasn't discoverability. It was that other sources were more quotable: more direct, cleaner structure, answer closer to the top.
 
 The fix isn't to publish more. It's to look at the pages you already have and ask: if an AI had to pick one quotable sentence from this page, what would it pick? If you can't answer that fast, the retrieval system probably can't either.
 
@@ -146,20 +146,20 @@ None of this needs a new content strategy. It mostly needs you to look at what y
 
 1. **Audit your top questions.** Open an AI assistant. Ask the five questions developers most commonly ask about your product. Look at what gets cited and at what rank. If your docs aren't in those citations, or show up late, that's where to start.
 2. **Move the answer up.** On your highest-traffic pages, check where the actual answer lives. If it's not in the first two paragraphs, move it. Keep the context, but lead with the answer.
-3. **Make every page readable without JavaScript.** Disable JS in your browser and load a few key pages. If the answer disappears, retrieval systems probably can't see it either. Flatten interactive components so the content exists as plain text in the HTML, not just as rendered UI.
+3. **Make every page readable without JavaScript.** Disable JS in your browser and load a few key pages. If the answer disappears, retrieval systems probably can't see it either. Flatten interactive components so the content exists as plain text in the HTML, not just as rendered UI. Serve [`.md` aliases or content-negotiated markdown](https://www.prisma.io/docs/guides/nextjs.md) so agents can skip the HTML entirely.
 4. **Write for the questions, not just the features.** Audit coverage for integration guides, comparison pages, and troubleshooting patterns. If those questions don't have a clear answer on your domain, someone else's answer becomes the canonical one.
 5. **Check what third-party pages are saying.** Search for comparisons involving your product. If those pages are getting cited in AI answers and they're wrong, you can't fix that by publishing internally and hoping. You need a better answer on the same question, or you reach out to the author.
 6. **Update before you add.** Outdated pages erode trust in everything around them. Before filling coverage gaps with new content, check what's already there for accuracy.
 
 # Where this goes
 
-The instinct when you hear "AI can't find my docs" is to add something. A new metadata file. An `llms.txt`. More pages. Sometimes that helps. Usually the problem is older than that.
+The instinct when you hear "AI can't find my docs" is to add something. A new metadata file. An [`llms.txt`](https://llmstxt.org/). More pages. Sometimes that helps. Usually the problem is older than that.
 
 ## Infrastructure comes last
 
 There is real infrastructure worth building, but only once the content itself is solid.
 
-At Prisma, I added an `llms.txt` index to the docs. The useful part wasn't the file itself. It was using it as a forcing function to think about what an AI agent actually needs from a docs site: curated entry points by product area, `.md` URL aliases so agents can request markdown directly, content negotiation so agent user-agents get flat text instead of rendered HTML.
+At Prisma, I added an [`llms.txt`](https://www.prisma.io/docs/llms.txt) index to the docs. The useful part wasn't the file itself. It was using it as a forcing function to think about what an AI agent actually needs from a docs site: curated entry points by product area, `.md` URL aliases so agents can request markdown directly, content negotiation so agent user-agents get flat text instead of rendered HTML. (I did [the same thing on this site](/llms.txt) — you can see what a minimal `llms.txt` looks like for a portfolio.)
 
 I also exposed a machine-readable changelog so AI tools can check for breaking changes before citing advice that's no longer accurate.
 

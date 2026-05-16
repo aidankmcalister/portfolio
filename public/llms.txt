@@ -1,0 +1,37 @@
+# Aidan McAlister
+
+> Developer advocate and technical writer focused on docs, dev tools, and developer experience. Previously at Prisma, where I led a 400+ page docs rebuild, built GEO infrastructure for AI discoverability, and shipped developer-facing tools.
+
+## About
+
+- [Home](https://www.aidanmcalister.com/): Overview, links, and experience
+- [Work](https://www.aidanmcalister.com/work): Portfolio of docs, tools, OSS, and writing
+- [Blog](https://www.aidanmcalister.com/blog): Posts on docs, dev tools, and AI visibility
+
+## Blog
+
+- [Your docs are invisible to AI. Here's why.](https://www.aidanmcalister.com/blog/your-docs-are-invisible-to-ai): Why well-written docs get skipped by AI retrieval systems, and what to do about it. Covers citation patterns, content structure, and GEO infrastructure.
+
+## Work
+
+- [Prisma docs rebuild](https://www.prisma.io/docs): Led all three rounds of a 400+ page docs rebuild: content architecture, production 301 redirect map, custom 404, and a Sentry + PostHog pipeline.
+- [20+ framework and integration guides](https://www.prisma.io/docs/guides): Authored guides for Next.js, Astro, Nuxt, SvelteKit, SolidStart, TanStack Start, Bun, Deno, Clerk, Cloudflare Workers, Vercel AI SDK, and more.
+- [llms.txt and AI-agent discoverability](https://www.prisma.io/docs/llms.txt): Built llms.txt sub-indexes, content negotiation, .md aliases on every docs route, and a markdown 404 handler for ChatGPT, Claude, and Perplexity.
+- [Prisma Postgres Management API](https://www.prisma.io/docs/management-api): Programmatic database provisioning and management. Docs generated from Swagger spec.
+- [create-db](https://create-db.prisma.io): CLI for provisioning temporary databases. Added Cloudflare rate limiting after a 700-database creation spike.
+- [Prisma Claude Code plugin](https://claude.com/plugins/prisma): Three skills packaged as a plugin and published to Anthropic's official listing.
+
+## External posts
+
+- [Rebuilding the Prisma docs](https://www.prisma.io/blog/rebuilding-the-prisma-docs): The story behind the 400+ page docs rebuild.
+- [Vibe coding with Prisma MCP and Next.js](https://www.prisma.io/blog/vibe-coding-with-prisma-mcp-and-nextjs): Building a Next.js app with the Prisma MCP server.
+
+## Experience
+
+- Prisma, Developer Advocate (Mar 2025 - May 2026): Lead docs, guides, and dev tools. Ran the docs rebuild, shipped create-db, built GEO and AI-citation pipeline, grew Discord past 10,000 members.
+- Inner Armor, Front End (Jul 2024 - Mar 2025): Built a Remix + TypeScript admin dashboard with Observable Plot and ShadCN for cross-period data analysis.
+- Elevate Digital IO, Full Stack (Jan 2024 - Aug 2024): Led development of an advanced filter system in RedwoodJS with Prisma and GraphQL.
+
+## Optional
+
+- [Full content](https://www.aidanmcalister.com/llms-full.txt): Complete text of all blog posts and work descriptions

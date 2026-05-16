@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+Sitemap: https://www.aidanmcalister.com/sitemap.xml
+LLMs: https://www.aidanmcalister.com/llms.txt

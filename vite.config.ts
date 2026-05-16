@@ -17,6 +17,9 @@ const config = defineConfig({
     tanstackStart(),
     nitro({
       preset: "vercel",
+      routeRules: {
+        "/llms-full.txt": { proxy: "/api/llms-full/txt" },
+      },
     }),
     viteReact(),
   ],

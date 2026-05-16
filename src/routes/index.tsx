@@ -22,30 +22,60 @@ const textareaClass =
   "min-h-24 w-full resize-y rounded-md border border-page-border bg-transparent px-3 py-2 text-[13px] leading-[1.55] text-page-ink placeholder:text-page-faint outline-none transition-colors duration-[220ms] hover:bg-page-surface focus-visible:border-page-muted focus-visible:bg-page-surface"
 
 function StatsBar() {
+  const label = "text-[10.5px] tracking-[0.08em] text-page-muted uppercase mb-3"
+
   return (
     <div className="border-t border-page-border-soft py-8 font-mono transition-colors duration-[220ms] max-sm:py-6">
-      <div className="mb-3 flex justify-between max-sm:hidden">
-        <span className="text-[10.5px] tracking-[0.08em] text-page-muted uppercase">experience</span>
-        <span className="text-[10.5px] tracking-[0.08em] text-page-muted uppercase">based</span>
-        <span className="text-[10.5px] tracking-[0.08em] text-page-muted uppercase">dates</span>
+      <div className="flex justify-between gap-16 max-sm:hidden">
+        <div>
+          <div className={label}>experience</div>
+          {EXPERIENCE.map((item) => (
+            <div
+              key={item.id}
+              className={`py-1 text-[13px] leading-[1.55] whitespace-nowrap ${item.kind === "contract" ? "opacity-50" : ""}`}
+            >
+              <span className="font-[600] text-page-ink">{item.role}</span>{" "}
+              <span className="text-page-muted">@ {item.company}</span>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div className={label}>based</div>
+          {EXPERIENCE.map((item) => (
+            <div
+              key={item.id}
+              className={`py-1 text-[13px] leading-[1.55] font-[600] text-page-ink ${item.kind === "contract" ? "opacity-50" : ""}`}
+            >
+              {STATS.location}
+            </div>
+          ))}
+        </div>
+        <div>
+          <div className={label}>dates</div>
+          {EXPERIENCE.map((item) => (
+            <div
+              key={item.id}
+              className={`py-1 text-[13px] leading-[1.55] font-[600] text-page-ink ${item.kind === "contract" ? "opacity-50" : ""}`}
+            >
+              {item.date}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-col gap-2 max-sm:gap-4">
+
+      <div className="hidden max-sm:flex max-sm:flex-col max-sm:gap-4">
         {EXPERIENCE.map((item) => (
           <div
             key={item.id}
             className={`text-[13px] leading-[1.55] ${item.kind === "contract" ? "opacity-50" : ""}`}
           >
-            <div className="flex justify-between max-sm:grid max-sm:grid-cols-[1fr_auto]">
-              <div className="whitespace-nowrap">
-                <span className="font-[600] text-page-ink">{item.role}</span>{" "}
-                <span className="text-page-muted max-sm:hidden">@ {item.company}</span>
-              </div>
-              <div className="font-[600] text-page-ink max-sm:hidden">{STATS.location}</div>
-              <div className="font-[600] text-page-ink">{item.date}</div>
+            <div className="flex justify-between">
+              <span className="font-[600] text-page-ink">{item.role}</span>
+              <span className="font-[600] text-page-ink">{item.date}</span>
             </div>
-            <div className="hidden max-sm:grid grid-cols-[1fr_auto]">
-              <div className="text-page-muted">@ {item.company}</div>
-              <div className="text-page-muted">{STATS.location}</div>
+            <div className="flex justify-between">
+              <span className="text-page-muted">@ {item.company}</span>
+              <span className="text-page-muted">{STATS.location}</span>
             </div>
           </div>
         ))}
@@ -131,7 +161,8 @@ function Home() {
           >
             <DialogTrigger asChild>
               <button className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink">
-                contact <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:text-page-ink group-hover:translate-x-[3px]" />
+                contact{" "}
+                <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-[3px] group-hover:text-page-ink" />
               </button>
             </DialogTrigger>
             <DialogContent className="font-mono">
@@ -271,7 +302,7 @@ function Home() {
                     ) : (
                       <>
                         send message{" "}
-                        <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:text-page-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
                       </>
                     )}
                   </button>
@@ -286,7 +317,8 @@ function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            github <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:text-page-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            github{" "}
+            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
           </a>
 
           <a
@@ -295,11 +327,16 @@ function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            linkedin <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:text-page-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            linkedin{" "}
+            <ArrowUpRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-page-ink" />
           </a>
 
-          <Link className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink" to="/work">
-            work <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:text-page-ink group-hover:translate-x-[3px]" />
+          <Link
+            className="group relative inline-flex items-center gap-2 py-1 text-[13px] text-page-ink after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-page-faint after:transition-colors after:duration-[220ms] hover:after:bg-page-ink"
+            to="/work"
+          >
+            work{" "}
+            <ArrowRight className="h-[11px] w-[11px] text-page-muted transition-all duration-150 group-hover:translate-x-[3px] group-hover:text-page-ink" />
           </Link>
         </div>
       </div>
