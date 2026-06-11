@@ -5,7 +5,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
 
-  /* Monochrome grayscale — five steps */
+  /* Monochrome grayscale, five steps */
   --color-bg: #0a0a0a;
   --color-surface: #161616;
   --color-border: #232323;
@@ -41,7 +41,7 @@
   }
 }
 
-/* Inline text links — underlined, monochrome */
+/* Inline text links, underlined, monochrome */
 .link {
   color: var(--color-ink);
   text-decoration: underline;

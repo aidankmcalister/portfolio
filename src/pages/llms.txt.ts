@@ -26,7 +26,7 @@ export const GET: APIRoute = async () => {
 
 > ${SITE.description}
 
-${SITE.role} at Prisma, based in ${SITE.location}. I build the docs, tools, and community around developer products.
+Developer advocate based in ${SITE.location}. I build docs, tools, and community for developer products. Most recently I led docs and developer relations at Prisma.
 
 ## Pages
 

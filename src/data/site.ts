@@ -4,7 +4,7 @@ export const SITE = {
   role: "Developer Advocate",
   email: "aidankmcalister@gmail.com",
   description:
-    "Developer Advocate building clear docs, practical demos, and better developer experiences.",
+    "Developer advocate. I build docs, tools, and community for developer products.",
   location: "Boston, USA",
   url: "https://www.aidanmcalister.com",
   social: {
@@ -107,7 +107,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Developer Advocate",
     company: "Prisma",
     kind: "full-time",
-    desc: "Lead docs, guides, and dev tools across the TypeScript ecosystem. Ran the 400+ page docs rebuild, shipped create-db, built Prisma's GEO and AI-citation pipeline, and grew the Discord past 10,000 members.",
+    desc: "Led docs, guides, and dev tools across the TypeScript ecosystem. Ran the 400+ page docs rebuild, shipped create-db, built Prisma's GEO and AI-citation pipeline, and grew the Discord past 10,000 members.",
     url: "https://prisma.io",
   },
   {
@@ -115,7 +115,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Front End",
     company: "Inner Armor",
     kind: "contract",
-    desc: "Built a Remix + TypeScript admin dashboard to replace a legacy tool — hit 100% company-wide adoption. Added 10+ interactive graphs in Observable Plot and ShadCN for cross-period data analysis, plus reusable components with NextUI and AG Grid.",
+    desc: "Built a Remix + TypeScript admin dashboard to replace a legacy tool, and hit 100% company-wide adoption. Added 10+ interactive graphs in Observable Plot and ShadCN for cross-period data analysis, plus reusable components with NextUI and AG Grid.",
     url: "https://www.forgeinnerarmor.com/",
   },
   {
