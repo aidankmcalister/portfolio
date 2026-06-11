@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Row from "../../components/Row.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<Layout
+  title="Blog"
+  description="Writing on docs, dev tools, and developer experience by Aidan McAlister."
+>
+  <section class="pt-10">
+    <h1 class="font-mono text-[22px] font-bold tracking-tight text-ink">Blog</h1>
+    <p class="mt-3 max-w-xl text-body">
+      Things I'm thinking about. Mostly docs, dev tools, and the lessons that
+      show up when you ship them.
+    </p>
+  </section>
+
+  <section class="mt-12">
+    {
+      posts.length === 0 ? (
+        <p class="text-muted">Nothing posted yet — first one lands soon.</p>
+      ) : (
+        <div class="flex flex-col gap-6">
+          {posts.map((post) => (
+            <Row
+              href={
+                post.data.external && post.data.link
+                  ? post.data.link
+                  : `/blog/${post.data.slug}`
+              }
+              external={post.data.external}
+              title={post.data.title}
+              desc={post.data.description}
+              meta={formatDate(post.data.date)}
+            />
+          ))}
+        </div>
+      )
+    }
+  </section>
+</Layout>

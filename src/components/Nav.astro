@@ -1,0 +1,32 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const links = [
+  { href: "/", label: "home" },
+  { href: "/work", label: "work" },
+  { href: "/blog", label: "blog" },
+  { href: "/resume.pdf", label: "resume", external: true },
+];
+
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+---
+
+<nav class="flex gap-5 pt-10 pb-2 font-mono text-[13px]">
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        target={link.external ? "_blank" : undefined}
+        rel={link.external ? "noreferrer" : undefined}
+        class:list={[
+          "transition-colors",
+          !link.external && isActive(link.href)
+            ? "text-ink"
+            : "text-muted hover:text-ink",
+        ]}
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</nav>

@@ -1,0 +1,34 @@
+---
+// A list item: title (link) on the left, muted meta on the right, description below.
+interface Props {
+  href?: string;
+  external?: boolean;
+  title: string;
+  desc?: string;
+  meta?: string;
+}
+
+const { href, external, title, desc, meta } = Astro.props;
+const linkAttrs = external ? { target: "_blank", rel: "noreferrer" } : {};
+---
+
+<div>
+  <div class="flex items-baseline justify-between gap-4">
+    {
+      href ? (
+        <a
+          {...linkAttrs}
+          href={href}
+          class="font-medium text-ink underline-offset-4 decoration-muted hover:underline"
+        >
+          {title}
+          {external && <span class="text-[0.85em] text-muted"> ↗</span>}
+        </a>
+      ) : (
+        <span class="font-medium text-ink">{title}</span>
+      )
+    }
+    {meta && <span class="shrink-0 text-[12.5px] text-muted">{meta}</span>}
+  </div>
+  {desc && <p class="mt-1 text-[13.5px] leading-relaxed text-muted">{desc}</p>}
+</div>

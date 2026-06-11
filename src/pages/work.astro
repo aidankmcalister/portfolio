@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Row from "../components/Row.astro";
+import { WORK, EXPERIENCE } from "../data/site";
+---
+
+<Layout
+  title="Work"
+  description="Things Aidan McAlister has shipped — docs, tools, and writing."
+>
+  <section class="pt-10">
+    <h1 class="font-mono text-[22px] font-bold tracking-tight text-ink">Work</h1>
+    <p class="mt-3 max-w-xl text-body">
+      Things I've shipped, mostly recent. Docs, dev tools, and writing.
+    </p>
+  </section>
+
+  <section class="mt-12">
+    <div class="flex flex-col gap-5">
+      {
+        WORK.map((item) => (
+          <Row
+            href={item.url}
+            external={!item.internal}
+            title={item.title}
+            desc={item.desc}
+            meta={item.company}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-14">
+    <h2 class="mb-5 font-mono text-[18px] font-semibold text-ink">Experience</h2>
+    <div class="flex flex-col gap-6">
+      {
+        EXPERIENCE.map((item) => (
+          <Row
+            href={item.url}
+            external
+            title={`${item.role} @ ${item.company}`}
+            desc={item.desc}
+            meta={item.date}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Layout>
