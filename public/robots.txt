@@ -2,4 +2,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.aidanmcalister.com/sitemap-index.xml
+Sitemap: https://www.aidanmcalister.com/sitemap.xml
+LLMs: https://www.aidanmcalister.com/llms.txt
