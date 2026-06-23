@@ -30,7 +30,7 @@ Developer advocate based in ${SITE.location}. I build docs, tools, and community
 
 ## Pages
 
-- [Home](${SITE.url}): Bio, selected work, and recent writing.
+- [Home](${SITE.url}): Bio, links, and what I'm currently building.
 - [Work](${SITE.url}/work): Full list of shipped work and experience.
 - [Blog](${SITE.url}/blog): Writing on docs, dev tools, and developer experience.
 

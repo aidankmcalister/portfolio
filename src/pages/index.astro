@@ -1,21 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Row from "../components/Row.astro";
 import { SITE, WORK } from "../data/site";
 
-const posts = (await getCollection("blog"))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
-  .slice(0, 3);
-
-const work = WORK.slice(0, 5);
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
-}
+const featured = WORK.find((item) => item.title === "BetterBox");
 ---
 
 <Layout>
@@ -40,50 +28,17 @@ function formatDate(iso: string) {
     </div>
   </section>
 
-  <section class="mt-14">
-    <div class="mb-5 flex items-baseline justify-between">
-      <h2 class="font-mono text-[18px] font-semibold text-ink">Work</h2>
-      <a href="/work" class="font-mono text-[12.5px] text-muted hover:text-ink">all →</a>
-    </div>
-    <div class="flex flex-col gap-5">
-      {
-        work.map((item) => (
-          <Row
-            href={item.url}
-            external={!item.internal}
-            title={item.title}
-            desc={item.desc}
-            meta={item.company}
-          />
-        ))
-      }
-    </div>
-  </section>
-
   {
-    posts.length > 0 && (
+    featured && (
       <section class="mt-14">
-        <div class="mb-5 flex items-baseline justify-between">
-          <h2 class="font-mono text-[18px] font-semibold text-ink">Writing</h2>
-          <a href="/blog" class="font-mono text-[12.5px] text-muted hover:text-ink">
-            all →
-          </a>
-        </div>
-        <div class="flex flex-col gap-5">
-          {posts.map((post) => (
-            <Row
-              href={
-                post.data.external && post.data.link
-                  ? post.data.link
-                  : `/blog/${post.data.slug}`
-              }
-              external={post.data.external}
-              title={post.data.title}
-              desc={post.data.description}
-              meta={formatDate(post.data.date)}
-            />
-          ))}
-        </div>
+        <h2 class="mb-5 font-mono text-[18px] font-semibold text-ink">Currently</h2>
+        <Row
+          href={featured.url}
+          external={!featured.internal}
+          title={featured.title}
+          desc={featured.desc}
+          meta={featured.company}
+        />
       </section>
     )
   }
