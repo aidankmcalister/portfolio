@@ -9,7 +9,7 @@ export const SITE = {
   url: "https://www.aidanmcalister.com",
   social: {
     github: "https://github.com/aidankmcalister",
-    linkedin: "https://www.linkedin.com/in/aidankmcalister",
+    linkedin: "https://www.linkedin.com/in/aidanmcalister",
   },
 };
 
