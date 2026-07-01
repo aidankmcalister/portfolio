@@ -46,7 +46,7 @@ export const WORK: WorkItem[] = [
     type: "Docs",
     company: "Prisma",
     title: "Prisma docs rebuild (400+ pages)",
-    desc: "Led all three rounds: content architecture, the production 301 redirect map, custom 404, and a Sentry + PostHog pipeline that pages the team in Slack when docs go down.",
+    desc: "Led all three rounds: content architecture, the production 301 redirect map, custom 404, and a Sentry + PostHog pipeline that pages the team in Slack when docs go down. Preserved ~90% of organic search traffic through the migration.",
     url: "https://www.prisma.io/docs",
   },
   {
@@ -60,7 +60,7 @@ export const WORK: WorkItem[] = [
     type: "Docs",
     company: "Prisma",
     title: "llms.txt and AI-agent discoverability",
-    desc: "llms.txt sub-indexes, content negotiation, .md aliases on every docs route, and a markdown 404 handler. Prisma's GEO architecture for ChatGPT, Claude, and Perplexity.",
+    desc: "llms.txt sub-indexes, content negotiation, .md aliases on every docs route, and a markdown 404 handler. Prisma's GEO architecture for ChatGPT, Claude, and Perplexity. The endpoint picked up 5,000+ monthly AI-crawler requests within weeks.",
     url: "https://www.prisma.io/docs/llms.txt",
   },
   {
@@ -74,7 +74,7 @@ export const WORK: WorkItem[] = [
     type: "OSS",
     company: "Prisma",
     title: "create-db",
-    desc: "CLI for provisioning temporary databases. Shortens time-to-first-query for new users. Tracked down a 700-database creation spike, added Cloudflare rate limiting, moved everything into a Turborepo monorepo.",
+    desc: "CLI for provisioning temporary databases. Provisions a ready-to-query database in under 3 seconds. Tracked down a 700-database creation spike, added Cloudflare rate limiting, moved everything into a Turborepo monorepo.",
     url: "https://create-db.prisma.io",
   },
   {
@@ -88,7 +88,7 @@ export const WORK: WorkItem[] = [
     type: "Post",
     company: "Personal",
     title: "Your docs are invisible to AI. Here's why.",
-    desc: "Why well-written docs still get skipped by AI retrieval systems, and what to do about it. Covers citation patterns, GEO infrastructure, and making content that AI can actually read.",
+    desc: "Good docs don't get cited by AI just because they're good. Here's why AI retrieval systems skip them, and what to do about it.",
     url: "/blog/your-docs-are-invisible-to-ai",
     internal: true,
   },
@@ -96,14 +96,14 @@ export const WORK: WorkItem[] = [
     type: "Post",
     company: "Prisma",
     title: "Rebuilding the Prisma docs",
-    desc: "The story behind the 400+ page docs rebuild: what we kept, what we cut, and how we shipped it without breaking SEO.",
+    desc: "How we rebuilt the Prisma docs site: new framework, new design, and a reworked information architecture.",
     url: "https://www.prisma.io/blog/rebuilding-the-prisma-docs",
   },
   {
     type: "Post",
     company: "Prisma",
     title: "Vibe coding with Prisma MCP and Next.js",
-    desc: "Building a Next.js app with the Prisma MCP server and an AI agent that actually understands your schema.",
+    desc: "Building a Next.js e-commerce app with Prisma MCP and an AI agent that actually understands your schema.",
     url: "https://www.prisma.io/blog/vibe-coding-with-prisma-mcp-and-nextjs",
   },
 ];

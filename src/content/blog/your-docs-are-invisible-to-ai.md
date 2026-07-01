@@ -2,7 +2,7 @@
 title: "Your docs are invisible to AI. Here's why."
 slug: "your-docs-are-invisible-to-ai"
 date: "2026-05-12"
-description: "Good documentation doesn't automatically get cited by AI. Here's why retrieval systems skip well-written content, and what to do about it."
+description: "Good docs don't get cited by AI just because they're good. Here's why AI retrieval systems skip them, and what to do about it."
 ---
 
 You wrote good docs. They're accurate, detailed, well-organized. The people who find them tell you they're helpful.
