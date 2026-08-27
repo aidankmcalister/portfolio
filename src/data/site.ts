@@ -38,9 +38,9 @@ export const WORK: WorkItem[] = [
   {
     type: "OSS",
     company: "Personal",
-    title: "BetterBox",
-    desc: "A tiling interface for Gmail built on the Gmail API. Link the Google accounts you already have and arrange every inbox as panes you drag, split, and resize, with your GitHub PRs in the same window. Nothing migrates and mail never touches a server. TanStack Start, Better Auth, and Prisma 7, open source and self-hostable.",
-    url: "https://betterbox.dev",
+    title: "clasp.sh",
+    desc: "Screenshots your code deserves. Paste a snippet, style it, and export a PNG or JPG. Runs entirely in the browser, no account, nothing uploaded. 242 languages via Shiki, VS Code theme import, and a pure Canvas 2D render engine kept React-free so the preview and the export always match. Next.js, TypeScript, and shadcn/ui.",
+    url: "https://clasp.sh",
   },
   {
     type: "Docs",
