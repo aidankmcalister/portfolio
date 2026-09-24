@@ -13,14 +13,14 @@ const small =
       Open to new roles. Say hi at <a href={`mailto:${SITE.email}`} class="link">{SITE.email}</a>
     </p>
     <div class="flex gap-5">
-      <a href={SITE.social.github} target="_blank" rel="noreferrer" class={small}>
-        GitHub<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.social.github} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={small}>
+        GitHub
       </a>
-      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" class={small}>
-        LinkedIn<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={small}>
+        LinkedIn
       </a>
-      <a href={SITE.resume} target="_blank" rel="noreferrer" class={small}>
-        Resume<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.resume} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={small}>
+        Resume
       </a>
     </div>
   </div>

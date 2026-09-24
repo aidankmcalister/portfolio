@@ -11,12 +11,14 @@ import { SITE } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
+  // Key of this page's generated card in src/pages/og/[...route].ts.
+  og?: string;
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, og = "index" } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.name}` : SITE.name;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
-const ogImage = new URL("/og.png", SITE.url).href;
+const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
 ---
 
 <!doctype html>
@@ -62,6 +64,7 @@ const ogImage = new URL("/og.png", SITE.url).href;
     />
   </head>
   <body>
+    <p id="new-tab" hidden>Opens in a new tab.</p>
     <Nav />
     <main class="mx-auto max-w-[800px] px-5">
       <slot />

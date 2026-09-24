@@ -8,13 +8,13 @@ Developer advocate and TypeScript engineer. I build the docs, tools, and communi
 
 - **6M+ runs** on [create-db](https://create-db.prisma.io), a CLI I planned, built, and shipped solo. It provisions a Postgres database in under 3 seconds.
 - **400+ page** [Prisma docs](https://www.prisma.io/docs) rebuild that kept ~90% of organic search traffic.
-- **10,000+ member** Prisma Discord, plus partnerships with TanStack, Bun, and Deno.
+- **10,000+ member** Prisma Discord community, plus partnerships with TanStack, Bun, and Deno.
 - **5,000+ monthly AI-crawler requests** on the [llms.txt](https://www.prisma.io/docs/llms.txt) layer I built for AI-agent discoverability.
 
 ## Experience
 
 **Developer Advocate**, Prisma (Mar 2025 to May 2026)
-Shipped create-db, led the docs rebuild, built the AI-agent discoverability layer, built the Prisma v7 and Prisma Postgres launch pages, wrote 20+ framework guides, and grew the community.
+Shipped create-db, led the docs rebuild, built the AI-agent discoverability layer, built the prisma.io homepage for the v7 launch and the Prisma Postgres product page, wrote 20+ framework guides, and grew the community.
 
 **Front End Developer**, Inner Armor (Jul 2024 to Mar 2025)
 Rebuilt an abandoned admin dashboard in Remix and TypeScript and got it to 100% company-wide adoption. Built 10+ data visualizations and a component library later extracted into a shared design system.

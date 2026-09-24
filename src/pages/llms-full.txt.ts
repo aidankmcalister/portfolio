@@ -30,7 +30,7 @@ export const GET: APIRoute = async () => {
 
 > ${SITE.description}
 
-Developer advocate and TypeScript engineer based in ${SITE.location}. I'm looking for my next role in developer relations or frontend and devtools engineering. At Prisma I shipped create-db, a CLI with 6M+ runs, led a 400+ page docs rebuild that kept ~90% of search traffic, and grew the Discord past 10,000 members.
+Developer advocate and TypeScript engineer based in ${SITE.location}. I'm looking for my next role in developer relations or frontend and devtools engineering. At Prisma I shipped create-db, a CLI with 6M+ runs, led a 400+ page docs rebuild that kept ~90% of search traffic, and grew the Discord community past 10,000 members.
 
 ## Links
 

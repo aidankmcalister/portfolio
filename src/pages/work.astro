@@ -14,13 +14,15 @@ const posts = await getPosts();
 ---
 
 <Base
+  og="work"
   title="Work"
-  description="What Aidan McAlister built, shipped, and wrote: create-db, clasp.sh, the Prisma docs rebuild, launch pages, and writing on docs and AI agents."
+  description="What Aidan McAlister built, shipped, and wrote: create-db, clasp.sh, the Prisma docs rebuild, the prisma.io homepage, and writing on docs and AI agents."
 >
   <PageHeader title="Work" subtitle="Things I built, shipped, and wrote." />
 
-  <Section title="Projects" id="projects">
+  <Section title="Work" id="work">
     {projects.map((p) => <TextRow href={p.data.href} title={p.data.title} desc={p.data.summary} />)}
+    {MORE_FROM_PRISMA.map((r) => <TextRow {...r} />)}
   </Section>
 
   <Section title="Writing" id="writing">
@@ -35,10 +37,6 @@ const posts = await getPosts();
         />
       ))
     }
-  </Section>
-
-  <Section title="Other work at Prisma" id="other-prisma">
-    {MORE_FROM_PRISMA.map((r) => <TextRow {...r} />)}
   </Section>
 
   <Section title="Open source" id="open-source">

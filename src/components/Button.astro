@@ -13,6 +13,7 @@ const { href, primary, external } = Astro.props;
   href={href}
   target={external ? "_blank" : undefined}
   rel={external ? "noreferrer" : undefined}
+  aria-describedby={external ? "new-tab" : undefined}
   class:list={[
     "inline-flex h-11 items-center justify-center rounded-sm border px-4 font-mono text-[13px] transition-colors duration-150",
     primary
@@ -21,5 +22,4 @@ const { href, primary, external } = Astro.props;
   ]}
 >
   <slot />
-  {external && <span class="sr-only"> (opens in new tab)</span>}
 </a>

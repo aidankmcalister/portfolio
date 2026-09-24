@@ -21,7 +21,7 @@ const nav =
   "inline-flex min-h-11 items-center gap-1.5 font-mono text-[13px] text-fg-muted transition-colors duration-150 hover:text-fg";
 ---
 
-<Base title={post.data.title} description={post.data.description}>
+<Base title={post.data.title} description={post.data.description} og={`blog/${post.data.slug}`}>
   <article class="mx-auto max-w-[640px] pt-10 md:pt-14">
     <a href="/work#writing" class={nav}><ArrowRight class="rotate-180" /> All writing</a>
     <h1 class="mt-6 font-mono text-[22px] leading-8 font-medium text-balance text-fg">

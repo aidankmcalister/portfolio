@@ -19,37 +19,31 @@ const quiet =
 <Base>
   <section class="pt-10 md:pt-20">
     <h1 class="max-w-[520px] font-mono text-[22px] leading-8 font-medium text-balance text-fg md:text-[24px] md:leading-9">
-      I'm Aidan. I build dev tools, docs, and the communities around them.
+      I'm Aidan, a developer advocate and TypeScript engineer.
     </h1>
     <p class="mt-5 max-w-[560px] text-fg-body">
-      As a developer advocate at <a
-        href="https://www.prisma.io"
-        target="_blank"
-        rel="noreferrer"
-        class="link">Prisma<span class="sr-only"> (opens in new tab)</span></a
-      >, I rebuilt the docs and shipped <a
-        href="https://github.com/prisma/create-db"
-        target="_blank"
-        rel="noreferrer"
-        class="link">create-db<span class="sr-only"> (opens in new tab)</span></a
-      >. I'm looking for my next role in developer relations or frontend and devtools engineering.
+      I work on the docs, tools, and communities that help developers pick up a product. At
+      <a href="https://www.prisma.io" class="link" target="_blank" rel="noreferrer" aria-describedby="new-tab">Prisma</a>, I rebuilt the docs and built
+      <a href="https://github.com/prisma/create-db" class="link" target="_blank" rel="noreferrer" aria-describedby="new-tab">create-db</a>, a CLI that has been
+      used more than 6 million times. I'm looking for my next role in developer relations, frontend, or
+      devtools engineering.
     </p>
     <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1">
       <Button href={`mailto:${SITE.email}`} primary>Email me</Button>
-      <a href={SITE.resume} target="_blank" rel="noreferrer" class={quiet}>
-        Resume<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.resume} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
+        Resume
       </a>
-      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" class={quiet}>
-        LinkedIn<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
+        LinkedIn
       </a>
-      <a href={SITE.social.github} target="_blank" rel="noreferrer" class={quiet}>
-        GitHub<span class="sr-only"> (opens in new tab)</span>
+      <a href={SITE.social.github} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
+        GitHub
       </a>
     </div>
   </section>
 
   <Section title="Experience" id="experience">
-    {EXPERIENCE.map((e) => <TextRow title={e.company} desc={e.role} aside={e.date} />)}
+    {EXPERIENCE.map((e) => <TextRow href={e.url} title={e.company} desc={e.role} aside={e.date} />)}
   </Section>
 
   <Section title="Selected work" id="selected-work" link={{ label: "All work", href: "/work" }}>

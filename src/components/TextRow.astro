@@ -20,7 +20,7 @@ const Tag = href ? "a" : "div";
 ---
 
 <Tag
-  {...href ? { href, ...(external ? { target: "_blank", rel: "noreferrer" } : {}) } : {}}
+  {...href ? { href, ...(external ? { target: "_blank", rel: "noreferrer", "aria-describedby": "new-tab" } : {}) } : {}}
   class="group/row grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 py-3"
 >
   <span class="flex min-w-0 flex-col gap-0.5">
@@ -38,7 +38,6 @@ const Tag = href ? "a" : "div";
           <ArrowUpRight class="ml-1 inline align-baseline text-fg-subtle transition-colors duration-150 group-hover/row:text-fg" />
         )
       }
-      {external && <span class="sr-only"> (opens in new tab)</span>}
       {byline && <span class="font-sans text-[14px] text-fg-subtle"> {byline}</span>}
     </span>
     {desc && <span class="text-fg-muted">{desc}</span>}

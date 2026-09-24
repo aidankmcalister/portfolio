@@ -20,7 +20,7 @@ export interface TextItem {
   href?: string;
 }
 
-// "Other work at Prisma" rows on /work.
+// Smaller Prisma work, listed after the projects on /work.
 export const MORE_FROM_PRISMA: TextItem[] = [
   {
     title: "20+ framework guides",
@@ -39,7 +39,7 @@ export const MORE_FROM_PRISMA: TextItem[] = [
   },
   {
     title: "Discord and partnerships",
-    desc: "The Prisma Discord passed 10,000 members. I worked on partnerships with TanStack, Bun, and Deno.",
+    desc: "Helped grow the Prisma Discord community past 10,000 members, and worked on partnerships with TanStack, Bun, and Deno.",
     href: "https://pris.ly/discord",
   },
 ];
@@ -64,8 +64,8 @@ export const OPEN_SOURCE: TextItem[] = [
 ];
 
 export const EXPERIENCE = [
-  { date: "Mar 2025 – May 2026", company: "Prisma", role: "Developer Advocate" },
-  { date: "Jul 2024 – Mar 2025", company: "Inner Armor", role: "Front End Developer, contract" },
-  { date: "Jan 2024 – Aug 2024", company: "Elevate Digital IO", role: "Full Stack Developer, contract" },
+  { date: "Mar 2025 – May 2026", company: "Prisma", role: "Developer Advocate", url: "https://www.prisma.io" },
+  { date: "Jul 2024 – Mar 2025", company: "Inner Armor", role: "Front End Developer", url: "https://www.forgeinnerarmor.com/" },
+  { date: "Jan 2024 – Aug 2024", company: "Elevate Digital IO", role: "Full Stack Developer, contract", url: "https://elevatedigital.io/" },
 ];
 
