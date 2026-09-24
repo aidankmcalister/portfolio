@@ -1,16 +1,18 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { SITE, WORK } from "../data/site";
+import { SITE } from "../data/site";
 
 export const GET: APIRoute = async () => {
   const posts = (await getCollection("blog"))
     .filter((p) => !p.data.draft)
     .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 
-  const work = WORK.map((w) => {
-    const url = w.internal ? `${SITE.url}${w.url}` : w.url;
-    return `- [${w.title}](${url}) (${w.company}): ${w.desc}`;
-  }).join("\n");
+  const work = (await getCollection("projects"))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map((p) => {
+      return `- [${p.data.title}](${p.data.href}): ${p.data.summary}`;
+    })
+    .join("\n");
 
   const fullPosts = posts
     .map((p) => {
@@ -28,13 +30,12 @@ export const GET: APIRoute = async () => {
 
 > ${SITE.description}
 
-Developer advocate based in ${SITE.location}. I build docs, tools, and community for developer products. Most recently I led docs and developer relations at Prisma.
+Developer advocate and TypeScript engineer based in ${SITE.location}. I'm looking for my next role in developer relations or frontend and devtools engineering. At Prisma I shipped create-db, a CLI with 6M+ runs, led a 400+ page docs rebuild that kept ~90% of search traffic, and grew the Discord past 10,000 members.
 
 ## Links
 
 - Home: ${SITE.url}
-- Work: ${SITE.url}/work
-- Blog: ${SITE.url}/blog
+- Work (projects and writing): ${SITE.url}/work
 - GitHub: ${SITE.social.github}
 - LinkedIn: ${SITE.social.linkedin}
 - Email: ${SITE.email}

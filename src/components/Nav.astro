@@ -1,32 +1,38 @@
 ---
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const links = [
-  { href: "/", label: "home" },
-  { href: "/work", label: "work" },
-  { href: "/blog", label: "blog" },
-  { href: "/resume.pdf", label: "resume", external: true },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
 ];
-
+// Blog posts live under /blog but belong to Work.
 const isActive = (href: string) =>
-  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+  path === href || path.startsWith(href + "/") || (href === "/work" && path.startsWith("/blog/"));
 ---
 
-<nav class="flex gap-5 pt-10 pb-2 font-mono text-[13px]">
-  {
-    links.map((link) => (
-      <a
-        href={link.href}
-        target={link.external ? "_blank" : undefined}
-        rel={link.external ? "noreferrer" : undefined}
-        class:list={[
-          "transition-colors",
-          !link.external && isActive(link.href)
-            ? "text-ink"
-            : "text-muted hover:text-ink",
-        ]}
-      >
-        {link.label}
-      </a>
-    ))
-  }
-</nav>
+<header>
+  <div class="mx-auto flex h-16 max-w-[800px] items-center justify-between px-5 md:h-20">
+    <a
+      href="/"
+      aria-current={path === "/" ? "page" : undefined}
+      class="flex min-h-11 items-center font-mono text-[14px] font-medium text-fg"
+    >
+      aidan mcalister
+    </a>
+    <nav aria-label="Primary" class="-mr-3 flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            aria-current={isActive(l.href) ? "page" : undefined}
+            class:list={[
+              "flex min-h-11 items-center px-3 font-mono text-[13px] underline-offset-[6px] transition-colors duration-150",
+              isActive(l.href) ? "text-fg underline decoration-fg" : "text-fg-muted hover:text-fg",
+            ]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

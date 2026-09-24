@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { SITE } from "../data/site";
+---
+
+<Base title="About" description="About Aidan McAlister, a developer advocate and TypeScript engineer in Boston.">
+  <PageHeader title="About" />
+  <div class="prose">
+    <p>
+      I'm a developer advocate and TypeScript engineer in Boston. I work on the parts of a developer
+      product that decide whether people stick around: the docs, the tooling, and the community.
+    </p>
+    <p>
+      As a developer advocate at <a href="https://www.prisma.io">Prisma</a>, I rebuilt the Prisma docs (400+ pages, and we kept about 90% of search traffic through the move),
+      built <a href="https://github.com/prisma/create-db">create-db</a> solo, made the docs readable by AI
+      agents with llms.txt, built the Prisma v7 and Prisma Postgres launch pages, and helped grow the
+      Discord past 10,000 members.
+    </p>
+    <p>
+      Before that I built frontends as a contractor. At Inner Armor I rebuilt an abandoned admin
+      dashboard in Remix that the whole company ended up using. At Elevate Digital IO I built CRUD
+      interfaces and a filter and search system in RedwoodJS. I learned to code through Nucamp's full
+      stack bootcamp.
+    </p>
+    <p>
+      On the side I build things like <a href="https://clasp.sh">clasp.sh</a> and <a href="/work#writing">write</a>
+      about docs and developer experience.
+    </p>
+    <p>
+      I'm looking for my next role in developer relations or frontend and devtools engineering. Email is the
+      best way to reach me: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. My
+      <a href={SITE.resume}>resume</a> has the details.
+    </p>
+  </div>
+
+</Base>

@@ -1,0 +1,39 @@
+---
+// Tools I use often with their logos (Simple Icons, CC0), drawn in ink.
+import {
+  siTypescript,
+  siReact,
+  siNextdotjs,
+  siPrisma,
+  siPostgresql,
+  siBetterauth,
+  siBun,
+  siShadcnui,
+  siTailwindcss,
+} from "simple-icons";
+
+const tools = [
+  { icon: siTypescript, label: "TypeScript" },
+  { icon: siReact, label: "React" },
+  { icon: siNextdotjs, label: "Next.js" },
+  { icon: siPrisma, label: "Prisma" },
+  { icon: siPostgresql, label: "Postgres" },
+  { icon: siBetterauth, label: "Better Auth" },
+  { icon: siBun, label: "Bun" },
+  { icon: siShadcnui, label: "shadcn/ui" },
+  { icon: siTailwindcss, label: "Tailwind" },
+];
+---
+
+<ul class="grid grid-cols-2 gap-x-6 gap-y-3 py-3 sm:grid-cols-3">
+  {
+    tools.map((t) => (
+      <li class="flex items-center gap-2.5 text-fg-body">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" class="shrink-0 text-fg">
+          <path d={t.icon.path} />
+        </svg>
+        {t.label}
+      </li>
+    ))
+  }
+</ul>

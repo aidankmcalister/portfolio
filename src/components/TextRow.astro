@@ -1,0 +1,58 @@
+---
+// A row: title (and byline) with one line under it, and a quiet aside on the right
+// (a date or the site it links to). External links get an arrow right after the title.
+import ArrowUpRight from "./icons/ArrowUpRight.astro";
+
+interface Props {
+  href?: string;
+  title: string;
+  desc?: string;
+  byline?: string;
+  // Defaults to the link's site for external links.
+  aside?: string;
+}
+
+const { href, title, desc, byline } = Astro.props;
+const external = !!href && /^https?:/.test(href);
+const site = external ? new URL(href!).hostname.replace(/^www\./, "") : undefined;
+const aside = Astro.props.aside ?? site;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  {...href ? { href, ...(external ? { target: "_blank", rel: "noreferrer" } : {}) } : {}}
+  class="group/row grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 py-3"
+>
+  <span class="flex min-w-0 flex-col gap-0.5">
+    <span class="font-mono text-[14px] leading-[22px] text-fg">
+      <span
+        class:list={[
+          href &&
+            "underline decoration-transparent underline-offset-4 transition-colors duration-150 group-hover/row:decoration-fg",
+        ]}
+      >
+        {title}
+      </span>
+      {
+        external && (
+          <ArrowUpRight class="ml-1 inline align-baseline text-fg-subtle transition-colors duration-150 group-hover/row:text-fg" />
+        )
+      }
+      {external && <span class="sr-only"> (opens in new tab)</span>}
+      {byline && <span class="font-sans text-[14px] text-fg-subtle"> {byline}</span>}
+    </span>
+    {desc && <span class="text-fg-muted">{desc}</span>}
+  </span>
+  {
+    aside && (
+      <span
+        class:list={[
+          "font-mono text-[12px] whitespace-nowrap text-fg-subtle",
+          !Astro.props.aside && "hidden sm:inline",
+        ]}
+      >
+        {aside}
+      </span>
+    )
+  }
+</Tag>

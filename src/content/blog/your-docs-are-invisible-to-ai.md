@@ -13,7 +13,7 @@ I noticed this while working on docs at Prisma. I asked an AI assistant somethin
 
 It wasn't a one-off. After spending the last few months tracking how AI tools cite content across the developer ecosystem, I can tell you it isn't a one-company problem either. A lot of good docs are invisible to AI for the same handful of reasons, and none of them are about content quality.
 
-# It's a problem with retrieval, not ranking
+## It's a problem with retrieval, not ranking
 
 When a developer Googles something, the system returns links. The developer picks one, reads it, decides if it's useful. Your job is to rank well enough to get the click.
 
@@ -23,9 +23,9 @@ That's a different game. You're not competing for a click anymore. You're compet
 
 Even very good documentation can fail that test.
 
-# Why docs get skipped
+## Why docs get skipped
 
-## The answer is too far down the page
+### The answer is too far down the page
 
 Retrieval systems weight the top of a page more heavily than the bottom. Makes sense. If you're summarizing content quickly, what comes first matters most.
 
@@ -33,7 +33,7 @@ Most docs are written as a logical progression: context, background, then the ac
 
 If your page on database connections opens with three paragraphs explaining what connection pooling is before it shows how to configure it, you're competing against sources that lead with the configuration.
 
-## The answer lives inside a component that doesn't render
+### The answer lives inside a component that doesn't render
 
 Modern docs frameworks lean on interactive components. Tabbed code blocks. Expandable sections. API references rendered from JSON. Conditional content based on selected framework.
 
@@ -80,13 +80,13 @@ Set `DATABASE_URL` in your `.env` file:
 
 Same content. No interactivity required. Now both tabs are crawlable and quotable.
 
-## The content is outdated
+### The content is outdated
 
 Retrieval systems don't have a reliable way to know when a page was last updated. But outdated content creates real downstream problems. Developers follow advice that no longer works, lose trust in the source, and the systems trained on that feedback learn to weight your domain a little less over time.
 
 If your docs still reference a deprecated API, an old CLI flag, or a version number from two releases ago, you're eroding the signal that your content is current and worth quoting.
 
-## The question doesn't have a page
+### The question doesn't have a page
 
 This one is easy to miss. Your docs might answer every question about how your product works. But AI assistants get asked questions that span categories your docs don't cover.
 
@@ -96,7 +96,7 @@ I saw this play out at Prisma. A comparison page from a small company was pullin
 
 Once I started auditing what developers were actually asking AI about, the gaps were obvious. There was no "Prisma Postgres vs Neon" comparison page. No "best Postgres for AI apps" guide. No framework-specific setup pages for [Next.js on Vercel](https://www.prisma.io/docs/guides/nextjs), [SvelteKit](https://www.prisma.io/docs/guides/sveltekit), [Nuxt](https://www.prisma.io/docs/guides/nuxt), or Hono on Cloudflare Workers. Every one of those questions had an answer somewhere else, and that answer was the one getting cited.
 
-## The page is crawlable but structurally weak
+### The page is crawlable but structurally weak
 
 A page can be fully accessible and still produce nothing useful for a retrieval system to cite. Weak page structure usually looks like:
 
@@ -130,7 +130,7 @@ a client waits for a connection from the pool:
 
 The second version leads with the answer. A retrieval system can quote it directly.
 
-# Being cited isn't enough
+## Being cited isn't enough
 
 There's a subtler version of this problem worth pulling out.
 
@@ -140,7 +140,7 @@ I tracked this across the [Prisma docs](https://www.prisma.io/docs) with an AI c
 
 The fix isn't to publish more. It's to look at the pages you already have and ask: if an AI had to pick one quotable sentence from this page, what would it pick? If you can't answer that fast, the retrieval system probably can't either.
 
-# What to actually do
+## What to actually do
 
 None of this needs a new content strategy. It mostly needs you to look at what you already have through a different lens.
 
@@ -151,11 +151,11 @@ None of this needs a new content strategy. It mostly needs you to look at what y
 5. **Check what third-party pages are saying.** Search for comparisons involving your product. If those pages are getting cited in AI answers and they're wrong, you can't fix that by publishing internally and hoping. You need a better answer on the same question, or you reach out to the author.
 6. **Update before you add.** Outdated pages erode trust in everything around them. Before filling coverage gaps with new content, check what's already there for accuracy.
 
-# Where this goes
+## Where this goes
 
 The instinct when you hear "AI can't find my docs" is to add something. A new metadata file. An [`llms.txt`](https://llmstxt.org/). More pages. Sometimes that helps. Usually the problem is older than that.
 
-## Infrastructure comes last
+### Infrastructure comes last
 
 There is real infrastructure worth building, but only once the content itself is solid.
 
@@ -165,7 +165,7 @@ I also exposed a machine-readable changelog so AI tools can check for breaking c
 
 None of that matters if the underlying pages are still burying the answer three paragraphs deep, or hiding it inside a tab component. Fix the content first. Build the infrastructure after.
 
-## The reading context changed
+### The reading context changed
 
 Most docs that are invisible to AI were written for a different reader: someone who has time, who'll navigate through sections, who'll tolerate a slow build to the answer. That reader still exists. They're just not the only one anymore.
 

@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
-import { SITE, WORK } from "../data/site";
+import { SITE } from "../data/site";
 
 export const GET: APIRoute = async () => {
   const posts = (await getCollection("blog"))
@@ -17,22 +17,24 @@ export const GET: APIRoute = async () => {
     })
     .join("\n");
 
-  const work = WORK.map((w) => {
-    const url = w.internal ? `${SITE.url}${w.url}` : w.url;
-    return `- [${w.title}](${url}) (${w.company}): ${w.desc}`;
-  }).join("\n");
+  const work = (await getCollection("projects"))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map((p) => {
+      return `- [${p.data.title}](${p.data.href}): ${p.data.summary}`;
+    })
+    .join("\n");
 
   const body = `# ${SITE.name}
 
 > ${SITE.description}
 
-Developer advocate based in ${SITE.location}. I build docs, tools, and community for developer products. Most recently I led docs and developer relations at Prisma.
+Developer advocate and TypeScript engineer based in ${SITE.location}. I'm looking for my next role in developer relations or frontend and devtools engineering. At Prisma I shipped create-db, a CLI with 6M+ runs, led a 400+ page docs rebuild that kept ~90% of search traffic, and grew the Discord past 10,000 members.
 
 ## Pages
 
 - [Home](${SITE.url}): Bio, links, and what I'm currently building.
-- [Work](${SITE.url}/work): Full list of shipped work and experience.
-- [Blog](${SITE.url}/blog): Writing on docs, dev tools, and developer experience.
+- [Work](${SITE.url}/work): Projects, writing, open source, and tools.
+- [About](${SITE.url}/about): Background and how to reach me.
 
 ## Writing
 

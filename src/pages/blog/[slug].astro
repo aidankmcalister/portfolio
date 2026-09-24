@@ -1,51 +1,57 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import Base from "../../layouts/Base.astro";
+import ArrowRight from "../../components/icons/ArrowRight.astro";
+import { formatDate } from "../../lib/date";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts
-    .filter((p) => !p.data.draft && !p.data.external)
-    .map((post) => ({
-      params: { slug: post.data.slug },
-      props: { post },
-    }));
+  const posts = (await getCollection("blog", (p) => !p.data.draft && !p.data.external)).sort(
+    (a, b) => (a.data.date < b.data.date ? 1 : -1),
+  );
+  // Newer post is "next", older is "previous".
+  return posts.map((post, i) => ({
+    params: { slug: post.data.slug },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
 }
 
-const { post } = Astro.props;
+const { post, newer, older } = Astro.props;
 const { Content } = await render(post);
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+const nav =
+  "inline-flex min-h-11 items-center gap-1.5 font-mono text-[13px] text-fg-muted transition-colors duration-150 hover:text-fg";
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
-  <article class="pt-10">
-    <a
-      href="/blog"
-      class="font-mono text-[13px] text-muted transition-colors hover:text-ink"
-    >
-      ← back to blog
-    </a>
-
-    <h1
-      class="mt-8 font-mono text-[24px] leading-snug font-bold tracking-tight text-ink"
-    >
+<Base title={post.data.title} description={post.data.description}>
+  <article class="mx-auto max-w-[640px] pt-10 md:pt-14">
+    <a href="/work#writing" class={nav}><ArrowRight class="rotate-180" /> All writing</a>
+    <h1 class="mt-6 font-mono text-[22px] leading-8 font-medium text-balance text-fg">
       {post.data.title}
     </h1>
-    <p class="mt-2 font-mono text-[12.5px] text-muted">
-      {formatDate(post.data.date)}
-    </p>
-
+    <time datetime={post.data.date} class="mt-2 block font-mono text-[12px] text-fg-subtle">
+      {formatDate(post.data.date, "long")}
+    </time>
     <div class="prose mt-10">
       <Content />
     </div>
+    <nav aria-label="More posts" class="mt-16 flex justify-between gap-4 border-t border-line pt-4">
+      {
+        older ? (
+          <a href={`/blog/${older.data.slug}`} class={nav}>
+            <ArrowRight class="rotate-180" /> {older.data.title}
+          </a>
+        ) : (
+          <a href="/work#writing" class={nav}>
+            <ArrowRight class="rotate-180" /> All writing
+          </a>
+        )
+      }
+      {
+        newer && (
+          <a href={`/blog/${newer.data.slug}`} class={nav}>
+            {newer.data.title} <ArrowRight />
+          </a>
+        )
+      }
+    </nav>
   </article>
-</Layout>
+</Base>

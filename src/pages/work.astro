@@ -1,50 +1,51 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Row from "../components/Row.astro";
-import { WORK, EXPERIENCE } from "../data/site";
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Section from "../components/Section.astro";
+import TextRow from "../components/TextRow.astro";
+import Tools from "../components/Tools.astro";
+import { formatDate } from "../lib/date";
+import { getPosts, postHref } from "../lib/posts";
+import { MORE_FROM_PRISMA, OPEN_SOURCE } from "../data/site";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+const posts = await getPosts();
 ---
 
-<Layout
+<Base
   title="Work"
-  description="Things Aidan McAlister has shipped: docs, tools, and writing."
+  description="What Aidan McAlister built, shipped, and wrote: create-db, clasp.sh, the Prisma docs rebuild, launch pages, and writing on docs and AI agents."
 >
-  <section class="pt-10">
-    <h1 class="font-mono text-[22px] font-bold tracking-tight text-ink">Work</h1>
-    <p class="mt-3 max-w-xl text-body">
-      Things I've shipped. Docs, dev tools, and writing.
-    </p>
-  </section>
+  <PageHeader title="Work" subtitle="Things I built, shipped, and wrote." />
 
-  <section class="mt-12">
-    <div class="flex flex-col gap-5">
-      {
-        WORK.map((item) => (
-          <Row
-            href={item.url}
-            external={!item.internal}
-            title={item.title}
-            desc={item.desc}
-            meta={item.company}
-          />
-        ))
-      }
-    </div>
-  </section>
+  <Section title="Projects" id="projects">
+    {projects.map((p) => <TextRow href={p.data.href} title={p.data.title} desc={p.data.summary} />)}
+  </Section>
 
-  <section class="mt-14">
-    <h2 class="mb-5 font-mono text-[18px] font-semibold text-ink">Experience</h2>
-    <div class="flex flex-col gap-6">
-      {
-        EXPERIENCE.map((item) => (
-          <Row
-            href={item.url}
-            external
-            title={`${item.role} @ ${item.company}`}
-            desc={item.desc}
-            meta={item.date}
-          />
-        ))
-      }
-    </div>
-  </section>
-</Layout>
+  <Section title="Writing" id="writing">
+    {
+      posts.map((post) => (
+        <TextRow
+          href={postHref(post)}
+          title={post.data.title}
+          byline={post.data.byline}
+          desc={post.data.description}
+          aside={formatDate(post.data.date)}
+        />
+      ))
+    }
+  </Section>
+
+  <Section title="Other work at Prisma" id="other-prisma">
+    {MORE_FROM_PRISMA.map((r) => <TextRow {...r} />)}
+  </Section>
+
+  <Section title="Open source" id="open-source">
+    {OPEN_SOURCE.map((r) => <TextRow {...r} />)}
+  </Section>
+
+  <Section title="Tools I use often" id="tools">
+    <Tools />
+  </Section>
+</Base>

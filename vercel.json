@@ -4,6 +4,15 @@
   "buildCommand": "astro build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/resume", "destination": "/resume.pdf", "permanent": false }
+    {
+      "source": "/resume",
+      "destination": "/resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/blog",
+      "destination": "/work#writing",
+      "permanent": true
+    }
   ]
 }

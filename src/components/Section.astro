@@ -1,0 +1,32 @@
+---
+// A titled group of rows, separated from the next by space rather than rules.
+import ArrowRight from "./icons/ArrowRight.astro";
+
+interface Props {
+  title: string;
+  id: string;
+  link?: { label: string; href: string };
+}
+
+const { title, id, link } = Astro.props;
+---
+
+<section aria-labelledby={id} class="mt-16 first:mt-0">
+  <div class="mb-2 flex min-h-11 items-center justify-between">
+    <h2 id={id} class="font-mono text-[13px] font-medium text-fg-subtle">{title}</h2>
+    {
+      link && (
+        <a
+          href={link.href}
+          class="inline-flex min-h-11 items-center gap-1.5 font-mono text-[13px] text-fg-muted transition-colors duration-150 hover:text-fg"
+        >
+          {link.label}
+          <ArrowRight />
+        </a>
+      )
+    }
+  </div>
+  <div class="flex flex-col">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+// Page title and a one-line subtitle.
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="pt-10 md:pt-16">
+  <h1 class="font-mono text-[20px] leading-7 font-medium text-fg">{title}</h1>
+  {subtitle && <p class="mt-1 text-fg-muted">{subtitle}</p>}
+  <slot />
+</div>

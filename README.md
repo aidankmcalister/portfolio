@@ -1,34 +1,33 @@
 # Aidan McAlister
 
-Developer advocate. I build docs, tools, and community for developer products. Based in Boston.
+Developer advocate and TypeScript engineer. I build the docs, tools, and community that help developers adopt a product. Based in Boston, open to DevRel and frontend / devtools engineering roles.
 
-[Website](https://www.aidanmcalister.com) · [GitHub](https://github.com/aidankmcalister) · [LinkedIn](https://www.linkedin.com/in/aidankmcalister) · [Email](mailto:aidankmcalister@gmail.com) · [Resume](https://www.aidanmcalister.com/resume.pdf)
+[Website](https://www.aidanmcalister.com) · [GitHub](https://github.com/aidankmcalister) · [LinkedIn](https://www.linkedin.com/in/aidanmcalister) · [Email](mailto:aidankmcalister@gmail.com) · [Resume](https://www.aidanmcalister.com/resume.pdf)
 
-## About
+## Highlights
 
-I work on the parts of a developer product that decide whether people stick around: the docs, the tooling, and the community. Most recently I led a 400+ page docs rebuild and shipped create-db at Prisma. Before that I did front-end and full-stack work at a couple of startups.
+- **6M+ runs** on [create-db](https://create-db.prisma.io), a CLI I planned, built, and shipped solo. It provisions a Postgres database in under 3 seconds.
+- **400+ page** [Prisma docs](https://www.prisma.io/docs) rebuild that kept ~90% of organic search traffic.
+- **10,000+ member** Prisma Discord, plus partnerships with TanStack, Bun, and Deno.
+- **5,000+ monthly AI-crawler requests** on the [llms.txt](https://www.prisma.io/docs/llms.txt) layer I built for AI-agent discoverability.
 
 ## Experience
 
 **Developer Advocate**, Prisma (Mar 2025 to May 2026)
-Led docs, guides, and dev tools across the TypeScript ecosystem. Ran the 400+ page docs rebuild, shipped create-db, built Prisma's GEO and AI-citation pipeline, and grew the Discord past 10,000 members.
+Shipped create-db, led the docs rebuild, built the AI-agent discoverability layer, built the Prisma v7 and Prisma Postgres launch pages, wrote 20+ framework guides, and grew the community.
 
-**Front End**, Inner Armor (Jul 2024 to Mar 2025)
-Built a Remix and TypeScript admin dashboard to replace a legacy tool, and hit 100% company-wide adoption. Added interactive graphs for cross-period analysis plus reusable components with NextUI and AG Grid.
+**Front End Developer**, Inner Armor (Jul 2024 to Mar 2025)
+Rebuilt an abandoned admin dashboard in Remix and TypeScript and got it to 100% company-wide adoption. Built 10+ data visualizations and a component library later extracted into a shared design system.
 
-**Full Stack**, Elevate Digital IO (Jan 2024 to Aug 2024)
-Built an advanced filter system in RedwoodJS and Tailwind, plus 10+ CRUD interfaces in Prisma and GraphQL focused on query efficiency and data integrity.
+**Full Stack Developer**, Elevate Digital IO (Jan 2024 to Aug 2024)
+Built 10+ CRUD interfaces with Prisma and GraphQL, and an advanced filter and search system in RedwoodJS.
 
-## Selected work
+## Projects
 
-- [Prisma docs rebuild (400+ pages)](https://www.prisma.io/docs): content architecture, the production 301 redirect map, a custom 404, and a Sentry + PostHog pipeline that pages the team in Slack when docs go down.
-- [create-db](https://create-db.prisma.io): a CLI for provisioning temporary databases. Shortens time-to-first-query, with Cloudflare rate limiting and a Turborepo monorepo behind it.
-- [Framework, runtime, and integration guides](https://www.prisma.io/docs/guides): 20+ guides spanning Next.js, Astro, SvelteKit, TanStack Start, Bun, Deno, and more.
-- [llms.txt and AI-agent discoverability](https://www.prisma.io/docs/llms.txt): the GEO architecture that makes Prisma's docs readable to ChatGPT, Claude, and Perplexity.
-- [Prisma Claude Code plugin](https://claude.com/plugins/prisma): three skills packaged and published to Anthropic's listing, used daily by the DevRel team.
+- [clasp.sh](https://clasp.sh): browser-only code screenshots with a React-free Canvas 2D render engine.
+- [Prisma Claude Code plugin](https://claude.com/plugins/prisma): three skills published to Anthropic's official listing.
 
 ## Writing
 
 - [Your docs are invisible to AI. Here's why.](https://www.aidanmcalister.com/blog/your-docs-are-invisible-to-ai)
 - [Rebuilding the Prisma docs](https://www.prisma.io/blog/rebuilding-the-prisma-docs)
-- [Vibe coding with Prisma MCP and Next.js](https://www.prisma.io/blog/vibe-coding-with-prisma-mcp-and-nextjs)

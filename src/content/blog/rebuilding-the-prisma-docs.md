@@ -1,5 +1,6 @@
 ---
-title: "Rebuilding the Prisma Docs: A New Framework, Design, and Structure"
+title: "Rebuilding the Prisma Docs"
+byline: "with Mike Hartington, on prisma.io"
 slug: "rebuilding-the-prisma-docs"
 date: "2026-03-09"
 description: "How we rebuilt the Prisma docs site: new framework, new design, and a reworked information architecture."

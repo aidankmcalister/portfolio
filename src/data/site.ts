@@ -1,136 +1,71 @@
-// Edit these to update site-wide info.
+// Edit these to update site-wide info. Projects live in src/content/projects/.
 export const SITE = {
   name: "Aidan McAlister",
-  role: "Developer Advocate",
+  role: "Developer advocate and TypeScript engineer",
   email: "aidankmcalister@gmail.com",
   description:
-    "Developer advocate. I build docs, tools, and community for developer products.",
-  location: "Boston, USA",
+    "Developer advocate and TypeScript engineer. I build the docs, tools, and community that help developers adopt a product.",
+  location: "Boston, MA",
   url: "https://www.aidanmcalister.com",
+  resume: "/resume.pdf",
   social: {
     github: "https://github.com/aidankmcalister",
     linkedin: "https://www.linkedin.com/in/aidanmcalister",
   },
 };
 
-export type WorkType = "Docs" | "Demo" | "Talk" | "Post" | "Video" | "OSS";
-
-export interface WorkItem {
-  type: WorkType;
-  company: string;
+export interface TextItem {
   title: string;
   desc: string;
-  url: string;
-  internal?: boolean;
+  href?: string;
 }
 
-export interface ExperienceItem {
-  date: string;
-  role: string;
-  company: string;
-  desc: string;
-  kind: "full-time" | "contract";
-  url?: string;
-}
-
-// Each item appears as a row on the /work page.
-export const WORK: WorkItem[] = [
+// "Other work at Prisma" rows on /work.
+export const MORE_FROM_PRISMA: TextItem[] = [
   {
-    type: "OSS",
-    company: "Personal",
-    title: "clasp.sh",
-    desc: "Screenshots your code deserves. Paste a snippet, style it, and export a PNG or JPG. Runs entirely in the browser, no account, nothing uploaded. 242 languages via Shiki, VS Code theme import, and a pure Canvas 2D render engine kept React-free so the preview and the export always match. Next.js, TypeScript, and shadcn/ui.",
-    url: "https://clasp.sh",
+    title: "20+ framework guides",
+    desc: "Getting-started guides for using Prisma with more than 20 frameworks.",
+    href: "https://www.prisma.io/docs/guides",
   },
   {
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma docs rebuild (400+ pages)",
-    desc: "Led all three rounds: content architecture, the production 301 redirect map, custom 404, and a Sentry + PostHog pipeline that pages the team in Slack when docs go down. Preserved ~90% of organic search traffic through the migration.",
-    url: "https://www.prisma.io/docs",
+    title: "Management API reference",
+    desc: "An API reference generated from the Swagger spec, so it never drifts from the API.",
+    href: "https://www.prisma.io/docs/rest-api",
   },
   {
-    type: "Docs",
-    company: "Prisma",
-    title: "20+ framework, runtime, and integration guides",
-    desc: "Authored most of the Prisma guides section: frameworks (Next.js, Astro, Nuxt, SvelteKit, SolidStart, TanStack Start), runtimes (Bun, Deno), auth (Clerk, Better Auth, Auth.js), deployment (Cloudflare Workers), and integrations (Vercel AI SDK, Shopify).",
-    url: "https://www.prisma.io/docs/guides",
-  },
-  {
-    type: "Docs",
-    company: "Prisma",
-    title: "llms.txt and AI-agent discoverability",
-    desc: "llms.txt sub-indexes, content negotiation, .md aliases on every docs route, and a markdown 404 handler. Prisma's GEO architecture for ChatGPT, Claude, and Perplexity. The endpoint picked up 5,000+ monthly AI-crawler requests within weeks.",
-    url: "https://www.prisma.io/docs/llms.txt",
-  },
-  {
-    type: "Docs",
-    company: "Prisma",
-    title: "Prisma Postgres Management API",
-    desc: "Programmatically provision and manage Prisma Postgres databases. Endpoints, auth, and the SDK that wraps it. Docs entirely generated from the Swagger spec.",
-    url: "https://www.prisma.io/docs/management-api",
-  },
-  {
-    type: "OSS",
-    company: "Prisma",
-    title: "create-db",
-    desc: "CLI for provisioning temporary databases. Provisions a ready-to-query database in under 3 seconds. Tracked down a 700-database creation spike, added Cloudflare rate limiting, moved everything into a Turborepo monorepo.",
-    url: "https://create-db.prisma.io",
-  },
-  {
-    type: "OSS",
-    company: "Prisma",
     title: "Prisma Claude Code plugin",
-    desc: "Three skills (prisma-voice, blog-writing, guide-writing) packaged as a plugin and published to Anthropic's official listing. Used daily by the DevRel team.",
-    url: "https://claude.com/plugins/prisma",
+    desc: "Three Claude Code skills, published in Anthropic's official plugin listing. The team uses them daily.",
+    href: "https://claude.com/plugins/prisma",
   },
   {
-    type: "Post",
-    company: "Personal",
-    title: "Your docs are invisible to AI. Here's why.",
-    desc: "Good docs don't get cited by AI just because they're good. Here's why AI retrieval systems skip them, and what to do about it.",
-    url: "/blog/your-docs-are-invisible-to-ai",
-    internal: true,
-  },
-  {
-    type: "Post",
-    company: "Prisma",
-    title: "Rebuilding the Prisma docs",
-    desc: "How we rebuilt the Prisma docs site: new framework, new design, and a reworked information architecture.",
-    url: "https://www.prisma.io/blog/rebuilding-the-prisma-docs",
-  },
-  {
-    type: "Post",
-    company: "Prisma",
-    title: "Vibe coding with Prisma MCP and Next.js",
-    desc: "Building a Next.js e-commerce app with Prisma MCP and an AI agent that actually understands your schema.",
-    url: "https://www.prisma.io/blog/vibe-coding-with-prisma-mcp-and-nextjs",
+    title: "Discord and partnerships",
+    desc: "The Prisma Discord passed 10,000 members. I worked on partnerships with TanStack, Bun, and Deno.",
+    href: "https://pris.ly/discord",
   },
 ];
 
-export const EXPERIENCE: ExperienceItem[] = [
+// Links point at the repos until the exact PR links are added (see TODO.md).
+export const OPEN_SOURCE: TextItem[] = [
   {
-    date: "Mar 2025 – May 2026",
-    role: "Developer Advocate",
-    company: "Prisma",
-    kind: "full-time",
-    desc: "Led docs, guides, and dev tools across the TypeScript ecosystem. Ran the 400+ page docs rebuild, shipped create-db, built Prisma's GEO and AI-citation pipeline, and grew the Discord past 10,000 members.",
-    url: "https://prisma.io",
+    title: "trpc-cli",
+    desc: "Added hidden CLI flag support via Zod meta.",
+    href: "https://github.com/mmkal/trpc-cli",
   },
   {
-    date: "Jul 2024 – Mar 2025",
-    role: "Front End",
-    company: "Inner Armor",
-    kind: "contract",
-    desc: "Built a Remix + TypeScript admin dashboard to replace a legacy tool, and hit 100% company-wide adoption. Added 10+ interactive graphs in Observable Plot and ShadCN for cross-period data analysis, plus reusable components with NextUI and AG Grid.",
-    url: "https://www.forgeinnerarmor.com/",
+    title: "better-hub",
+    desc: "Added stars pages and routing to Better Auth's GitHub client.",
+    href: "https://github.com/better-auth/better-hub",
   },
   {
-    date: "Jan 2024 – Aug 2024",
-    role: "Full Stack",
-    company: "Elevate Digital IO",
-    kind: "contract",
-    desc: "Led development of an advanced filter system in RedwoodJS and Tailwind for efficient information retrieval. Built 10+ specialized CRUD interactions in Prisma and GraphQL, each with 12+ fields, focused on query efficiency and data integrity.",
-    url: "https://elevatedigital.io/",
+    title: "Better Auth",
+    desc: "Contributed an upstream docs PR.",
+    href: "https://github.com/better-auth/better-auth",
   },
 ];
+
+export const EXPERIENCE = [
+  { date: "Mar 2025 – May 2026", company: "Prisma", role: "Developer Advocate" },
+  { date: "Jul 2024 – Mar 2025", company: "Inner Armor", role: "Front End Developer, contract" },
+  { date: "Jan 2024 – Aug 2024", company: "Elevate Digital IO", role: "Full Stack Developer, contract" },
+];
+

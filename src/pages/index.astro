@@ -1,46 +1,76 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Row from "../components/Row.astro";
-import { SITE, WORK } from "../data/site";
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Button from "../components/Button.astro";
+import Section from "../components/Section.astro";
+import TextRow from "../components/TextRow.astro";
+import { SITE, EXPERIENCE } from "../data/site";
+import { formatDate } from "../lib/date";
+import { postHref, getPosts } from "../lib/posts";
 
-const featured = WORK.find((item) => item.title === "clasp.sh");
+const featured = (await getCollection("projects", (p) => p.data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const posts = (await getPosts()).slice(0, 3);
+const quiet =
+  "inline-flex min-h-11 items-center font-mono text-[13px] text-fg-muted underline decoration-control underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg";
 ---
 
-<Layout>
-  <section class="pt-10">
-    <h1 class="font-mono text-[26px] font-bold tracking-tight text-ink">
-      {SITE.name}
+<Base>
+  <section class="pt-10 md:pt-20">
+    <h1 class="max-w-[520px] font-mono text-[22px] leading-8 font-medium text-balance text-fg md:text-[24px] md:leading-9">
+      I'm Aidan. I build dev tools, docs, and the communities around them.
     </h1>
-
-    <p class="mt-4 max-w-xl text-body">
-      Developer advocate. I write and build the docs, content, and tools around
-      developer products. Most recently I led a 400+ page docs rebuild and
-      shipped{" "}
-      <a href="https://create-db.prisma.io" class="link" target="_blank" rel="noreferrer"
-        >create-db</a
-      > at Prisma.
+    <p class="mt-5 max-w-[560px] text-fg-body">
+      As a developer advocate at <a
+        href="https://www.prisma.io"
+        target="_blank"
+        rel="noreferrer"
+        class="link">Prisma<span class="sr-only"> (opens in new tab)</span></a
+      >, I rebuilt the docs and shipped <a
+        href="https://github.com/prisma/create-db"
+        target="_blank"
+        rel="noreferrer"
+        class="link">create-db<span class="sr-only"> (opens in new tab)</span></a
+      >. I'm looking for my next role in developer relations or frontend and devtools engineering.
     </p>
-
-    <div class="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-mono text-[13px]">
-      <a href={SITE.social.github} class="link" target="_blank" rel="noreferrer">GitHub</a>
-      <a href={`mailto:${SITE.email}`} class="link">Email</a>
-      <a href={SITE.social.linkedin} class="link" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a href="/resume.pdf" class="link" target="_blank" rel="noreferrer">Resume</a>
+    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1">
+      <Button href={`mailto:${SITE.email}`} primary>Email me</Button>
+      <a href={SITE.resume} target="_blank" rel="noreferrer" class={quiet}>
+        Resume<span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" class={quiet}>
+        LinkedIn<span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <a href={SITE.social.github} target="_blank" rel="noreferrer" class={quiet}>
+        GitHub<span class="sr-only"> (opens in new tab)</span>
+      </a>
     </div>
   </section>
 
-  {
-    featured && (
-      <section class="mt-14">
-        <h2 class="mb-5 font-mono text-[18px] font-semibold text-ink">Currently</h2>
-        <Row
-          href={featured.url}
-          external={!featured.internal}
-          title={featured.title}
-          desc={featured.desc}
-          meta={featured.company}
+  <Section title="Experience" id="experience">
+    {EXPERIENCE.map((e) => <TextRow title={e.company} desc={e.role} aside={e.date} />)}
+  </Section>
+
+  <Section title="Selected work" id="selected-work" link={{ label: "All work", href: "/work" }}>
+    {
+      featured.map((p) => (
+        <TextRow href={p.data.href} title={p.data.title} desc={p.data.summary} />
+      ))
+    }
+  </Section>
+
+  <Section title="Recent writing" id="writing" link={{ label: "All writing", href: "/work#writing" }}>
+    {
+      posts.map((post) => (
+        <TextRow
+          href={postHref(post)}
+          title={post.data.title}
+          byline={post.data.byline}
+          desc={post.data.description}
+          aside={formatDate(post.data.date)}
         />
-      </section>
-    )
-  }
-</Layout>
+      ))
+    }
+  </Section>
+</Base>
