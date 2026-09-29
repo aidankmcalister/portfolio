@@ -24,6 +24,7 @@ Built 10+ CRUD interfaces with Prisma and GraphQL, and an advanced filter and se
 
 ## Projects
 
+- [SureUI](https://sureui.com): confirmation components for shadcn/ui, matched to the risk. Undo, click twice, hold to confirm, type to confirm, and more. Free and open source.
 - [clasp.sh](https://clasp.sh): browser-only code screenshots with a React-free Canvas 2D render engine.
 - [Prisma Claude Code plugin](https://claude.com/plugins/prisma): three skills published to Anthropic's official listing.
 
