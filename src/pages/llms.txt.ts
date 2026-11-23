@@ -1,58 +1,42 @@
 import type { APIRoute } from "astro";
-import { getCollection } from "astro:content";
-import { SITE } from "../data/site";
+import { SITE, WORK } from "../data/site";
+import { getPosts, postHref } from "../lib/posts";
+
+const abs = (href: string) => (href.startsWith("/") ? SITE.url + href : href);
 
 export const GET: APIRoute = async () => {
-  const posts = (await getCollection("blog"))
-    .filter((p) => !p.data.draft)
-    .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
-
-  const writing = posts
-    .map((p) => {
-      const url =
-        p.data.external && p.data.link
-          ? p.data.link
-          : `${SITE.url}/blog/${p.data.slug}`;
-      return `- [${p.data.title}](${url}): ${p.data.description}`;
-    })
-    .join("\n");
-
-  const work = (await getCollection("projects"))
-    .sort((a, b) => a.data.order - b.data.order)
-    .map((p) => {
-      return `- [${p.data.title}](${p.data.href}): ${p.data.summary}`;
-    })
-    .join("\n");
-
+  const posts = await getPosts();
   const body = `# ${SITE.name}
 
 > ${SITE.description}
 
-Developer advocate and TypeScript engineer based in ${SITE.location}. I'm looking for my next role in developer relations or frontend and devtools engineering. At Prisma I shipped create-db, a CLI with 6M+ runs, led a 400+ page docs rebuild that kept ~90% of search traffic, and grew the Discord community past 10,000 members.
+Based in ${SITE.location}. Looking for a frontend, product or full-stack engineering role, developer relations, or docs or solutions engineering.
 
 ## Pages
 
-- [Home](${SITE.url}): Bio, links, and what I'm currently building.
-- [Work](${SITE.url}/work): Projects, writing, open source, and tools.
-- [About](${SITE.url}/about): Background and how to reach me.
-
-## Writing
-
-${writing}
+- [Home](${SITE.url}/index.md): Bio, work, experience, writing and open source, as markdown.
+- [Everything in one file](${SITE.url}/llms-full.txt)
+- [Resume](${SITE.url}${SITE.resume})
 
 ## Work
 
-${work}
+${WORK.map((w) => `- [${w.title}](${abs(w.href ?? SITE.url)}): ${w.desc}`).join("\n")}
 
-## Links
+## Writing
 
+${posts
+  .map((p) => {
+    const href = postHref(p);
+    const md = p.data.external ? href : `${SITE.url}${href}.md`;
+    return `- [${p.data.title}](${md}): ${p.data.description}`;
+  })
+  .join("\n")}
+
+## Contact
+
+- Email: ${SITE.email}
 - GitHub: ${SITE.social.github}
 - LinkedIn: ${SITE.social.linkedin}
-- Email: ${SITE.email}
-- Resume: ${SITE.url}/resume.pdf
 `;
-
-  return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
-  });
+  return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 };

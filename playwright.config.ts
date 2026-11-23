@@ -5,7 +5,7 @@ export default defineConfig({
   testDir: "tests",
   use: { baseURL: "http://localhost:4330", channel: "chrome" },
   webServer: {
-    command: "bun run build && bun run preview --port 4330",
+    command: "bun run build && bun run preview 4330",
     url: "http://localhost:4330",
     reuseExistingServer: false,
     timeout: 120_000,

@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T15:12:53.380364+00:00",
+  "title": "Design System: Aidan McAlister",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Paper (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "body": {
+        "role": "neutral",
+        "displayName": "Body Grey",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "body-dark": {
+        "role": "neutral",
+        "displayName": "Body Grey (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Grey",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "muted-dark": {
+        "role": "neutral",
+        "displayName": "Muted Grey (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "mark": {
+        "role": "primary",
+        "displayName": "Ochre Highlighter",
+        "tonalRamp": [
+          "#4a3410",
+          "#6e4d16",
+          "#93671d",
+          "#b88224",
+          "#e2aa34",
+          "#ebc06a",
+          "#f2d59c",
+          "#f9ebcf"
+        ]
+      },
+      "mark-dark": {
+        "role": "primary",
+        "displayName": "Ochre Highlighter (dark)",
+        "tonalRamp": [
+          "#4a3410",
+          "#6e4d16",
+          "#93671d",
+          "#b88224",
+          "#e2aa34",
+          "#ebc06a",
+          "#f2d59c",
+          "#f9ebcf"
+        ]
+      },
+      "mark-strong": {
+        "role": "primary",
+        "displayName": "Strong Ochre",
+        "tonalRamp": [
+          "#4a3410",
+          "#6e4d16",
+          "#93671d",
+          "#b88224",
+          "#e2aa34",
+          "#ebc06a",
+          "#f2d59c",
+          "#f9ebcf"
+        ]
+      },
+      "mark-strong-dark": {
+        "role": "primary",
+        "displayName": "Strong Ochre (dark)",
+        "tonalRamp": [
+          "#4a3410",
+          "#6e4d16",
+          "#93671d",
+          "#b88224",
+          "#e2aa34",
+          "#ebc06a",
+          "#f2d59c",
+          "#f9ebcf"
+        ]
+      },
+      "code-bg": {
+        "role": "neutral",
+        "displayName": "Code Tint",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "code-bg-dark": {
+        "role": "neutral",
+        "displayName": "Code Tint (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "code-line": {
+        "role": "neutral",
+        "displayName": "Code Edge",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      },
+      "code-line-dark": {
+        "role": "neutral",
+        "displayName": "Code Edge (dark)",
+        "tonalRamp": [
+          "#1b1b1a",
+          "#2a2a28",
+          "#3d3d3a",
+          "#55554f",
+          "#6b6b66",
+          "#94938e",
+          "#c9c8c3",
+          "#ecebe7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the home page and the 404 heading."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Blog post titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings on home; prose h2 at 1.5rem."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Prose h3 in posts."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Bio and post prose within the 36rem measure; list titles at weight 500."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "List descriptions and section lede."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Right-hand date or place in list rows; footer."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code blocks in posts."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "highlight-fill",
+        "value": "background-size 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Ochre highlighter fills behind link text on hover."
+      },
+      {
+        "name": "underline-fade",
+        "value": "text-decoration-color 0.2s ease-out",
+        "purpose": "Hairline underline fades as the highlight fills on list titles and guides."
+      },
+      {
+        "name": "quiet-color",
+        "value": "color 0.15s ease-out",
+        "purpose": "Muted links turn ink on hover."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none",
+        "purpose": "All transitions removed under prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "row-stack",
+        "value": "max-width: 30rem",
+        "purpose": "List row aside drops under the description."
+      },
+      {
+        "name": "two-column",
+        "value": "min-width: 68rem",
+        "purpose": "Home splits into intro (27rem) and lists (40rem) columns."
+      },
+      {
+        "name": "sticky-intro",
+        "value": "min-width: 68rem and min-height: 46rem",
+        "purpose": "Intro column becomes sticky."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "List Row",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "Title, one line, a quiet right-aligned date or place; hairline rules between rows.",
+      "html": "<ul class=\"ds-list\"><li class=\"ds-item\"><a class=\"ds-item__title\" href=\"#\">create-db</a><span class=\"ds-item__aside\">2025</span><p class=\"ds-item__desc\">One command for a temporary Postgres database.</p></li><li class=\"ds-item\"><a class=\"ds-item__title\" href=\"#\">Prisma docs rebuild</a><span class=\"ds-item__aside\">2026</span><p class=\"ds-item__desc\">Led the 400+ page rebuild.</p></li></ul>",
+      "css": ".ds-list{list-style:none;padding:0;margin:0;font:400 17px/1.65 var(--sans, system-ui, sans-serif);color:var(--body,#3d3d3a)} .ds-item{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:1.25rem;align-items:baseline;padding:0.85rem 0;border-top:1px solid var(--rule,#e2e2df)} .ds-item:first-child{border-top:0} .ds-item__title{justify-self:start;color:var(--ink,#1b1b1a);font-weight:500;text-decoration:underline;text-decoration-color:var(--rule,#e2e2df);text-decoration-thickness:1px;text-underline-offset:4px;background:linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0;transition:background-size 0.2s cubic-bezier(0.22,1,0.36,1),text-decoration-color 0.2s ease-out} .ds-item__title:hover{background-size:100% 100%;text-decoration-color:transparent} .ds-item__title:focus-visible{outline:2px solid var(--ink,#1b1b1a);outline-offset:3px;border-radius:2px} .ds-item__aside{color:var(--muted,#6b6b66);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap} .ds-item__desc{grid-column:1/-1;margin:0.15rem 0 0;color:var(--muted,#6b6b66);font-size:15.5px;line-height:1.55}"
+    },
+    {
+      "name": "Highlighted Link",
+      "kind": "custom",
+      "refersTo": "link-highlight",
+      "description": "Links in running text: ochre marker stroke under the lower 0.42em, filling on hover.",
+      "html": "<p class=\"ds-prose\">At <a class=\"ds-hl\" href=\"#\">Prisma</a>, I led the <a class=\"ds-hl\" href=\"#\">docs rebuild</a>.</p>",
+      "css": ".ds-prose{font:400 17px/1.65 var(--sans, system-ui, sans-serif);color:var(--body,#3d3d3a);margin:0} .ds-hl{color:var(--ink,#1b1b1a);text-decoration:none;white-space:nowrap;background:linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0.42em;transition:background-size 0.2s cubic-bezier(0.22,1,0.36,1)} .ds-hl:hover{background-size:100% 100%} .ds-hl:focus-visible{outline:2px solid var(--ink,#1b1b1a);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Quiet Link Row",
+      "kind": "nav",
+      "refersTo": "quiet-link",
+      "description": "Resume, GitHub, LinkedIn: muted text turning ink on hover.",
+      "html": "<ul class=\"ds-links\"><li><a href=\"#\">Resume</a></li><li><a href=\"#\">GitHub</a></li><li><a href=\"#\">LinkedIn</a></li></ul>",
+      "css": ".ds-links{display:flex;flex-wrap:wrap;gap:0.25rem 1.5rem;list-style:none;padding:0;margin:0;font:400 15px/1.65 var(--sans, system-ui, sans-serif)} .ds-links a{display:inline-block;padding:0.65rem 0;color:var(--muted,#6b6b66);text-decoration:none;transition:color 0.15s ease-out} .ds-links a:hover{color:var(--ink,#1b1b1a)} .ds-links a:focus-visible{outline:2px solid var(--ink,#1b1b1a);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Name and Section Heading",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "The serif italic voice: the name, then a section heading.",
+      "html": "<h1 class=\"ds-name\">Aidan McAlister</h1><h2 class=\"ds-h2\">Work</h2>",
+      "css": ".ds-name{margin:0;font:italic 500 clamp(2.75rem, 2rem + 4vw, 4.75rem)/1.02 var(--serif, Spectral, Georgia, serif);letter-spacing:-0.02em;color:var(--ink,#1b1b1a)} .ds-h2{margin:2rem 0 0;font:italic 500 1.55rem/1.2 var(--serif, Spectral, Georgia, serif);color:var(--ink,#1b1b1a)}"
+    },
+    {
+      "name": "Guide Link Grid",
+      "kind": "custom",
+      "refersTo": "quiet-link",
+      "description": "Compact auto-fill grid of short links with hairline underline and highlighter hover.",
+      "html": "<ul class=\"ds-guides\"><li><a href=\"#\">Next.js</a></li><li><a href=\"#\">Nuxt</a></li><li><a href=\"#\">SvelteKit</a></li><li><a href=\"#\">Astro</a></li></ul>",
+      "css": ".ds-guides{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(9rem,40%),1fr));column-gap:1.5rem;list-style:none;padding:0;margin:0;font:400 17px/1.65 var(--sans, system-ui, sans-serif)} .ds-guides a{display:inline-block;padding:0.6rem 0;color:var(--ink,#1b1b1a);text-decoration:underline;text-decoration-color:var(--rule,#e2e2df);text-underline-offset:4px;background:linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0;background-origin:content-box;background-clip:content-box;transition:background-size 0.2s cubic-bezier(0.22,1,0.36,1),text-decoration-color 0.2s ease-out} .ds-guides a:hover{background-size:100% 100%;text-decoration-color:transparent} .ds-guides a:focus-visible{outline:2px solid var(--ink,#1b1b1a);outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Code Panel",
+      "kind": "card",
+      "refersTo": "code-panel",
+      "description": "Tinted panel with a hairline edge for code in posts; grayscale syntax.",
+      "html": "<pre class=\"ds-code\"><code><span class=\"ds-c\">// one command</span>\n<span class=\"ds-k\">npx</span> create-db</code></pre><p class=\"ds-prose-inline\">Run <code class=\"ds-icode\">npx create-db</code> to start.</p>",
+      "css": ".ds-code{overflow-x:auto;margin:0;padding:1rem 1.25rem;border:1px solid var(--code-line,#e0e0dc);border-radius:8px;background:var(--code-bg,#efefed);color:var(--body,#3d3d3a);font:13px/1.6 var(--mono, ui-monospace, monospace)} .ds-c{color:var(--muted,#6b6b66);font-style:italic} .ds-k{color:var(--ink,#1b1b1a);font-weight:700} .ds-prose-inline{font:400 17px/1.65 var(--sans, system-ui, sans-serif);color:var(--body,#3d3d3a)} .ds-icode{font:0.86em var(--mono, ui-monospace, monospace);background:var(--code-bg,#efefed);padding:0.1em 0.35em;border-radius:4px;color:var(--ink,#1b1b1a)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Well-Set Letter",
+    "overview": "The site reads like a short letter set with care: a name in a large italic serif, three plain paragraphs, then tidy lists. Everything is type on a near-neutral ground. There are no surfaces to speak of, no boxes, no imagery and no ornament; hierarchy comes from the two type voices, ink versus muted grey, and hairline rules between rows. It is the calm text-first personal site played straight, a mix of evanyou.me (big italic serif name, prose bio, soft highlighted links) and leerob.com (lists with a quiet date on the right).\n\nDensity is low and the measure is short (36rem). Light or dark follows the visitor's system setting with no toggle; both themes are the same warm-neutral grey scale inverted, with the same ochre highlighter slightly dimmed for dark. On wide screens the page opens into two columns: the intro stays pinned on the left while the lists scroll on the right, so the email is always in view.\n\nThe developer-portfolio template (hero headline, button row, card grid, stat tiles) and any concept-world costume are rejected.",
+    "keyCharacteristics": [
+      "Neutral ground and ink; one warm ochre accent, used only as a highlighter under links and as the selection color.",
+      "Two type voices: Spectral 500 italic for the name and headings, the system UI sans for everything else.",
+      "Lists, not cards: title, one line, a quiet date or place on the right, hairline rules between rows.",
+      "Flat. No shadows, no filled surfaces except the code panel.",
+      "Motion is a single hover fill, removed under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Ochre is the only hue on the site, and it appears only as a highlighter behind text (links, selection). Text, rules and fills stay neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Follow-the-Visitor Rule",
+        "body": "Every color is a custom property on `:root` with a `prefers-color-scheme: dark` override. No theme toggle, no hard-coded color outside the token set (the social card is the one place light values are inlined, since it is a raster).",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Serif italic is for the name and headings only, always Spectral 500 italic. Everything else is the system sans. No third family, no upright Spectral on the site, no uppercase or letter-spaced labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Page Rule",
+        "body": "Nothing floats. Separation is a 1px hairline or whitespace, never a shadow, card or filled box.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** take every color from the `:root` custom properties and give it a `prefers-color-scheme: dark` value.",
+      "**Do** use the ochre only as the link highlighter and the selection color.",
+      "**Do** set the name and headings in Spectral 500 italic and everything else in the system sans.",
+      "**Do** present collections as list rows: title, one line, a quiet right-aligned date or place, hairline rules between rows.",
+      "**Do** open external links in a new tab with `rel=\"noreferrer\"` and `aria-describedby=\"new-tab\"` so screen readers announce it; internal links stay in the tab.",
+      "**Do** keep motion to the 0.2s highlight fill (`cubic-bezier(0.22, 1, 0.36, 1)`) and 0.15s color shifts on hover, and remove all transitions under `prefers-reduced-motion: reduce`.",
+      "**Do** keep copy in Aidan's voice per PRODUCT.md: short plain sentences, no em or en dashes in prose, no colons in sentences."
+    ],
+    "donts": [
+      "**Don't** add cards, boxes, icons, thumbnails, stat tiles, badges or a button row.",
+      "**Don't** introduce a second accent hue, colored text, or colored fills.",
+      "**Don't** add shadows or elevated surfaces.",
+      "**Don't** add a hero headline, eyebrow or uppercase label above headings.",
+      "**Don't** add a theme toggle; the visitor's system setting decides.",
+      "**Don't** animate on load or on scroll; the only motion is a hover response."
+    ]
+  }
+}

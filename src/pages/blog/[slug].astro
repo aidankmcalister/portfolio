@@ -1,57 +1,29 @@
 ---
 import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import ArrowRight from "../../components/icons/ArrowRight.astro";
 import { formatDate } from "../../lib/date";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog", (p) => !p.data.draft && !p.data.external)).sort(
-    (a, b) => (a.data.date < b.data.date ? 1 : -1),
-  );
-  // Newer post is "next", older is "previous".
-  return posts.map((post, i) => ({
-    params: { slug: post.data.slug },
-    props: { post, newer: posts[i - 1], older: posts[i + 1] },
-  }));
+  const posts = await getCollection("blog", (p) => !p.data.draft && !p.data.external);
+  return posts.map((post) => ({ params: { slug: post.data.slug }, props: { post } }));
 }
 
-const { post, newer, older } = Astro.props;
+const { post } = Astro.props;
 const { Content } = await render(post);
-const nav =
-  "inline-flex min-h-11 items-center gap-1.5 font-mono text-[13px] text-fg-muted transition-colors duration-150 hover:text-fg";
 ---
 
-<Base title={post.data.title} description={post.data.description} og={`blog/${post.data.slug}`}>
-  <article class="mx-auto max-w-[640px] pt-10 md:pt-14">
-    <a href="/work#writing" class={nav}><ArrowRight class="rotate-180" /> All writing</a>
-    <h1 class="mt-6 font-mono text-[22px] leading-8 font-medium text-balance text-fg">
-      {post.data.title}
-    </h1>
-    <time datetime={post.data.date} class="mt-2 block font-mono text-[12px] text-fg-subtle">
-      {formatDate(post.data.date, "long")}
-    </time>
-    <div class="prose mt-10">
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  og={`blog/${post.data.slug}`}
+  md={`/blog/${post.data.slug}.md`}
+>
+  <a class="back" href="/">Aidan McAlister</a>
+  <article>
+    <h1 class="post-title">{post.data.title}</h1>
+    <p class="post-date"><time datetime={post.data.date}>{formatDate(post.data.date, "long")}</time></p>
+    <div class="prose">
       <Content />
     </div>
-    <nav aria-label="More posts" class="mt-16 flex justify-between gap-4 border-t border-line pt-4">
-      {
-        older ? (
-          <a href={`/blog/${older.data.slug}`} class={nav}>
-            <ArrowRight class="rotate-180" /> {older.data.title}
-          </a>
-        ) : (
-          <a href="/work#writing" class={nav}>
-            <ArrowRight class="rotate-180" /> All writing
-          </a>
-        )
-      }
-      {
-        newer && (
-          <a href={`/blog/${newer.data.slug}`} class={nav}>
-            {newer.data.title} <ArrowRight />
-          </a>
-        )
-      }
-    </nav>
   </article>
 </Base>

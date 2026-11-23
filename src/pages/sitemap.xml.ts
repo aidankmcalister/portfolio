@@ -9,8 +9,6 @@ export const GET: APIRoute = async () => {
 
   const urls = [
     { loc: SITE.url },
-    { loc: `${SITE.url}/work` },
-    { loc: `${SITE.url}/about` },
     ...posts.map((p) => ({
       loc: `${SITE.url}/blog/${p.data.slug}`,
       lastmod: p.data.date,

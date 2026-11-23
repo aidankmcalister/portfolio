@@ -3,7 +3,7 @@ title: "Rebuilding the Prisma Docs"
 byline: "with Mike Hartington, on prisma.io"
 slug: "rebuilding-the-prisma-docs"
 date: "2026-03-09"
-description: "How we rebuilt the Prisma docs site: new framework, new design, and a reworked information architecture."
+description: "How we rebuilt the Prisma docs site with a new framework, a new design, and a reworked information architecture."
 external: true
 link: "https://www.prisma.io/blog/rebuilding-the-prisma-docs"
 ---

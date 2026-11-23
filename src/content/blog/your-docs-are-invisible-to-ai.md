@@ -1,8 +1,8 @@
 ---
-title: "Your docs are invisible to AI. Here's why."
+title: "Your docs are invisible to AI. Here’s why."
 slug: "your-docs-are-invisible-to-ai"
 date: "2026-05-12"
-description: "Good docs don't get cited by AI just because they're good. Here's why AI retrieval systems skip them, and what to do about it."
+description: "Good docs don’t get cited by AI just because they’re good. Here’s why AI retrieval systems skip them, and what to do about it."
 ---
 
 You wrote good docs. They're accurate, detailed, well-organized. The people who find them tell you they're helpful.
@@ -159,7 +159,7 @@ The instinct when you hear "AI can't find my docs" is to add something. A new me
 
 There is real infrastructure worth building, but only once the content itself is solid.
 
-At Prisma, I added an [`llms.txt`](https://www.prisma.io/docs/llms.txt) index to the docs. The useful part wasn't the file itself. It was using it as a forcing function to think about what an AI agent actually needs from a docs site: curated entry points by product area, `.md` URL aliases so agents can request markdown directly, content negotiation so agent user-agents get flat text instead of rendered HTML. (I did [the same thing on this site](/llms.txt) — you can see what a minimal `llms.txt` looks like for a portfolio.)
+At Prisma, I added an [`llms.txt`](https://www.prisma.io/docs/llms.txt) index to the docs. Writing it forced me to work out what an AI agent needs from a docs site: curated entry points by product area, `.md` URL aliases so agents can request markdown directly, and content negotiation so agent user-agents get flat text instead of rendered HTML. (I did [the same thing on this site](/llms.txt), if you want to see what a minimal `llms.txt` looks like for a portfolio.)
 
 I also exposed a machine-readable changelog so AI tools can check for breaking changes before citing advice that's no longer accurate.
 

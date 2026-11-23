@@ -1,16 +1,23 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
+import vercel from "@astrojs/vercel";
 import rehypeExternalLinks from "rehype-external-links";
-import { grayTheme } from "./src/lib/shiki-theme.mjs";
+import { grayTheme, grayThemeDark } from "./src/lib/shiki-theme.mjs";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.aidanmcalister.com",
-  // Writing now lives on /work.
-  redirects: { "/blog": "/work#writing" },
+  // Every page is still prerendered static HTML. The adapter only runs the one
+  // server route that opts out (src/pages/api/contact.ts).
+  adapter: vercel(),
+  // The stylesheet is tiny; inlining it removes a render-blocking request.
+  build: { inlineStylesheets: "always" },
+  // The site is one page now; old routes land on its sections.
+  redirects: { "/blog": "/#writing", "/work": "/#work", "/about": "/" },
   markdown: {
-    shikiConfig: { theme: /** @type {any} */ (grayTheme) },
+    shikiConfig: {
+      themes: { light: /** @type {any} */ (grayTheme), dark: /** @type {any} */ (grayThemeDark) },
+    },
     // External links in posts open in a new tab so readers don't lose their place here.
     rehypePlugins: [
       [
@@ -19,5 +26,4 @@ export default defineConfig({
       ],
     ],
   },
-  vite: { plugins: [tailwindcss()] },
 });

@@ -1,11 +1,7 @@
 ---
-import "@fontsource-variable/inter";
-import "@fontsource-variable/jetbrains-mono";
-import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
-import monoLatin from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
+import "@fontsource/spectral/latin-500-italic.css";
+import spectralItalic from "@fontsource/spectral/files/spectral-latin-500-italic.woff2?url";
 import "../styles/global.css";
-import Nav from "../components/Nav.astro";
-import Footer from "../components/Footer.astro";
 import { SITE } from "../data/site";
 
 interface Props {
@@ -13,9 +9,13 @@ interface Props {
   description?: string;
   // Key of this page's generated card in src/pages/og/[...route].ts.
   og?: string;
+  // This page's markdown version, for agents.
+  md?: string;
+  // Wide layout: the home page's two columns on large screens.
+  wide?: boolean;
 }
 
-const { title, description = SITE.description, og = "index" } = Astro.props;
+const { title, description = SITE.description, og = "index", md, wide = false } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.name}` : SITE.name;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
@@ -28,13 +28,14 @@ const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={monoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={spectralItalic} as="font" type="font/woff2" crossorigin />
+    {md && <link rel="alternate" type="text/markdown" href={md} />}
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name}: Writing`} href="/rss.xml" />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f6f3ec" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f6" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151514" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
@@ -45,8 +46,6 @@ const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
     <script
@@ -65,10 +64,17 @@ const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
   </head>
   <body>
     <p id="new-tab" hidden>Opens in a new tab.</p>
-    <Nav />
-    <main class="mx-auto max-w-[800px] px-5">
+    <main class:list={["page", wide && "page--wide"]}>
       <slot />
+      <footer class="foot">
+        <p>
+          {SITE.name}, {SITE.location}. Reach me at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </p>
+        <p>
+          For agents, this page is also at <a href={md ?? "/index.md"}>{md ?? "/index.md"}</a> and the
+          site is indexed at <a href="/llms.txt">/llms.txt</a>. <a href="/rss.xml">RSS</a>.
+        </p>
+      </footer>
     </main>
-    <Footer />
   </body>
 </html>

@@ -1,70 +1,120 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
-import Button from "../components/Button.astro";
-import Section from "../components/Section.astro";
-import TextRow from "../components/TextRow.astro";
-import { SITE, EXPERIENCE } from "../data/site";
+import List from "../components/List.astro";
+import { SITE, WORK, EXPERIENCE, GUIDES, OPEN_SOURCE } from "../data/site";
 import { formatDate } from "../lib/date";
-import { postHref, getPosts } from "../lib/posts";
+import { getPosts, postHref } from "../lib/posts";
 
-const featured = (await getCollection("projects", (p) => p.data.featured)).sort(
-  (a, b) => a.data.order - b.data.order,
-);
-const posts = (await getPosts()).slice(0, 3);
-const quiet =
-  "inline-flex min-h-11 items-center font-mono text-[13px] text-fg-muted underline decoration-control underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg";
+const posts = (await getPosts()).map((p) => ({
+  title: p.data.title,
+  desc: p.data.description,
+  aside: formatDate(p.data.date),
+  href: postHref(p),
+}));
+const ext = { target: "_blank", rel: "noreferrer", "aria-describedby": "new-tab" };
 ---
 
-<Base>
-  <section class="pt-10 md:pt-20">
-    <h1 class="max-w-[520px] font-mono text-[22px] leading-8 font-medium text-balance text-fg md:text-[24px] md:leading-9">
-      I'm Aidan, a developer advocate and TypeScript engineer.
-    </h1>
-    <p class="mt-5 max-w-[560px] text-fg-body">
-      I work on the docs, tools, and communities that help developers pick up a product. At
-      <a href="https://www.prisma.io" class="link" target="_blank" rel="noreferrer" aria-describedby="new-tab">Prisma</a>, I rebuilt the docs and built
-      <a href="https://github.com/prisma/create-db" class="link" target="_blank" rel="noreferrer" aria-describedby="new-tab">create-db</a>, a CLI that has been
-      used more than 6 million times. I'm looking for my next role in developer relations, frontend, or
-      devtools engineering.
+<Base md="/index.md" wide>
+  <div class="home">
+  <header class="intro">
+  <h1 class="name">Aidan McAlister</h1>
+
+  <div class="bio">
+    <p>
+      I’m a frontend-leaning full-stack engineer and Developer Advocate. I build TypeScript
+      tools, docs and developer-facing products.
     </p>
-    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1">
-      <Button href={`mailto:${SITE.email}`} primary>Email me</Button>
-      <a href={SITE.resume} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
-        Resume
-      </a>
-      <a href={SITE.social.linkedin} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
-        LinkedIn
-      </a>
-      <a href={SITE.social.github} target="_blank" rel="noreferrer" aria-describedby="new-tab" class={quiet}>
-        GitHub
-      </a>
-    </div>
+    <p>
+      At <a class="hl" href="https://www.prisma.io" {...ext}>Prisma</a>, I led the 400+ page
+      <a class="hl" href="https://www.prisma.io/blog/rebuilding-the-prisma-docs" {...ext}>docs rebuild</a>,
+      built <a class="hl" href="https://github.com/prisma/create-db" {...ext}>create-db</a>, and made the
+      docs readable to AI agents. On my own, I built
+      <a class="hl" href="https://opentape.app" {...ext}>OpenTape</a>, a free and open-source screen
+      recorder for macOS.
+    </p>
+    <p>
+      I live in Boston and I’m looking for my next role as a frontend, product or full-stack engineer,
+      in developer relations, or in docs or solutions engineering. The best way to reach me is
+      <a class="hl" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    </p>
+  </div>
+
+  <ul class="links">
+    <li><a href={SITE.resume} {...ext}>Resume</a></li>
+    <li><a href={SITE.social.github} {...ext}>GitHub</a></li>
+    <li><a href={SITE.social.linkedin} {...ext}>LinkedIn</a></li>
+  </ul>
+  </header>
+
+  <div class="sections">
+
+  <section class="section" aria-labelledby="work">
+    <h2 id="work">Work</h2>
+    <List items={WORK} />
   </section>
 
-  <Section title="Experience" id="experience">
-    {EXPERIENCE.map((e) => <TextRow href={e.url} title={e.company} desc={e.role} aside={e.date} />)}
-  </Section>
+  <section class="section" aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    <List items={EXPERIENCE} />
+  </section>
 
-  <Section title="Selected work" id="selected-work" link={{ label: "All work", href: "/work" }}>
-    {
-      featured.map((p) => (
-        <TextRow href={p.data.href} title={p.data.title} desc={p.data.summary} />
-      ))
-    }
-  </Section>
+  <section class="section" aria-labelledby="writing">
+    <h2 id="writing">Writing</h2>
+    <List items={posts} />
+  </section>
 
-  <Section title="Recent writing" id="writing" link={{ label: "All writing", href: "/work#writing" }}>
-    {
-      posts.map((post) => (
-        <TextRow
-          href={postHref(post)}
-          title={post.data.title}
-          byline={post.data.byline}
-          desc={post.data.description}
-          aside={formatDate(post.data.date)}
-        />
-      ))
-    }
-  </Section>
+  <section class="section" aria-labelledby="guides">
+    <h2 id="guides">Guides</h2>
+    <p class="section__lede">
+      I wrote 20+ framework and integration guides for the Prisma docs, averaging 3,000+ monthly views
+      each, plus the guide-writing standard the team uses.
+    </p>
+    <ul class="guides">
+      {
+        GUIDES.map((g) => (
+          <li>
+            <a href={g.href} {...ext}>{g.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="open-source">
+    <h2 id="open-source">Open source</h2>
+    <p class="section__lede">Merged pull requests to other projects, most of them Prisma integration docs.</p>
+    <List items={OPEN_SOURCE} />
+  </section>
+
+  <section class="section" aria-labelledby="contact">
+    <h2 id="contact">Contact</h2>
+    <p class="section__lede">Send me a note here, or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. I reply by email.</p>
+    <p id="sent" class="form-status" role="status">Thanks, your message reached me. I’ll reply by email.</p>
+    <p id="send-failed" class="form-status" role="alert">
+      That didn’t send. Please email me at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> instead.
+    </p>
+    <form class="contact" method="post" action="/api/contact">
+      <div class="contact__row">
+        <label>
+          <span>Name</span>
+          <input name="name" autocomplete="name" required maxlength="200" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" required maxlength="320" />
+        </label>
+      </div>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required minlength="2" maxlength="5000"></textarea>
+      </label>
+      <label class="contact__trap" aria-hidden="true">
+        <span>Company</span>
+        <input name="company" tabindex="-1" autocomplete="off" />
+      </label>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  </div>
+  </div>
 </Base>

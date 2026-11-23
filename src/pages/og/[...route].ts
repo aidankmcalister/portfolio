@@ -8,8 +8,6 @@ const posts = await getCollection("blog", (p) => !p.data.draft && !p.data.extern
 
 const pages: Record<string, { title: string; description: string }> = {
   index: { title: SITE.name, description: SITE.role },
-  work: { title: "Work", description: `${SITE.name} · Things I built, shipped, and wrote.` },
-  about: { title: "About", description: `${SITE.name} · ${SITE.role}` },
   ...Object.fromEntries(
     posts.map((p) => [
       `blog/${p.data.slug}`,
@@ -18,10 +16,10 @@ const pages: Record<string, { title: string; description: string }> = {
   ),
 };
 
-// Paper palette from global.css.
-const bg: [number, number, number] = [246, 243, 236];
-const ink: [number, number, number] = [28, 27, 24];
-const muted: [number, number, number] = [88, 85, 78];
+// Light palette from global.css.
+const bg: [number, number, number] = [247, 247, 246];
+const ink: [number, number, number] = [27, 27, 26];
+const muted: [number, number, number] = [107, 107, 102];
 
 export const { getStaticPaths, GET } = await OGImageRoute({
   pages,
@@ -33,12 +31,10 @@ export const { getStaticPaths, GET } = await OGImageRoute({
     bgImage: { path: "./src/og/background.png", fit: "none", position: "start" },
     padding: 96,
     font: {
-      title: { families: ["JetBrains Mono"], weight: "Medium", size: 64, lineHeight: 1.2, color: ink },
-      description: { families: ["Inter"], weight: "Normal", size: 32, lineHeight: 1.4, color: muted },
+      title: { families: ["Spectral"], weight: "Medium", size: 76, lineHeight: 1.1, color: ink },
+      description: { families: ["Spectral"], weight: "Medium", size: 32, lineHeight: 1.4, color: muted },
     },
-    fonts: [
-      "./node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2",
-      "./node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
-    ],
+    // Only the italic is loaded: the renderer prefers an upright face when both exist.
+    fonts: ["./node_modules/@fontsource/spectral/files/spectral-latin-500-italic.woff2"],
   }),
 });

@@ -1,157 +1,546 @@
-@import "tailwindcss";
+/* A calm, text-first page. Neutral ground and ink, one italic serif voice for the
+   name and headings, the system sans for everything else, and a soft ochre
+   highlighter under links as the only accent. Light or dark follows the visitor. */
 
-/* Warm off-white paper and near-black ink. Clearing the default palette means an
-   accent color class won't compile. Contrast on bg: fg 15.5, body 11.6, muted 6.7, subtle 5.1. */
-@theme {
-  --color-*: initial;
-  --color-black: #000000;
-  --color-bg: #f6f3ec;
-  --color-surface: #ede9e0;
-  --color-line: #e2ddd2;
-  --color-control: #cfc9bc;
-  --color-fg: #1c1b18;
-  --color-fg-body: #34322d;
-  --color-fg-muted: #58554e;
-  --color-fg-subtle: #69655c;
-  --font-sans: "Inter Variable", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-  --text-base: 15px;
-  --text-base--line-height: 24px;
-  --radius-sm: 4px;
+:root {
+  color-scheme: light dark;
+
+  --bg: #f7f7f6;
+  --ink: #1b1b1a;
+  --body: #3d3d3a;
+  --muted: #6b6b66;
+  --rule: #e2e2df;
+  --mark: rgb(226 170 52 / 0.32);
+  --mark-strong: rgb(226 170 52 / 0.5);
+  --code-bg: #efefed;
+  --code-line: #e0e0dc;
+
+  --serif: "Spectral", "Iowan Old Style", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --measure: 36rem;
+  --gutter: clamp(1.25rem, 9vw, 10rem);
 }
 
-@layer base {
-  html {
-    background: var(--color-bg);
-    color: var(--color-fg);
-    color-scheme: light;
-    scrollbar-color: var(--color-control) var(--color-bg);
-  }
-  body {
-    font: 15px/24px var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    caret-color: var(--color-fg);
-  }
-  ::selection {
-    background: var(--color-fg);
-    color: var(--color-bg);
-  }
-  :focus-visible {
-    outline: 2px solid var(--color-fg);
-    outline-offset: 2px;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    ::before,
-    ::after {
-      transition: none !important;
-      animation: none !important;
-    }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151514;
+    --ink: #ecebe7;
+    --body: #c9c8c3;
+    --muted: #94938e;
+    --rule: #2a2a28;
+    --mark: rgb(214 160 52 / 0.26);
+    --mark-strong: rgb(214 160 52 / 0.42);
+    --code-bg: #1e1e1c;
+    --code-line: #2f2f2c;
   }
 }
 
-@layer components {
-  /* Inline links are always underlined. */
-  .link {
-    color: var(--color-fg);
-    text-decoration: underline;
-    text-decoration-color: var(--color-control);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 150ms;
-  }
-  .link:hover {
-    text-decoration-color: var(--color-fg);
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  /* Blog post body. Written by hand so no stray colors come in. */
-  .prose {
-    color: var(--color-fg-body);
-    font-size: 15px;
-    line-height: 26px;
+html {
+  background: var(--bg);
+  scrollbar-color: var(--rule) var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--body);
+  font: 400 17px/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  caret-color: var(--ink);
+}
+
+::selection {
+  background: var(--mark-strong);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+.page {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  padding: clamp(3.5rem, 11vh, 8rem) var(--gutter) 4rem;
+}
+
+.page--wide {
+  max-width: calc(80rem + var(--gutter) * 2);
+}
+
+/* Wide screens: the intro (name, bio, contact) stays pinned on the left while the
+   lists scroll on the right, so the email is always in view. */
+@media (min-width: 68rem) {
+  .home {
+    display: grid;
+    grid-template-columns: minmax(0, 27rem) minmax(0, 40rem);
+    column-gap: clamp(4rem, 8vw, 9rem);
+    align-items: start;
   }
-  .prose > * + * {
-    margin-top: 16px;
+  .home .sections > .section:first-child {
+    margin-top: 0.35rem;
   }
-  .prose h2 {
-    margin-top: 48px;
-    font-family: var(--font-mono);
-    font-size: 15px;
-    line-height: 22px;
-    font-weight: 500;
-    color: var(--color-fg);
+  .page--wide .foot {
+    margin-left: calc(27rem + clamp(4rem, 8vw, 9rem));
+    max-width: 40rem;
   }
-  .prose h3 {
-    margin-top: 32px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 500;
-    color: var(--color-fg);
+}
+
+@media (min-width: 68rem) and (min-height: 46rem) {
+  .intro {
+    position: sticky;
+    top: clamp(3.5rem, 11vh, 8rem);
   }
-  .prose h2 + *,
-  .prose h3 + * {
-    margin-top: 8px;
+}
+
+/* The one display voice: an italic serif, used for the name and section headings. */
+.name {
+  font: italic 500 clamp(2.75rem, 2rem + 4vw, 4.75rem) / 1.02 var(--serif);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.bio {
+  margin-top: clamp(2rem, 6vh, 3.5rem);
+  display: grid;
+  gap: 1.1rem;
+}
+
+.links {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+
+.links a {
+  display: inline-block;
+  padding: 0.65rem 0;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease-out;
+}
+
+.links a:hover {
+  color: var(--ink);
+}
+
+/* Links in running text carry a soft highlighter stroke that fills on hover. */
+.hl {
+  white-space: nowrap;
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0.42em;
+  transition: background-size 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hl:hover {
+  background-size: 100% 100%;
+}
+
+.section {
+  margin-top: clamp(3.5rem, 9vh, 5rem);
+}
+
+.section h2 {
+  font: italic 500 1.55rem / 1.2 var(--serif);
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  /* Anchor links (/#work, /#writing) land with breathing room above the heading. */
+  scroll-margin-top: clamp(2rem, 8vh, 4rem);
+}
+
+/* A plain list: title and one line on the left, a quiet date or place on the right. */
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1.25rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.item:first-child {
+  border-top: 0;
+}
+
+.item__title {
+  justify-self: start;
+  /* A 44px tap area without changing the row's spacing. */
+  padding-block: 0.5rem;
+  margin-block: -0.5rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* List titles stay quiet: a hairline underline, with the highlighter only on hover. */
+a.item__title {
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0;
+  /* The padding is tap area only; the highlight stays on the text. */
+  background-origin: content-box;
+  background-clip: content-box;
+  transition:
+    background-size 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    text-decoration-color 0.2s ease-out;
+}
+
+a.item__title:hover {
+  background-size: 100% 100%;
+  text-decoration-color: transparent;
+}
+
+.item__aside {
+  color: var(--muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.item__desc {
+  grid-column: 1 / -1;
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.section__lede {
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+
+/* A compact link grid for many short entries. */
+.guides {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(9rem, 40%), 1fr));
+  column-gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.guides a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 4px;
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0;
+  background-origin: content-box;
+  background-clip: content-box;
+  transition:
+    background-size 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    text-decoration-color 0.2s ease-out;
+}
+
+.guides a:hover {
+  background-size: 100% 100%;
+  text-decoration-color: transparent;
+}
+
+.section__lede a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule);
+}
+
+/* Contact form: plain fields on hairline edges, matching the lists above. */
+.contact {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+.contact label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: 16px/1.5 var(--sans);
+  transition: border-color 0.15s ease-out;
+}
+
+.contact textarea {
+  resize: vertical;
+}
+
+.contact input:hover,
+.contact textarea:hover {
+  border-color: var(--muted);
+}
+
+.contact input:focus-visible,
+.contact textarea:focus-visible {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.contact button {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0.5rem 1.4rem;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--bg);
+  font: 500 15px/1 var(--sans);
+  cursor: pointer;
+  transition: opacity 0.15s ease-out;
+}
+
+.contact button:hover {
+  opacity: 0.85;
+}
+
+/* Bots fill every field; people never see this one. */
+.contact__trap {
+  position: absolute;
+  left: -9999px;
+}
+
+/* The server redirects to #sent or #send-failed; only the targeted message shows. */
+.form-status {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--mark-strong);
+  background: var(--code-bg);
+  color: var(--ink);
+  font-size: 15.5px;
+  scroll-margin-top: 2rem;
+}
+
+.form-status:target {
+  display: block;
+}
+
+.form-status a {
+  color: var(--ink);
+}
+
+@media (max-width: 30rem) {
+  .item {
+    grid-template-columns: 1fr;
   }
-  .prose strong {
-    color: var(--color-fg);
-    font-weight: 600;
+  .item__aside {
+    order: 3;
+    margin-top: 0.3rem;
   }
-  .prose a {
-    color: var(--color-fg);
-    text-decoration: underline;
-    text-decoration-color: var(--color-control);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 150ms;
+}
+
+.foot {
+  margin-top: clamp(4rem, 12vh, 6rem);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.foot a {
+  color: var(--muted);
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule);
+}
+
+.foot a:hover {
+  color: var(--ink);
+}
+
+/* Blog posts */
+.back {
+  display: inline-block;
+  padding: 0.65rem 0;
+  color: var(--muted);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--ink);
+}
+
+.post-title {
+  margin-top: 2rem;
+  font: italic 500 clamp(2rem, 1.6rem + 2vw, 2.9rem) / 1.12 var(--serif);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.post-date {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.prose {
+  margin-top: 2.5rem;
+}
+
+.prose > * + * {
+  margin-top: 1.15em;
+}
+
+.prose h2 {
+  margin-top: 2.4em;
+  font: italic 500 1.5rem / 1.25 var(--serif);
+  color: var(--ink);
+}
+
+.prose h3 {
+  margin-top: 1.9em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.5em;
+}
+
+.prose a {
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 100% / 100% 0.42em;
+  transition: background-size 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prose a:hover {
+  background-size: 100% 100%;
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose :not(pre) > code {
+  font: 0.86em var(--mono);
+  background: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
   }
-  .prose a:hover {
-    text-decoration-color: var(--color-fg);
-  }
-  .prose ul,
-  .prose ol {
-    padding-left: 20px;
-  }
-  .prose ul {
-    list-style: disc;
-  }
-  .prose ol {
-    list-style: decimal;
-  }
-  .prose li + li {
-    margin-top: 6px;
-  }
-  .prose li::marker {
-    color: var(--color-fg-subtle);
-  }
-  .prose :not(pre) > code {
-    border-radius: 4px;
-    background: var(--color-surface);
-    padding: 1px 5px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--color-fg);
-  }
-  .prose pre {
-    overflow-x: auto;
-    border-radius: 4px;
-    padding: 16px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .prose blockquote {
-    border-left: 2px solid var(--color-line);
-    padding-left: 16px;
-    color: var(--color-fg-muted);
-  }
-  .prose hr {
-    border: 0;
-    border-top: 1px solid var(--color-line);
-    margin: 40px 0;
-  }
-  .prose img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+}
+
+/* Code blocks: a quiet tinted panel with a hairline edge, so the code reads as one
+   unit instead of floating in the text column. */
+.prose pre {
+  overflow-x: auto;
+  margin-block: 1.5em;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--code-line);
+  border-radius: 8px;
+  background: var(--code-bg) !important;
+  font: 13px/1.6 var(--mono);
+  tab-size: 2;
+}
+
+.prose pre code {
+  font: inherit;
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  margin-left: 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+  color: var(--muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
   }
 }

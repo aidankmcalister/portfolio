@@ -10,7 +10,7 @@
     {
       "name": "astro-preview",
       "runtimeExecutable": "bun",
-      "runtimeArgs": ["run", "preview", "--port", "4322"],
+      "runtimeArgs": ["run", "preview", "4322"],
       "port": 4322
     }
   ]

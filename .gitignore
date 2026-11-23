@@ -25,3 +25,11 @@ pnpm-debug.log*
 .gstack/
 test-results/
 playwright-report/
+
+# Vercel build output
+.vercel/
+
+# Local screenshots and review captures
+.shots/
+.shots-log.txt
+.impeccable/review/

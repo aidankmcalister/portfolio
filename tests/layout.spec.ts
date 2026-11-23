@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const pages = ["/", "/work", "/about", "/blog/your-docs-are-invisible-to-ai", "/404"];
+const pages = ["/", "/blog/your-docs-are-invisible-to-ai", "/404"];
 
 test.use({ viewport: { width: 375, height: 812 } });
 

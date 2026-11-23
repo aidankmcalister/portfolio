@@ -1,0 +1,30 @@
+---
+// A plain list: title and one line on the left, a quiet date or place on the right.
+// External links open in a new tab so visitors don't lose this page.
+import { isExternal, type Item } from "../data/site";
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+const ext = { target: "_blank", rel: "noreferrer", "aria-describedby": "new-tab" };
+---
+
+<ul class="list">
+  {
+    items.map((item) => (
+      <li class="item">
+        {item.href ? (
+          <a class="item__title" href={item.href} {...(isExternal(item.href) ? ext : {})}>
+            {item.title}
+          </a>
+        ) : (
+          <span class="item__title">{item.title}</span>
+        )}
+        <span class="item__aside">{item.aside}</span>
+        <p class="item__desc">{item.desc}</p>
+      </li>
+    ))
+  }
+</ul>

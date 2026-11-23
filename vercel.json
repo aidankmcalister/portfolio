@@ -2,7 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "buildCommand": "astro build",
-  "outputDirectory": "dist",
   "redirects": [
     {
       "source": "/resume",
@@ -11,8 +10,29 @@
     },
     {
       "source": "/blog",
-      "destination": "/work#writing",
+      "destination": "/#writing",
       "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/#work",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

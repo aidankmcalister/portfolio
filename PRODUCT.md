@@ -8,59 +8,63 @@ web
 
 ## Users
 
-Hiring managers deciding whether to interview Aidan McAlister, weighted equally between two groups:
+Hiring managers and recruiters deciding whether to talk to Aidan McAlister. He links the site from almost every job application. Roles he wants, IC only:
 
-- Heads of DevRel / developer experience hiring a developer advocate.
-- Engineering managers hiring for frontend or developer-tools roles.
+- Frontend, product, or full-stack engineer.
+- Developer Advocate, DevRel, or DX engineer.
+- Docs or technical writing engineer.
+- Solutions engineer.
 
-Recruiters screening on a phone are a common first pass for both. Visitors skim; most arrive from a resume, LinkedIn, or an application link and spend well under a minute.
+Visitors skim, often on a phone, and spend well under a minute. They should reach his best work in under 30 seconds.
 
 ## Product Purpose
 
-A personal portfolio for an active job search (Aidan was laid off from Prisma in May 2026). Success means a visitor understands who he is, sees proof of shipped work, and emails him or opens the resume.
+The site advocates for Aidan: it shows who he is, proves what he shipped, and gets the visitor to email him or open the resume. Success is an email or a resume open.
 
 ## Positioning
 
-A developer advocate who ships real engineering: at Prisma he built create-db (a CLI with 6M+ runs) solo, led a 400+ page docs rebuild that kept ~90% of search traffic, and built the docs' AI-agent discoverability layer. Few candidates can show both the DevRel and the engineering track with this kind of evidence.
+A frontend-leaning full-stack engineer and Developer Advocate (never "former"; Aidan, Nov 2026) who builds TypeScript tools, docs, and developer-facing products, and can show both tracks with shipped evidence: create-db and the Prisma docs rebuild at Prisma, and OpenTape, a native macOS app he built and released alone.
 
 ## Operating Context
 
-- Astro 6 static site with Tailwind 4, deployed on Vercel at aidanmcalister.com.
-- Pages: home, /work, /blog (markdown collection, some posts link out to prisma.io), /resume.pdf, plus llms.txt, llms-full.txt, and sitemap endpoints.
-- Content lives in `src/data/site.ts` and `src/content/blog/`.
+- Astro 6 static site, deployed on Vercel at aidanmcalister.com.
+- Structure (Aidan, Nov 2026): one page, plus a page per blog post. Keep llms.txt / llms-full.txt and a markdown version of pages, blog post URLs under /blog/<slug>, RSS, sitemap, and generated per-page social cards.
+- Content source of truth: `/Users/aidankmcalister/projects/career-ops/output/portfolio-prompt.md` (Nov 2026 brief). Resume at `public/resume.pdf`.
 
 ## Capabilities and Constraints
 
-- Must stay simple, fast, and minimal: static HTML, near-zero client JS.
-- One resume only: `/resume.pdf` (the general/master version).
-- Prisma is a past role (Mar 2025 – May 2026). Present its metrics as past accomplishments, never as ongoing ones.
-- The Prisma website, the Prisma docs, and create-db are owned and maintained by Prisma. Aidan built them (create-db solo) while employed there. Frame them as "Prisma's X, which I built/rebuilt while I was there", never as his own products, and label live screenshots with their capture date since Prisma keeps changing them.
+- Simple, clean, lightweight, easy to digest. Fast static HTML, near-zero client JS.
+- Every fact comes from the brief. No invented metrics, employers, titles, dates, tools, or projects. Ask before adding anything not in it.
+- Prisma (Developer Advocate, March 2025 to May 2026) is past work on Prisma's products. Never say anything negative about Prisma. Don't mention the layoff.
+- Inner Armor (Front End, contract, July 2024 to March 2025) and Elevate Digital IO (Full Stack, contract, January 2024 to August 2024).
+- Education: Nucamp Full Stack Development Bootcamp (March 2023 to February 2024). No CS degree; never imply one.
+- OpenTape is the main side project (sole creator). clasp.sh may appear as a minor entry. SureUI is not on the site.
+- TanStack is the only partnership. Never list Bun or Deno as partnerships.
+- Discord: "managed and helped grow" past 10,000 members, never "grew".
+- create-db: never "6M runs". Keep every number exactly as the brief writes it.
+- OpenTape: no GitHub stars, never "halved export time".
 - No phone number on the site.
-- Readable and skimmable on a phone first.
 
 ## Brand Commitments
 
-- Visual identity (binding, set by Aidan, Sep 2026): a warm off-white paper background with near-black ink and warm grays. No accent colors, no textures. Calm and uncluttered, inspired by conordewey.com without copying it (no photo, no tags, no serif).
-- Typography (binding): JetBrains Mono for the name, headings, nav, labels, and meta; Inter for body text. Compact sizes (15px body, 20–22px name and page titles). Do not swap fonts or scale type up. Both fonts are self-hosted via Fontsource.
-- Keep it simple: one narrow column; work and writing are plain rows (title, one line, a quiet date or site on the right). No borders or rules; sections are separated by space. Arrows only on external links. Tokens live in `src/styles/global.css`.
-- Voice: plain, direct, first person, no hype. Short sentences.
-- The site should not look template-made or AI-generated, should not feel corporate or stiff, should not be busy or dense, and should not rely on flashy animation.
+- Voice (binding): Aidan's own. Short, plain sentences; specific facts over adjectives; peer tone, not student. Lead with what he built and what it did. Past tense for finished work.
+- Copy bans (binding): no em or en dashes in prose; avoid colons in sentences; never "passionate", "excited", "genuinely", "thrilled", "I usually design what I build", "where I do my best work", "not just X but Y", one-line dramatic closers, or "eager to learn" lines. Don't mention his own use of AI coding tools (shipped AI work is fine).
+- Visual identity (binding, Aidan, Nov 2026): the calm, text-first personal site, played straight. References he chose: evanyou.me (light, big italic serif name, prose bio, soft highlighted links) and leerob.com (tidy lists with dates on the right); mhartington.io as a third. A mix of Evan and Lee. Follows the visitor's light or dark setting. Not a concept world; craft is the bar.
 
 ## Evidence on Hand
 
-- Resume PDF at `public/resume.pdf` (source of truth for all facts and numbers).
-- Shipped work with live links: create-db, Prisma docs, Prisma docs llms.txt, clasp.sh, Prisma guides, Management API docs, Prisma Claude Code plugin.
-- OSS contributions: trpc-cli, better-hub, Better Auth.
-- Blog posts in `src/content/blog/`.
-- Open items are tracked in `TODO.md`. No testimonials or headshot exist. Do not fabricate testimonials, quotes, or metrics.
+- Links: GitHub github.com/aidankmcalister, LinkedIn linkedin.com/in/aidanmcalister, email aidankmcalister@gmail.com, OpenTape opentape.app and github.com/aidankmcalister/OpenTape, create-db github.com/prisma/create-db (docs prisma.io/docs/postgres/npx-create-db), docs rebuild write-up prisma.io/blog/rebuilding-the-prisma-docs, AI-docs post /blog/your-docs-are-invisible-to-ai, Claude Code plugin claude.com/plugins/prisma, REST API docs prisma.io/docs/rest-api.
+- Posts: "Your Docs Are Invisible to AI. Here's Why" (May 2026), "Rebuilding the Prisma Docs" (2026), "Vibe Coding with Prisma MCP and Next.js" (2025).
+- Screenshots of shipped work are archived on branch `archive/two-readers-revamp` in `src/assets/work/` (create-db, Prisma docs, Prisma home and Postgres pages, llms.txt, clasp).
+- No testimonials, headshot, or press. Do not fabricate any.
 
 ## Product Principles
 
-1. Proof over claims: every claim links to something real.
-2. Skimmable in under 30 seconds on a phone.
-3. Honest framing: past roles read as past, numbers match the resume.
+1. Best work within 30 seconds.
+2. Proof over claims; every claim traceable to the brief or a live link.
+3. Two tracks, one person: engineering and DevRel evidence side by side.
 4. Restraint: fewer, better elements.
 
 ## Accessibility & Inclusion
 
-WCAG AA contrast, keyboard-focusable links, respects reduced motion.
+WCAG AA contrast, keyboard reachable, respects reduced motion, works on a phone first.
