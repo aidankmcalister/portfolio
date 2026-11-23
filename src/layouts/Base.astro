@@ -28,12 +28,14 @@ const {
   published,
   noindex = false,
 } = Astro.props;
-const pageTitle = title ? `${title} · ${SITE.name}` : SITE.name;
+// The home page's title says what he does, not just his name (about 60 characters).
+const homeTitle = `${SITE.name}, full-stack engineer and Developer Advocate`;
+const pageTitle = title ? `${title} · ${SITE.name}` : homeTitle;
 // Canonical URLs match the links the site uses: no trailing slash except the root.
 const path = Astro.url.pathname.replace(/(.)\/$/, "$1");
 const canonical = new URL(path, SITE.url).href;
 const ogImage = new URL(`/og/${og}.png`, SITE.url).href;
-const ogTitle = title ?? SITE.name;
+const ogTitle = title ?? homeTitle;
 // The card shows the title (or the name and role) in Spectral italic.
 const imageAlt = title ?? `${SITE.name}, ${SITE.role}`;
 

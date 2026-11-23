@@ -10,7 +10,8 @@ export const SITE = {
   url: "https://www.aidanmcalister.com",
   resume: "/resume.pdf",
   description:
-    "Aidan McAlister is a frontend-leaning full-stack engineer and Developer Advocate. He builds TypeScript tools, docs and developer-facing products.",
+    // Kept under ~125 characters so link previews don't cut it off.
+    "Frontend-leaning full-stack engineer and Developer Advocate who builds TypeScript tools, docs and developer-facing products.",
   social: {
     github: "https://github.com/aidankmcalister",
     linkedin: "https://www.linkedin.com/in/aidanmcalister",
