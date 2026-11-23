@@ -17,6 +17,7 @@ const { Content } = await render(post);
   description={post.data.description}
   og={`blog/${post.data.slug}`}
   md={`/blog/${post.data.slug}.md`}
+  published={post.data.date}
 >
   <a class="back" href="/">Aidan McAlister</a>
   <article>

@@ -33,3 +33,5 @@ playwright-report/
 .shots/
 .shots-log.txt
 .impeccable/review/
+.vercel
+.env*
